@@ -24,13 +24,12 @@ public class CapstoneProject {
         // TODO code application logic here
         MainDisplay mainFrame = new MainDisplay();
 
-        String data = AccessFile.readFile("data\\prefectureData.txt");
+        String data = AccessFile.readFile("data\\prefecture.dat");
         Scanner scr = new Scanner(data);
         scr.useDelimiter("<");
 
         int[] caseNumberAry = CaseNumberApi.getCaseNumber();
         StringBuffer info = new StringBuffer();
-        
         int count = 0;
         Region[] japan = new Prefecture[47];
 
