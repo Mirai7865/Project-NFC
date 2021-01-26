@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class CaseNumberApi {
 
     private static String data = "";
-    public static String[] testing = new String[47];
+//    public static String[] testing = new String[47];
 
     public CaseNumberApi() {
     }
@@ -58,7 +58,7 @@ public class CaseNumberApi {
         for (int i = 0; i < 47; i++) {
             str = scr.next();
 //            System.out.println(str);
-            testing[i] = str;
+//            testing[i] = str;
             startingIndex = str.indexOf("\"npatients\":") + 13;
             endingIndex = str.indexOf("\"},");
             caseNumber[i] = Integer.parseInt(str.substring(startingIndex, endingIndex));

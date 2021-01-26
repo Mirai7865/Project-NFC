@@ -21,6 +21,14 @@ public class Prefecture extends Region {
         this.majorCity = majorCity;
     }
 
+    private void setPopulation(int population) {
+        this.population = population;
+    }
+
+    private void setmajorCity(String city) {
+        this.majorCity = city;
+    }
+
     public int getPopulation() {
         return this.population;
     }
@@ -29,7 +37,7 @@ public class Prefecture extends Region {
         return this.majorCity;
     }
 
-    public void setWeatherForecast(String weather) {
+    private void setWeatherForecast(String weather) {
         this.weatherForecast = weather;
     }
 
