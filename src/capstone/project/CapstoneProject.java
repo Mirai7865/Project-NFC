@@ -22,18 +22,18 @@ public class CapstoneProject {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        MainDisplay mainFrame = new MainDisplay();
+
         String data = AccessFile.readFile("data\\prefectureData.txt");
         Scanner scr = new Scanner(data);
         scr.useDelimiter("<");
 
         int[] caseNumberAry = CaseNumberApi.getCaseNumber();
-
-        int count = 0;
-        Region[] japan = new Prefecture[47];
-        
-        MainDisplay mainFrame = new MainDisplay();
         StringBuffer info = new StringBuffer();
         
+        int count = 0;
+        Region[] japan = new Prefecture[47];
+
         while (scr.hasNextLine()) {
             String temp = scr.next();
             Scanner scrT = new Scanner(temp);
@@ -41,6 +41,8 @@ public class CapstoneProject {
                 String prefName = scrT.next();
                 int population = scrT.nextInt() * 1000;
                 String majorCity = scrT.next();
+
+                //For testing purposes
 //                System.out.println(CaseNumberApi.testing[count].substring(CaseNumberApi.testing[count].indexOf("\"name_jp\":\"") + 11, CaseNumberApi.testing[count].indexOf("\",\"npatients")));
 //                if (!(CaseNumberApi.testing[count].substring(CaseNumberApi.testing[count].indexOf("\"name_jp\":\"") + 11, CaseNumberApi.testing[count].indexOf("\",\"npatients")).equals(prefName))) {
 //                    IllegalArgumentException iAE = new IllegalArgumentException();

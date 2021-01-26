@@ -31,7 +31,7 @@ public class MainDisplay extends JFrame {
 
         this.mainTextField = new JTextArea();
         this.mainTextField.setSize(200, 200);
-        this.mainTextField.setText("Hello Hello");
+        this.mainTextField.setText("");
 
 //        this.randomButton = new JButton();
 //        this.randomButton.setText("a Buton");
@@ -44,7 +44,7 @@ public class MainDisplay extends JFrame {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.gridwidth = 1;
+        gbc.gridwidth = 2;
         gbc.gridheight = 5;
         gbc.weightx = 1;
         gbc.weighty = 1;
