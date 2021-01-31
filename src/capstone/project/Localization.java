@@ -5,10 +5,6 @@
  */
 package capstone.project;
 
-/**
- *
- * @author Owner
- */
 public class Localization {
 public static String[] langData;
 

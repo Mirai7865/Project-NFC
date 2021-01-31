@@ -5,10 +5,6 @@
  */
 package capstone.project;
 
-/**
- *
- * @author 1100000436
- */
 abstract class Region {
     
     private String regionName;

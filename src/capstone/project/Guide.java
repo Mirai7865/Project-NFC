@@ -5,10 +5,7 @@
  */
 package capstone.project;
 
-/**
- *
- * @author 1100000436
- */
+
 public class Guide {
 
     private String articleTitle;

@@ -5,10 +5,6 @@
  */
 package capstone.project;
 
-/**
- *
- * @author 1100000436
- */
 public class Prefecture extends Region {
 
     private int population;

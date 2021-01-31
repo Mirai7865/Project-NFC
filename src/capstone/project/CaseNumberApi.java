@@ -12,10 +12,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author 1100000436
- */
+
 public class CaseNumberApi {
 
     private static String data = "";

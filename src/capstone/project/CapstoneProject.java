@@ -11,10 +11,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author 1100000436
- */
 public class CapstoneProject {
 
     /**
@@ -32,6 +28,7 @@ public class CapstoneProject {
         StringBuffer info = new StringBuffer();
         int count = 0;
         Region[] japan = new Prefecture[47];
+        String tempStr = "";
 
         while (scr.hasNextLine()) {
             String temp = scr.next();
@@ -52,7 +49,7 @@ public class CapstoneProject {
                 info.append(" ");
                 info.append(japan[count].getCaseNumber());
                 info.append("\n");
-                
+                tempStr = tempStr + japan[count].getRegionName() + "\n";
             } catch (NumberFormatException ex) {
                 System.out.println("Exception in creating prefecture objects.");
             } catch (IllegalArgumentException iAE) {
@@ -63,6 +60,7 @@ public class CapstoneProject {
         }
         scr.close();
         mainFrame.updateMainDisplay(info.toString());
+        AccessFile.writeFile(tempStr, "localization\\ja-jp.txt");
     }
 
 }

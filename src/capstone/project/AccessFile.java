@@ -8,10 +8,6 @@ package capstone.project;
 import java.util.Scanner;
 import java.io.*;
 
-/**
- *
- * @author 1100000436
- */
 import java.util.Scanner;
 import java.io.IOException;
 
@@ -47,15 +43,22 @@ public class AccessFile {
         return strBfer.toString();
     }
 
-    public static void writeFile(String str) {
-        //create FileWriter object
-        //create PrintWriter object
-
-        //try
-        //write the str object into file
-        //catch IOException
-        //close FileWriter
-        //close PrintWriter
-        //close Scanner
+    public static void writeFile(String str, String path) {
+        File f = new File(new File(path).getAbsolutePath());
+        try {
+            //create FileWriter object
+            FileWriter fw = new FileWriter(f);
+            //create PrintWriter object
+            PrintWriter pw = new PrintWriter(fw);
+            //write the str object into file
+            pw.append(str);
+            //close PrintWriter
+            pw.close();
+            //close FileWriter
+            fw.close();
+            //catch IOException
+        } catch (IOException IOE) {
+            System.out.println("Unable to find file at " + f.getAbsolutePath());
+        }
     }
 }

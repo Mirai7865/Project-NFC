@@ -7,10 +7,6 @@ package capstone.project;
 
 import java.net.HttpURLConnection;
 
-/**
- *
- * @author 1100000436
- */
 public class YahooApi {
 
     public YahooApi() {

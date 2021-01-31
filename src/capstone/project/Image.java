@@ -10,20 +10,15 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-
-/**
- *
- * @author 1100000436
- */
 public class Image {
     private BufferedImage img;
     public Image() {
 
     }
 
-    public void loadImage(String path) throws IOException{
-        this.img = null;
-        this.img = ImageIO.read(new File (path));
+    public void loadImage(String name) throws IOException{
+        File imgPath = new File("data\\img\\" + name);
+        this.img = ImageIO.read(imgPath);
     }
     
     public BufferedImage getImage () {

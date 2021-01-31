@@ -9,32 +9,32 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.io.IOException;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-/**
- *
- * @author 1100000436
- */
 public class MainDisplay extends JFrame {
 
     JTextArea mainTextField;
     JFrame mainFrame = new JFrame();
     JButton randomButton;
+    ImageIcon mapIcon;
+    JLabel mapLabel;
 
     public void initialComponents() {
         this.mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.mainFrame.setMinimumSize(new Dimension(800, 400));
+        this.mainFrame.setMinimumSize(new Dimension(1200, 600));
 
         this.mainTextField = new JTextArea();
         this.mainTextField.setSize(200, 200);
         this.mainTextField.setText("");
 
-//        this.randomButton = new JButton();
-//        this.randomButton.setText("a Buton");
+        this.setMap("japan_map.png");
+        mapLabel = new JLabel(this.mapIcon);
 
         Container mainDisplayPane = this.mainFrame.getContentPane();
         mainDisplayPane.setLayout(new GridBagLayout());
@@ -62,15 +62,25 @@ public class MainDisplay extends JFrame {
 //        gbc.fill = GridBagConstraints.CENTER;
 //        gbc.anchor = GridBagConstraints.NORTH;
 //        mainDisplayPane.add(this.randomButton, gbc);
+        mainDisplayPane.add(this.mapLabel);
 
         this.mainFrame.setVisible(true);
-//        this.mainTextField.setVisible(true);
         this.mainFrame.pack();
     }
 
     public MainDisplay() {
         //Create JFrame and locate "mainDsiplay"
         this.initialComponents();
+    }
+
+    private void setMap(String mapName) {
+        Image map = new Image();
+        try {
+            map.loadImage(mapName);
+            this.mapIcon = new ImageIcon(map.getImage());
+        } catch (IOException IOE) {
+            updateMainDisplay("Unable to find japan_map.png.");
+        }
     }
 
     public void updateMainDisplay(String text) {
