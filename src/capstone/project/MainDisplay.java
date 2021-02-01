@@ -32,6 +32,7 @@ public class MainDisplay extends JFrame {
         this.mainTextField = new JTextArea();
         this.mainTextField.setSize(200, 200);
         this.mainTextField.setText("");
+        this.mainTextField.setEditable(false);
 
         this.setMap("japan_map.png");
         mapLabel = new JLabel(this.mapIcon);
