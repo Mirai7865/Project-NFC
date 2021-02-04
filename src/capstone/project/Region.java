@@ -6,10 +6,10 @@
 package capstone.project;
 
 abstract class Region {
-    
+
     private String regionName;
     private int caseNumber;
-    
+
     public Region(String regionName, int caseNumber) {
         this.setRegionName(regionName);
         this.setCaseNumber(caseNumber);
@@ -22,12 +22,17 @@ abstract class Region {
     public String getRegionName() {
         return regionName;
     }
-    
+
     private void setCaseNumber(int caseNumber) {
         this.caseNumber = caseNumber;
     }
-    
+
     public int getCaseNumber() {
         return this.caseNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "Region Name: " + this.getRegionName() + " Case Numbers: " + this.getCaseNumber();
     }
 }
