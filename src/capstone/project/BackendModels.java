@@ -6,6 +6,7 @@
 package capstone.project;
 
 import java.io.File;
+import java.net.URI;
 import java.util.Scanner;
 
 public class BackendModels {
@@ -14,7 +15,7 @@ public class BackendModels {
 
     public BackendModels() {
 
-        String data = AccessFile.readFile("src" + File.separator + "capstone" + File.separator + "project" + File.separator + "data" + File.separator + "prefecture.dat");
+        String data = AccessFile.readFile(getClass().getClassLoader().getResource("prefecture.dat"));
         Scanner scr = new Scanner(data);
         scr.useDelimiter("<");
 

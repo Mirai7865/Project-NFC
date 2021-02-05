@@ -10,6 +10,11 @@ import java.io.*;
 
 import java.util.Scanner;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AccessFile {
 
@@ -17,13 +22,13 @@ public class AccessFile {
 
     }
 
-    public static String readFile(String path) {
-        File file = new File(path);
+    public static String readFile(URL path) {
         StringBuffer strBfer = new StringBuffer();
         //create Scanner
         //try-catch statement
         try {
-            Scanner scr = new Scanner(new File(file.getAbsolutePath()), "UTF-8");
+//            File f = new File(path.toURI());
+            Scanner scr = new Scanner(new File(path.toURI()), "UTF-8");
             //make while-loop
             while (scr.hasNext()) {
                 //store the components into a String
@@ -39,6 +44,9 @@ public class AccessFile {
             }
         } catch (FileNotFoundException e) {
             System.out.println("Unable to find file at " + path);
+        } catch (URISyntaxException ex) {
+            
+            System.out.println("URI may be wrong");
         }
         return strBfer.toString();
     }

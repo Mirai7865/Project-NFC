@@ -18,7 +18,7 @@ public class Guide {
     }
 
     public void loadArticle() {
-        this.article = AccessFile.readFile(this.path);
+//        this.article = AccessFile.readFile(this.path);
     }
 
     public String getArticle() {

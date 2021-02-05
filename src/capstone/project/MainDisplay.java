@@ -38,7 +38,7 @@ public class MainDisplay extends JFrame {
         this.caseNumberTextField.setText("Collecting data from server.");
         this.caseNumberTextField.setEditable(false);
 
-        this.setMap("japan_map.png");
+      this.setMap("japan_map.png");
         this.mapLabel = new JLabel(this.mapIcon);
 
         Container mainDisplayPane = this.mainFrame.getContentPane();
