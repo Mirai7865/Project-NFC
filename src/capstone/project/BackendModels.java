@@ -5,6 +5,7 @@
  */
 package capstone.project;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class BackendModels {
@@ -13,7 +14,7 @@ public class BackendModels {
 
     public BackendModels() {
 
-        String data = AccessFile.readFile("data\\prefecture.dat");
+        String data = AccessFile.readFile("src" + File.separator + "capstone" + File.separator + "project" + File.separator + "data" + File.separator + "prefecture.dat");
         Scanner scr = new Scanner(data);
         scr.useDelimiter("<");
 
@@ -37,12 +38,6 @@ public class BackendModels {
 //                    throw iAE;
 //                }
                 japan[count] = new Prefecture(prefName, caseNumberAry[count], population, majorCity);
-                
-//                info.append(japan[count].getRegionName());
-//                info.append(" ");
-//                info.append(japan[count].getCaseNumber());
-//                info.append("\n");
-
             } catch (NumberFormatException ex) {
                 System.out.println("Exception in creating prefecture objects.");
             } catch (IllegalArgumentException iAE) {

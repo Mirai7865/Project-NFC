@@ -11,17 +11,20 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Image {
+
     private BufferedImage img;
+
     public Image() {
 
     }
 
-    public void loadImage(String name) throws IOException{
-        File imgPath = new File("data\\img\\" + name);
+    public void loadImage(String name) throws IOException {
+        File imgPath = new File(/*"src" + File.separator + */"capstone" + File.separator + "project" + File.separator + "data" + File.separator + "img" + File.separator + name
+        );
         this.img = ImageIO.read(imgPath);
     }
-    
-    public BufferedImage getImage () {
+
+    public BufferedImage getImage() {
         return this.img;
     }
 }

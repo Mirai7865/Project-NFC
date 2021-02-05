@@ -10,7 +10,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,7 +32,6 @@ public class MainDisplay extends JFrame {
         this.mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.mainFrame.setMinimumSize(new Dimension(1200, 800));
         this.mainFrame.setTitle("Project NFC");
-        this.mainFrame.setLayout(null);
 
         this.caseNumberTextField = new JTextArea();
         this.caseNumberTextField.setSize(200, 200);
@@ -43,14 +41,9 @@ public class MainDisplay extends JFrame {
         this.setMap("japan_map.png");
         this.mapLabel = new JLabel(this.mapIcon);
 
-//        this.hokkaidoButton = new JButton();
-//        this.hokkaidoButton.setFont(new Font("Arial", Font.PLAIN, 16));
-//        this.hokkaidoButton.setText("Hokkaido " + backendModels.japan[0].getCaseNumber());
         Container mainDisplayPane = this.mainFrame.getContentPane();
-        mainDisplayPane.setLayout(new GridLayout());
+        mainDisplayPane.setLayout(new GridBagLayout());
 
-//        this.hokkaidoButton.setBounds(500, 50, 150, 50);
-//        this.mainFrame.add(this.hokkaidoButton);
         GridBagConstraints gbc;
 
         gbc = new GridBagConstraints();
@@ -62,18 +55,8 @@ public class MainDisplay extends JFrame {
         gbc.weighty = 1;
         gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.NORTH;
-        this.mainFrame.add(this.caseNumberTextField, gbc);
-        //        gbc = new GridBagConstraints();
-        //        gbc.gridx = 0;
-        //        gbc.gridy = 0;
-        //        gbc.gridwidth = 1;
-        //        gbc.gridheight = 5;
-        //        gbc.weightx = 1;
-        //        gbc.weighty = 1;
-        //        gbc.fill = GridBagConstraints.CENTER;
-        //        gbc.anchor = GridBagConstraints.NORTH;
-        //        mainDisplayPane.add(this.randomButton, gbc)
-//        this.mapLabel.setBounds(0, 0, 800, 600);
+        mainDisplayPane.add(this.caseNumberTextField, gbc);
+
         mainDisplayPane.add(this.mapLabel);
         this.mainFrame.setVisible(true);
         this.mainFrame.pack();
