@@ -16,7 +16,7 @@ public class ProjectNFC {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Localization.setLang("ja-jp");
+        Localization.setLang("en-us");
         BackendModels backendModels = new BackendModels();
         MainDisplay mainDisplay = new MainDisplay(backendModels);
         MainDisplayController mdc = new MainDisplayController(backendModels, mainDisplay);
