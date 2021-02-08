@@ -1,3 +1,4 @@
+﻿"Prefecture Name", "Population", "Major City Name"
 北海道 5250 札幌市
 青森県 1246 青森市
 岩手県 1227 盛岡市

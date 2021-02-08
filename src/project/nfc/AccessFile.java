@@ -17,6 +17,7 @@ public class AccessFile {
 
     public static String readFile(String path) {
         StringBuffer strBfer = new StringBuffer();
+        boolean isThisFirstLine = true;
         //create Scanner
         //try-catch statement
         try {
@@ -25,6 +26,11 @@ public class AccessFile {
             //make while-loop
             while (scr.hasNext()) {
                 //store the components into a String
+                if (isThisFirstLine == true){ //First line contains formatting.
+                    scr.nextLine();
+                    isThisFirstLine = false;
+                    continue;
+                }
                 strBfer.append("<");
                 strBfer.append(scr.nextLine());
             }

@@ -1,3 +1,4 @@
+﻿<"a word in Japanese">="Translation"
 <北海道>=Hokkaido
 <青森県>=Aomori
 <岩手県>=Iwate
@@ -52,6 +53,6 @@
 <各都道府県感染状況>=Chart of case numbers
 <感染状況>=Case Numbers
 <ガイドブック>=Guidebook
-<高>=High
-<中>=Moderate
-<低>=Low
+<高iiii>=High
+<中iiii>=Moderate
+<低iiii>=Low

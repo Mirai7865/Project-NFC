@@ -1,4 +1,5 @@
-﻿<北海道>=
+﻿<"a word in Japanese">="Translation"
+<北海道>=
 <青森県>=
 <岩手県>=
 <宮城県>=

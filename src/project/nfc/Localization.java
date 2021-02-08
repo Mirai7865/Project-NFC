@@ -27,14 +27,19 @@ public class Localization {
 
     private static void loadLang() {
         //load language files
-        String str = AccessFile.readFile(("data" + File.separator + "localization" + File.separator + getLang() + ".txt"));
+        String str = AccessFile.readFile("data" + File.separator + "localization" + File.separator + getLang() + ".txt");
         Scanner scr = new Scanner(str);
 //        System.out.println(str);
-        scr.useDelimiter("<<.{0,10}>=");
+        scr.useDelimiter("<");
         int num = 0;
         while (scr.hasNext()) {
-            langData[num] = scr.next();
-            num++;
+            String s = scr.next();
+            System.out.println(s);
+            if (!s.substring(0, 1).equals("<")) {
+                langData[num] = s;
+                num++;
+//            System.out.println(langData[num]);
+            }
         }
 //        System.out.println(langData[54]);
     }
@@ -42,7 +47,7 @@ public class Localization {
     public static String[] getLangData() { //return langData
         return langData;
     }
-    
+
     public static String getLangDataAtIndex(int index) { //return langData
         return langData[index];
     }

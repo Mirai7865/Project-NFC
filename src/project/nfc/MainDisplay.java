@@ -162,14 +162,14 @@ public class MainDisplay extends JFrame {
     public void updateCaseNumberTextPane() {
         //update contents inside the caseNumberList
         this.listModel.clear();
-        String langData[] = Localization.getLangData();
+//        String langData[] = Localization.getLangData();
         StringBuffer strB;
         String risk = null;
 
         if (Localization.getLang().equals("ja-jp")) { //Needs to differentiate the two, since tabbing works on ja-jp but not on en-us, and Formatter works for en-us but not for ja-jp
             for (int i = 0; i < backendModels.japan.length; i++) {
                 if (backendModels.japan[i].getRisk().equals("High")) {
-                    risk = Localization.getLangDataAtIndex(54); 
+                    risk = Localization.getLangDataAtIndex(54);
                 } else if (backendModels.japan[i].getRisk().equals("Moderate")) {
                     risk = Localization.getLangDataAtIndex(55);
 //                    risk = "中";
@@ -177,40 +177,28 @@ public class MainDisplay extends JFrame {
                     risk = Localization.getLangDataAtIndex(56);
 //                    risk = "低";
                 }
-//                System.out.println("risk " + risk);
-                strB = new StringBuffer();
-                strB.append("<html><pre>");
-                strB.append(String.format(Localization.getLangDataAtIndex(47) + " " + Localization.getLangDataAtIndex(i) + "\t" + Localization.getLangDataAtIndex(48) + "%7s" + " " + Localization.getLangDataAtIndex(49) + " " + risk, backendModels.japan[i].getCaseNumber()));
-                strB.append("</pre></html>");
-                this.listModel.addElement(strB.toString());
+//                strB = new StringBuffer();
+//                strB.append("<html><pre>");
+//                strB.append(String.format(Localization.getLangDataAtIndex(47) + " " + Localization.getLangDataAtIndex(i) + "\t" + Localization.getLangDataAtIndex(48) + "%7s" + " " + Localization.getLangDataAtIndex(49) + " " + risk, backendModels.japan[i].getCaseNumber()));
+//                strB.append("<html><pre>" + (String.format(Localization.getLangDataAtIndex(47) + " " + Localization.getLangDataAtIndex(i) + "\t" + Localization.getLangDataAtIndex(48) + "%7s" + " " + Localization.getLangDataAtIndex(49) + " " + risk, backendModels.japan[i].getCaseNumber())) + "</pre></html>");
+                this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAtIndex(47) + " " + Localization.getLangDataAtIndex(i) + "\t" + Localization.getLangDataAtIndex(48) + "%7s" + " " + Localization.getLangDataAtIndex(49) + " " + risk, backendModels.japan[i].getCaseNumber())) + "</pre></html>");
             }
         } else if (Localization.getLang().equals("en-us")) {
             for (int i = 0; i < backendModels.japan.length; i++) {
-//                System.out.println(backendModels.japan[i].getRisk());
-//                System.out.println(Localization.getLangDataAtIndex(55));
-//                System.out.println(langData[54]);
                 if (backendModels.japan[i].getRisk().equals("High")) {
-//                    risk = langData[54]; For some reason this doesn't work. Returns Moderate when its suppossed to return high
-//                    System.out.println("H");
-                    risk = "High";
+                    risk = Localization.getLangDataAtIndex(54);
                 }
                 if (backendModels.japan[i].getRisk().equals("Moderate")) {
-//                    risk = langData[55];
-//                    System.out.println("M");
-                    risk = "Moderate";
+                    risk = Localization.getLangDataAtIndex(55);
                 }
                 if (backendModels.japan[i].getRisk().equals("Low")) {
-//                    risk = langData[56];
-//                    System.out.println("L");
-                    risk = "Low";
+                    risk = Localization.getLangDataAtIndex(56);
                 }
-//
-//                System.out.println("risk " + risk);
-                strB = new StringBuffer();
-                strB.append("<html><pre>");
-                strB.append(String.format(Localization.getLangDataAtIndex(47) + " " + "%-10.10s" + Localization.getLangDataAtIndex(48) + "%7s" + " " + Localization.getLangDataAtIndex(49) + " " + risk, Localization.getLangDataAtIndex(i), backendModels.japan[i].getCaseNumber()));
-                strB.append("</pre></html>");
-                this.listModel.addElement(strB.toString());
+//                strB = new StringBuffer();
+//                strB.append("<html><pre>");
+//                strB.append(String.format(Localization.getLangDataAtIndex(47) + " " + "%-10.10s" + Localization.getLangDataAtIndex(48) + "%7s" + " " + Localization.getLangDataAtIndex(49) + " " + risk, Localization.getLangDataAtIndex(i), backendModels.japan[i].getCaseNumber()));
+//                strB.append("</pre></html>");
+                this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAtIndex(47) + " " + "%-10.10s" + Localization.getLangDataAtIndex(48) + "%7s" + "\n" + Localization.getLangDataAtIndex(49) + " " + risk, Localization.getLangDataAtIndex(i), backendModels.japan[i].getCaseNumber())) + "</pre></html>");
             }
         }
     }

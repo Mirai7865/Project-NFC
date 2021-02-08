@@ -48,8 +48,8 @@ public class DrawMap {
         this.setMap("japan_map.png");
         this.setDots();
         Graphics g = this.map.getGraphics();
-
         for (int i = 0; i < xLoc.length; i++) {
+//            System.out.println(pref[i].toString());
             if (pref[i].getRisk().equals("High")) {
                 g.drawImage(this.dotRed, xLoc[i], yLoc[i], null);
             } else if (pref[i].getRisk().equals("Moderate")) {
