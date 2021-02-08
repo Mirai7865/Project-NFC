@@ -5,16 +5,9 @@
  */
 package project.nfc;
 
-import java.util.Scanner;
 import java.io.*;
-
 import java.util.Scanner;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class AccessFile {
 
@@ -49,8 +42,8 @@ public class AccessFile {
     }
 
     public static void writeFile(String str, String path) {
-        File f = new File(path);
         try {
+            File f = new File(path);
             //create FileWriter object
             FileWriter fw = new FileWriter(f);
             //create PrintWriter object
@@ -63,7 +56,7 @@ public class AccessFile {
             fw.close();
             //catch IOException
         } catch (IOException IOE) {
-            System.out.println("Unable to find file at " + f.getPath());
+            System.out.println("Unable to find file at " + path);
         }
     }
 }

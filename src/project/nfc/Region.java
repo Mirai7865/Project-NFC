@@ -5,7 +5,6 @@
  */
 package project.nfc;
 
-import java.util.Formatter;
 
 abstract class Region {
 

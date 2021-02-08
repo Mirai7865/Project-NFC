@@ -6,7 +6,6 @@
 package project.nfc;
 
 import java.io.File;
-import java.net.URI;
 import java.util.Scanner;
 
 public class BackendModels {
@@ -14,11 +13,10 @@ public class BackendModels {
     public Prefecture[] japan;
 
     public BackendModels() {
-//        this.initialSetUp();
+        this.initialSetUp();
     }
 
-    public void initialSetUp() {
-        Localization.setLang("en-us");
+    private void initialSetUp() {
         String data = AccessFile.readFile(("data" + File.separator + "prefecture.txt"));
         Scanner scr = new Scanner(data);
         scr.useDelimiter("<");
@@ -35,10 +33,9 @@ public class BackendModels {
                 japan[count] = new Prefecture(prefName, caseNumberAry[count], population, majorCity);
             } catch (NumberFormatException ex) {
                 System.out.println("Exception in creating prefecture objects.");
-            } catch (IllegalArgumentException iAE) {
-                System.out.println("The prefecture name and the returned data from API has been misassembled. Check prefectureData.txt");
             }
             scrT.close();
+//            System.out.println(this.japan[count].toString());
             count++;
         }
         scr.close();

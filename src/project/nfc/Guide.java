@@ -12,13 +12,14 @@ public class Guide {
     private String article;
     private String path;
 
-    public Guide(String articleTitle, String path) {
+    public Guide(String articleTitle, String path) { //Incomplete class. Will be working on this later
         this.articleTitle = articleTitle;
         this.path = path;
+        this.loadArticle();
     }
 
-    public void loadArticle() {
-//        this.article = AccessFile.readFile(this.path);
+    private void loadArticle() {
+        this.article = AccessFile.readFile(this.path);
     }
 
     public String getArticle() {

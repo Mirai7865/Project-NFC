@@ -6,6 +6,6 @@
 package project.nfc;
 
 
-public class Translator {
+public class Translator { // The plan is to make an API to get data from google traslate website. Will be working on this later.
     
 }

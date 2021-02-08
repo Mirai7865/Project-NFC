@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Localization {
 
     private static String language;
-    private static String[] langData = new String[50];
+    private static String[] langData = new String[57];
 
     public Localization() {
     }
@@ -33,19 +33,17 @@ public class Localization {
         scr.useDelimiter("<<.{0,10}>=");
         int num = 0;
         while (scr.hasNext()) {
-//            String temp = scr.next();
-//            System.out.println(temp);
-
-//            int index = temp.indexOf("=");
-//            System.out.println(index);
             langData[num] = scr.next();
-//            System.out.println(langData[num]);
             num++;
         }
-//        System.out.println(langData[48]);
+//        System.out.println(langData[54]);
     }
 
     public static String[] getLangData() { //return langData
         return langData;
+    }
+    
+    public static String getLangDataAtIndex(int index) { //return langData
+        return langData[index];
     }
 }

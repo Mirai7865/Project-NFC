@@ -16,10 +16,10 @@ public class ProjectNFC {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        BackendModels bem = new BackendModels();
-        MainDisplay main = new MainDisplay(bem);
-        MainDisplayController mdc = new MainDisplayController(bem, main);
-//        main.updateCaseNumberTextField();
+        Localization.setLang("ja-jp");
+        BackendModels backendModels = new BackendModels();
+        MainDisplay mainDisplay = new MainDisplay(backendModels);
+        MainDisplayController mdc = new MainDisplayController(backendModels, mainDisplay);
     }
 
 }

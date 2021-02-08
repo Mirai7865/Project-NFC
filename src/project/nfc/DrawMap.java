@@ -55,35 +55,26 @@ public class DrawMap {
             } else if (pref[i].getRisk().equals("Moderate")) {
                 g.drawImage(this.dotOrange, xLoc[i], yLoc[i], null);
             } else if (pref[i].getRisk().equals("Low")) {
-                g.drawImage((this.dotGreen), xLoc[i], yLoc[i], null);
+                g.drawImage(this.dotGreen, xLoc[i], yLoc[i], null);
             }
         }
         return new ImageIcon(this.map);
     }
 
     private void setMap(String mapName) {
-        Image map = new Image();
-        try {
-            map.loadImage(mapName);
-            this.map = (map.getImage());
-        } catch (IOException IOE) {
-            System.out.println("Unable to find japan_map.png.");
-        }
+        Image map = new Image(mapName);
+        this.map = (map.getImage());
     }
 
     private void setDots() {
-        Image dot = new Image();
-        try {
-            dot.loadImage("red dot.png");
-            this.dotRed = (dot.getImage());
-            dot.loadImage("green dot.png");
-            this.dotGreen = (dot.getImage());
-            dot.loadImage("orange dot.png");
-            this.dotOrange = (dot.getImage());
-            dot.loadImage("blue dot.png");
-            this.dotBlue = (dot.getImage());
-        } catch (IOException IOE) {
-            System.out.println("Unable to find png.");
-        }
+        Image dot;
+        dot = new Image("red dot.png");
+        this.dotRed = (dot.getImage());
+        dot = new Image("green dot.png");
+        this.dotGreen = (dot.getImage());
+        dot = new Image("orange dot.png");
+        this.dotOrange = (dot.getImage());
+        dot = new Image("blue dot.png");
+        this.dotBlue = (dot.getImage());
     }
 }

@@ -11,25 +11,29 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.io.IOException;
-import java.util.Formatter;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 public class MainDisplay extends JFrame {
 
     BackendModels backendModels;
 
-    JList caseNumberTextField;
+    JList caseNumberList;
     JButton langJpButton;
     JButton langEnButton;
+    JTabbedPane mainPane;
+    JPanel caseNumberPanel;
+    JPanel guidePanel;
+    JTextField guidebookText;
 //    ImageIcon mapIcon;
 //    ImageIcon redDot;
 //    ImageIcon yellowDot;
@@ -37,25 +41,26 @@ public class MainDisplay extends JFrame {
 //    JLabel redDotLabel;
     JLabel mapLabel;
     JPanel mapPanel;
+    JScrollPane caseNumberPane;
     DefaultListModel<String> listModel;
 
-    String[] str = new String[48];
-    JScrollPane pane;
-
-    public void initialComponents() {
+    private void initialComponents() {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setMinimumSize(new Dimension(1000, 600));
+        this.setMinimumSize(new Dimension(1200, 600));
         this.setTitle("Project NFC");
 
-        this.listModel = new DefaultListModel<>();
-//        this.listModel.addElement("Collecting data from server....");
-//        str[0] = "Collecting data from server";
-        this.caseNumberTextField = new JList(this.listModel);
-        this.caseNumberTextField.setFont(new Font("monospaced", Font.BOLD, 14));
-//        this.caseNumberTextField.setPreferredSize(new Dimension(510, 1550));
+        this.mainPane = new JTabbedPane(JTabbedPane.TOP);
+        this.caseNumberPanel = new JPanel(new GridBagLayout());
+        this.guidePanel = new JPanel(new GridBagLayout());
 
-        this.pane = new JScrollPane(this.caseNumberTextField);
-        this.pane.setPreferredSize(new Dimension(380, 500));
+        this.listModel = new DefaultListModel<>();
+        this.caseNumberList = new JList(this.listModel);
+        this.caseNumberList.setFont(new Font("monospaced", Font.BOLD, 14));
+//        this.caseNumberList.setPreferredSize(new Dimension(510, 1550));
+
+        this.caseNumberPane = new JScrollPane(this.caseNumberList);
+        this.caseNumberPane.setPreferredSize(new Dimension(380, 500));
+        this.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAtIndex(51)));
 
         this.langJpButton = new JButton();
         this.langJpButton.setText("日本語");
@@ -63,15 +68,14 @@ public class MainDisplay extends JFrame {
         this.langEnButton = new JButton();
         this.langEnButton.setText("English");
 
-//        this.setMap("japan_map.png");
         DrawMap map = new DrawMap();
-        this.mapLabel = new JLabel(map.initialDraw(this.backendModels.japan));
-
+//        this.mapLabel = new JLabel(map.initialDraw(this.backendModels.japan));
         this.mapPanel = new JPanel();
-        this.mapPanel.add(this.mapLabel);
+        this.mapPanel.add(new JLabel(map.initialDraw(this.backendModels.japan)));
+        this.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAtIndex(50)));
 
-        Container mainDisplayPane = this.getContentPane();
-        mainDisplayPane.setLayout(new GridBagLayout());
+        this.guidebookText = new JTextField();
+        this.guidebookText.setText("Content to be added later");
 
         GridBagConstraints gbc;
 
@@ -84,7 +88,8 @@ public class MainDisplay extends JFrame {
         gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.NORTH;
-        mainDisplayPane.add(this.langJpButton, gbc);
+//        mainDisplayPane.add(this.langJpButton, gbc);
+        this.caseNumberPanel.add(this.langJpButton, gbc);
 
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
@@ -95,7 +100,8 @@ public class MainDisplay extends JFrame {
         gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.NORTH;
-        mainDisplayPane.add(this.langEnButton, gbc);
+//        mainDisplayPane.add(this.langEnButton, gbc);
+        this.caseNumberPanel.add(this.langEnButton, gbc);
 
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -106,7 +112,8 @@ public class MainDisplay extends JFrame {
         gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
 //        gbc.anchor = GridBagConstraints.NORTH;
-        mainDisplayPane.add(this.pane, gbc);
+//        this.mainPane.addTab("Main Tab", this.caseNumberPane);
+        this.caseNumberPanel.add(this.caseNumberPane, gbc);
 
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
@@ -117,66 +124,91 @@ public class MainDisplay extends JFrame {
         gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.NORTH;
-        mainDisplayPane.add(this.mapPanel, gbc);
+        this.caseNumberPanel.add(this.mapPanel, gbc);
 
+        Container mainDisplayPane = this.getContentPane();
+        mainDisplayPane.setLayout(new GridBagLayout());
+
+        this.mainPane.addTab(Localization.getLangDataAtIndex(52), null, this.caseNumberPanel, "Shows case numbers");
+
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.fill = GridBagConstraints.CENTER;
+//        gbc.anchor = GridBagConstraints.NORTH;
+        this.guidePanel.add(this.guidebookText, gbc);
+
+        this.mainPane.addTab(Localization.getLangDataAtIndex(53), null, this.guidePanel, "Guidebook section");
+
+        mainDisplayPane.add(this.mainPane);
         this.mapPanel.setVisible(true);
         this.setVisible(true);
         this.pack();
     }
 
     public MainDisplay(BackendModels bem) {
-        //Create JFrame and locate "mainDsiplay"
+        //Create JFrame and locate all the components. Also update caseNumber.
         this.backendModels = bem;
-//        this.initialComponents();
-        this.backendModels.initialSetUp();
+//        this.backendModels.initialSetUp();
         this.initialComponents();
-        this.updateCaseNumberTextField();
+        this.updateCaseNumberTextPane();
 
     }
 
-//    private void setMap(String mapName) {
-//        Image map = new Image();
-//        try {
-//            map.loadImage(mapName);
-//            this.mapIcon = new ImageIcon(map.getImage());
-//        } catch (IOException IOE) {
-//            System.out.println("Unable to find japan_map.png.");
-//        }
-//    }
-//    private void setDots() {
-//        Image dot = new Image();
-//        try {
-//            dot.loadImage("red dot.png");
-//            this.redDot = new ImageIcon(dot.getImage());
-//        } catch (IOException IOE) {
-//            System.out.println("Unable to find png.");
-//        }
-//    }
-    public void updateCaseNumberTextField() {
-        //update contents inside the mainDisplay
+    public void updateCaseNumberTextPane() {
+        //update contents inside the caseNumberList
         this.listModel.clear();
         String langData[] = Localization.getLangData();
+        StringBuffer strB;
+        String risk = null;
 
         if (Localization.getLang().equals("ja-jp")) { //Needs to differentiate the two, since tabbing works on ja-jp but not on en-us, and Formatter works for en-us but not for ja-jp
             for (int i = 0; i < backendModels.japan.length; i++) {
-//                Formatter nft = new Formatter();
-//                String str = nft.format(langData[47] + " " + "%-10.10s" + langData[48] + "%7s", langData[i], backendModels.japan[i].getCaseNumber()).toString();
-                StringBuffer strB = new StringBuffer();
+                if (backendModels.japan[i].getRisk().equals("High")) {
+                    risk = Localization.getLangDataAtIndex(54); 
+                } else if (backendModels.japan[i].getRisk().equals("Moderate")) {
+                    risk = Localization.getLangDataAtIndex(55);
+//                    risk = "中";
+                } else if (backendModels.japan[i].getRisk().equals("Low")) {
+                    risk = Localization.getLangDataAtIndex(56);
+//                    risk = "低";
+                }
+//                System.out.println("risk " + risk);
+                strB = new StringBuffer();
                 strB.append("<html><pre>");
-                strB.append(String.format(langData[47] + " " + langData[i] + "\t" +  langData[48] + "%7s" + " " + langData[49] + " " + backendModels.japan[i].getRisk(), backendModels.japan[i].getCaseNumber()));
+                strB.append(String.format(Localization.getLangDataAtIndex(47) + " " + Localization.getLangDataAtIndex(i) + "\t" + Localization.getLangDataAtIndex(48) + "%7s" + " " + Localization.getLangDataAtIndex(49) + " " + risk, backendModels.japan[i].getCaseNumber()));
                 strB.append("</pre></html>");
                 this.listModel.addElement(strB.toString());
-//                nft.close();
             }
         } else if (Localization.getLang().equals("en-us")) {
-            String str = "";
             for (int i = 0; i < backendModels.japan.length; i++) {
-//                Formatter nft = new Formatter();
-//                str = String.format(langData[47] + " " + "%-10.10s" + langData[48] + "%7s", langData[i], backendModels.japan[i].getCaseNumber()).toString();
-//                this.listModel.addElement(str);
-                StringBuffer strB = new StringBuffer();
+//                System.out.println(backendModels.japan[i].getRisk());
+//                System.out.println(Localization.getLangDataAtIndex(55));
+//                System.out.println(langData[54]);
+                if (backendModels.japan[i].getRisk().equals("High")) {
+//                    risk = langData[54]; For some reason this doesn't work. Returns Moderate when its suppossed to return high
+//                    System.out.println("H");
+                    risk = "High";
+                }
+                if (backendModels.japan[i].getRisk().equals("Moderate")) {
+//                    risk = langData[55];
+//                    System.out.println("M");
+                    risk = "Moderate";
+                }
+                if (backendModels.japan[i].getRisk().equals("Low")) {
+//                    risk = langData[56];
+//                    System.out.println("L");
+                    risk = "Low";
+                }
+//
+//                System.out.println("risk " + risk);
+                strB = new StringBuffer();
                 strB.append("<html><pre>");
-                strB.append(String.format(langData[47] + " " + "%-10.10s" + langData[48] + "%7s" + " " + langData[49] + " " + backendModels.japan[i].getRisk(), langData[i], backendModels.japan[i].getCaseNumber()));
+                strB.append(String.format(Localization.getLangDataAtIndex(47) + " " + "%-10.10s" + Localization.getLangDataAtIndex(48) + "%7s" + " " + Localization.getLangDataAtIndex(49) + " " + risk, Localization.getLangDataAtIndex(i), backendModels.japan[i].getCaseNumber()));
                 strB.append("</pre></html>");
                 this.listModel.addElement(strB.toString());
             }

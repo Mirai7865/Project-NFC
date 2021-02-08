@@ -13,7 +13,7 @@ public class YahooApi {
         //Create http request
     }
 
-    public String[] getForecast(HttpURLConnection data) {
+    public String[] getForecast(HttpURLConnection data) { //The plan is to get weather data by connecting to yahoo weather(one of the most reliable sources). Will be working on this later.
         //create for-loop
             //get weather forecast and store into an array
         //return array

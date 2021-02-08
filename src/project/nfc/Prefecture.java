@@ -6,43 +6,43 @@
 package project.nfc;
 
 public class Prefecture extends Region {
-
+    
     private int population;
     private String risk;
     private String majorCity;
     private String weatherForecast;
-
+    
     public Prefecture(String prefectureName, int caseNumber, int population, String majorCity) {
         super(prefectureName, caseNumber);
-        this.population = population;
+        this.setPopulation(population);
+        this.setmajorCity(majorCity);
         this.setRisk();
-        this.majorCity = majorCity;
     }
-
+    
     private void setPopulation(int population) {
         this.population = population;
     }
-
+    
     private void setmajorCity(String city) {
         this.majorCity = city;
     }
-
+    
     public int getPopulation() {
         return this.population;
     }
-
+    
     public String getMajorCityName() {
         return this.majorCity;
     }
-
+    
     private void setWeatherForecast(String weather) {
         this.weatherForecast = weather;
     }
-
+    
     public String getWeatherForecast() {
         return this.weatherForecast;
     }
-
+    
     private void setRisk() {
         double risk = Calculate.calculateRisk(this.getPopulation(), this.getCaseNumber());
         if (risk > 0.003) {
@@ -53,7 +53,7 @@ public class Prefecture extends Region {
             this.risk = "Low";
         }
     }
-
+    
     public String getRisk() {
         return this.risk;
     }

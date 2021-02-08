@@ -8,22 +8,24 @@ package project.nfc;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 public class Image {
 
     private BufferedImage img;
 
-    public Image() {
-
+    public Image(String path) {
+        this.loadImage(path);
     }
 
-    public void loadImage(String name) throws IOException {
-        File imgPath = new File(("data" + File.separator + "images" + File.separator + name));
-        this.img = ImageIO.read(imgPath);
+    private void loadImage(String name) {
+        File imgPath;
+        try {
+            imgPath = new File(("data" + File.separator + "images" + File.separator + name));
+            this.img = ImageIO.read(imgPath);
+        } catch (IOException e) {
+            System.out.println("Unable to find image " + name);
+        }
     }
 
     public BufferedImage getImage() {
