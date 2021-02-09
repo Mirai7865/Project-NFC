@@ -26,7 +26,7 @@ public class AccessFile {
             //make while-loop
             while (scr.hasNext()) {
                 //store the components into a String
-                if (isThisFirstLine == true){ //First line contains formatting.
+                if (isThisFirstLine == true) { //First line contains formatting.
                     scr.nextLine();
                     isThisFirstLine = false;
                     continue;

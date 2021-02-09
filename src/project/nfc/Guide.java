@@ -13,7 +13,7 @@ public class Guide {
     private String article;
     private String path;
 
-    public Guide(String articleTitle, String path) { //Incomplete class. Will be working on this later
+    public Guide(String articleTitle, String path) {
         this.articleTitle = articleTitle;
         this.path = path;
         this.loadArticle();
@@ -21,10 +21,15 @@ public class Guide {
 
     private void loadArticle() {
         this.article = AccessFile.readFile("data" + File.separator + "articles" + File.separator + this.path + ".txt");
-        this.article = this.article.replace("@", "");
+        this.article = this.article.replaceFirst("@", "");
+        this.article = this.article.replaceAll("@", "\n");
     }
 
     public String getArticle() {
         return this.article;
+    }
+    
+    public String getArticleTitle() {
+        return this.articleTitle;
     }
 }
