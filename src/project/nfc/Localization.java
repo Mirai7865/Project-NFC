@@ -29,19 +29,14 @@ public class Localization {
         //load language files
         String str = AccessFile.readFile("data" + File.separator + "localization" + File.separator + getLang() + ".txt");
         Scanner scr = new Scanner(str);
-//        System.out.println(str);
-        scr.useDelimiter("<");
+        scr.useDelimiter("@<");
         int num = 0;
         while (scr.hasNext()) {
             String s = scr.next();
-            System.out.println(s);
-            if (!s.substring(0, 1).equals("<")) {
-                langData[num] = s;
-                num++;
+            langData[num] = s.substring(s.indexOf("=") + 1, s.length());
+            num++;
 //            System.out.println(langData[num]);
-            }
         }
-//        System.out.println(langData[54]);
     }
 
     public static String[] getLangData() { //return langData

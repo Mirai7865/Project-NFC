@@ -5,6 +5,7 @@
  */
 package project.nfc;
 
+import java.io.File;
 
 public class Guide {
 
@@ -19,7 +20,8 @@ public class Guide {
     }
 
     private void loadArticle() {
-        this.article = AccessFile.readFile(this.path);
+        this.article = AccessFile.readFile("data" + File.separator + "articles" + File.separator + this.path + ".txt");
+        this.article = this.article.replace("@", "");
     }
 
     public String getArticle() {

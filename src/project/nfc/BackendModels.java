@@ -19,7 +19,7 @@ public class BackendModels {
     private void initialSetUp() {
         String data = AccessFile.readFile(("data" + File.separator + "prefecture.txt"));
         Scanner scr = new Scanner(data);
-        scr.useDelimiter("<");
+        scr.useDelimiter("@");
 
         int[] caseNumberAry = CaseNumberApi.getCaseNumber();
         int count = 0;

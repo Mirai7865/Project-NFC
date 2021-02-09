@@ -13,6 +13,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,7 +21,9 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import javax.swing.WindowConstants;
 
 public class MainDisplay extends JFrame {
@@ -33,7 +36,11 @@ public class MainDisplay extends JFrame {
     JTabbedPane mainPane;
     JPanel caseNumberPanel;
     JPanel guidePanel;
-    JTextField guidebookText;
+    JTextArea guidebookText;
+    JScrollPane guideSectionPane;
+    JPanel guideSectionImagePane1;
+    JPanel guideSectionImagePane2;
+
 //    ImageIcon mapIcon;
 //    ImageIcon redDot;
 //    ImageIcon yellowDot;
@@ -74,8 +81,28 @@ public class MainDisplay extends JFrame {
         this.mapPanel.add(new JLabel(map.initialDraw(this.backendModels.japan)));
         this.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAtIndex(50)));
 
-        this.guidebookText = new JTextField();
-        this.guidebookText.setText("Content to be added later");
+        this.guidebookText = new JTextArea();
+        this.guidebookText.setEditable(false);
+
+        Guide sensouji = new Guide("Sensouji", "Sensouji");
+        this.guidebookText.setText(sensouji.getArticle());
+        this.guidebookText.setFont(new Font(Font.SERIF, Font.PLAIN, 18));
+        this.guidebookText.setSize(new Dimension(700, 700));
+        this.guidebookText.setLineWrap(true);
+        this.guidebookText.setWrapStyleWord(true);
+
+        this.guideSectionPane = new JScrollPane(this.guidebookText);
+        this.guideSectionPane.setBorder(BorderFactory.createTitledBorder("Senso-ji"));
+//        this.guideSectionPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+        this.guideSectionPane.setPreferredSize(new Dimension(700, 600));
+
+        this.guideSectionImagePane1 = new JPanel();
+        this.guideSectionImagePane1.add(new JLabel(this.fetchImage("Kaminarimon.jpg")));
+        this.guideSectionImagePane1.setBorder(BorderFactory.createTitledBorder("The face of Senso-ji, \"Kaminarimon\""));
+
+        this.guideSectionImagePane2 = new JPanel();
+        this.guideSectionImagePane2.add(new JLabel(this.fetchImage("Kaminarimon from distance.jpg")));
+        this.guideSectionImagePane2.setBorder(BorderFactory.createTitledBorder("Take another look at Kaminarimon!"));
 
         GridBagConstraints gbc;
 
@@ -138,9 +165,31 @@ public class MainDisplay extends JFrame {
         gbc.gridheight = 1;
         gbc.weightx = 1;
         gbc.weighty = 1;
-        gbc.fill = GridBagConstraints.CENTER;
-//        gbc.anchor = GridBagConstraints.NORTH;
-        this.guidePanel.add(this.guidebookText, gbc);
+//        gbc.fill = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.NORTH;
+        this.guidePanel.add(this.guideSectionPane, gbc);
+
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+//        gbc.fill = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.NORTH;
+        this.guidePanel.add(this.guideSectionImagePane1, gbc);
+
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+//        gbc.fill = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.SOUTH;
+        this.guidePanel.add(this.guideSectionImagePane2, gbc);
 
         this.mainPane.addTab(Localization.getLangDataAtIndex(53), null, this.guidePanel, "Guidebook section");
 
@@ -201,5 +250,10 @@ public class MainDisplay extends JFrame {
                 this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAtIndex(47) + " " + "%-10.10s" + Localization.getLangDataAtIndex(48) + "%7s" + "\n" + Localization.getLangDataAtIndex(49) + " " + risk, Localization.getLangDataAtIndex(i), backendModels.japan[i].getCaseNumber())) + "</pre></html>");
             }
         }
+    }
+
+    public ImageIcon fetchImage(String name) {
+        Image image = new Image(name);
+        return new ImageIcon(image.getImage());
     }
 }

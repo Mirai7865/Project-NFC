@@ -31,7 +31,7 @@ public class AccessFile {
                     isThisFirstLine = false;
                     continue;
                 }
-                strBfer.append("<");
+                strBfer.append("@");
                 strBfer.append(scr.nextLine());
             }
             //close Scanner

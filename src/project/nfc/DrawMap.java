@@ -14,8 +14,6 @@ import javax.swing.ImageIcon;
 
 public class DrawMap {
 
-//    JLabel redDotLabel;
-//    JLabel mapLabel;
     BufferedImage map;
     BufferedImage dotRed;
     BufferedImage dotGreen;
@@ -27,7 +25,7 @@ public class DrawMap {
 
     public DrawMap() {
         Scanner scr = new Scanner(AccessFile.readFile("data" + File.separator + "dotLocation.txt"));
-        scr.useDelimiter("<.{0,10}=");
+        scr.useDelimiter("@.{0,10}=");
         int count = 0;
         xLoc = new int[47];
         yLoc = new int[47];
