@@ -29,7 +29,7 @@ public class Localization {
         //load language files
         String str = AccessFile.readFile("data" + File.separator + "localization" + File.separator + getLang() + ".txt");
         Scanner scr = new Scanner(str);
-        scr.useDelimiter("@<");
+        scr.useDelimiter("@");
         int num = 0;
         while (scr.hasNext()) {
             String s = scr.next();
