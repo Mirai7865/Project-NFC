@@ -25,17 +25,16 @@ public class BackendModels {
         int count = 0;
         this.japan = new Prefecture[47];
         while (scr.hasNextLine()) {
-            Scanner scrT = new Scanner(scr.next());
+            Scanner prefData = new Scanner(scr.next());
             try {
-                String prefName = scrT.next();
-                int population = scrT.nextInt() * 1000;
-                String majorCity = scrT.next();
+                String prefName = prefData.next();
+                int population = prefData.nextInt() * 1000;
+                String majorCity = prefData.next();
                 japan[count] = new Prefecture(prefName, caseNumberAry[count], population, majorCity);
             } catch (NumberFormatException ex) {
                 System.out.println("Exception in creating prefecture objects.");
             }
-            scrT.close();
-//            System.out.println(this.japan[count].toString());
+            prefData.close();
             count++;
         }
         scr.close();
