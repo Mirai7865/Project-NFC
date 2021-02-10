@@ -18,8 +18,8 @@ public class DrawMap {
     BufferedImage dotGreen;
     BufferedImage dotOrange;
     BufferedImage dotBlue;
-    public int[] xLoc;
-    public int[] yLoc;
+    private int[] xLoc;
+    private int[] yLoc;
 
     public DrawMap() {
         Scanner scr = new Scanner(AccessFile.readFile("data" + File.separator + "dotLocation.txt"));

@@ -5,10 +5,7 @@
  */
 package project.nfc;
 
-/**
- *
- * @author atsuya-o
- */
+
 public class ProjectNFC {
 
     /**
