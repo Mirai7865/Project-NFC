@@ -6,7 +6,6 @@
 package project.nfc;
 
 import java.awt.Container;
-import java.awt.Panel;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -22,13 +21,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import javax.swing.WindowConstants;
 
 public class MainDisplay extends JFrame {
 
     BackendModels backendModels;
+    DrawMap map;
 
     JList caseNumberList;
     JButton langJpButton;
@@ -75,8 +73,6 @@ public class MainDisplay extends JFrame {
         this.langEnButton = new JButton();
         this.langEnButton.setText("English");
 
-        DrawMap map = new DrawMap();
-//        this.mapLabel = new JLabel(map.initialDraw(this.backendModels.japan));
         this.mapPanel = new JPanel();
         this.mapPanel.add(new JLabel(map.initialDraw(this.backendModels.japan)));
         this.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAtIndex(50)));
@@ -93,7 +89,6 @@ public class MainDisplay extends JFrame {
 
         this.guideSectionPane = new JScrollPane(this.guidebookText);
         this.guideSectionPane.setBorder(BorderFactory.createTitledBorder("Senso-ji"));
-//        this.guideSectionPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
         this.guideSectionPane.setPreferredSize(new Dimension(700, 600));
 
         this.guideSectionImagePane1 = new JPanel();
@@ -202,7 +197,7 @@ public class MainDisplay extends JFrame {
     public MainDisplay(BackendModels bem) {
         //Create JFrame and locate all the components. Also update caseNumber.
         this.backendModels = bem;
-//        this.backendModels.initialSetUp();
+        this.map = new DrawMap();
         this.initialComponents();
         this.updateCaseNumberTextPane();
 
@@ -211,42 +206,19 @@ public class MainDisplay extends JFrame {
     public void updateCaseNumberTextPane() {
         //update contents inside the caseNumberList
         this.listModel.clear();
-//        String langData[] = Localization.getLangData();
-        StringBuffer strB;
         String risk = null;
-
-        if (Localization.getLang().equals("ja-jp")) { //Needs to differentiate the two, since tabbing works on ja-jp but not on en-us, and Formatter works for en-us but not for ja-jp
-            for (int i = 0; i < backendModels.japan.length; i++) {
-                if (backendModels.japan[i].getRisk().equals("High")) {
-                    risk = Localization.getLangDataAtIndex(54);
-                } else if (backendModels.japan[i].getRisk().equals("Moderate")) {
-                    risk = Localization.getLangDataAtIndex(55);
-//                    risk = "中";
-                } else if (backendModels.japan[i].getRisk().equals("Low")) {
-                    risk = Localization.getLangDataAtIndex(56);
-//                    risk = "低";
-                }
-//                strB = new StringBuffer();
-//                strB.append("<html><pre>");
-//                strB.append(String.format(Localization.getLangDataAtIndex(47) + " " + Localization.getLangDataAtIndex(i) + "\t" + Localization.getLangDataAtIndex(48) + "%7s" + " " + Localization.getLangDataAtIndex(49) + " " + risk, backendModels.japan[i].getCaseNumber()));
-//                strB.append("<html><pre>" + (String.format(Localization.getLangDataAtIndex(47) + " " + Localization.getLangDataAtIndex(i) + "\t" + Localization.getLangDataAtIndex(48) + "%7s" + " " + Localization.getLangDataAtIndex(49) + " " + risk, backendModels.japan[i].getCaseNumber())) + "</pre></html>");
-                this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAtIndex(47) + " " + Localization.getLangDataAtIndex(i) + "\t" + Localization.getLangDataAtIndex(48) + "%7s" + " " + Localization.getLangDataAtIndex(49) + " " + risk, backendModels.japan[i].getCaseNumber())) + "</pre></html>");
+        for (int i = 0; i < backendModels.japan.length; i++) {
+            if (backendModels.japan[i].getRisk().equals("High")) {
+                risk = Localization.getLangDataAtIndex(54);
+            } else if (backendModels.japan[i].getRisk().equals("Moderate")) {
+                risk = Localization.getLangDataAtIndex(55);
+            } else if (backendModels.japan[i].getRisk().equals("Low")) {
+                risk = Localization.getLangDataAtIndex(56);
             }
-        } else if (Localization.getLang().equals("en-us")) {
-            for (int i = 0; i < backendModels.japan.length; i++) {
-                if (backendModels.japan[i].getRisk().equals("High")) {
-                    risk = Localization.getLangDataAtIndex(54);
-                }
-                if (backendModels.japan[i].getRisk().equals("Moderate")) {
-                    risk = Localization.getLangDataAtIndex(55);
-                }
-                if (backendModels.japan[i].getRisk().equals("Low")) {
-                    risk = Localization.getLangDataAtIndex(56);
-                }
-//                strB = new StringBuffer();
-//                strB.append("<html><pre>");
-//                strB.append(String.format(Localization.getLangDataAtIndex(47) + " " + "%-10.10s" + Localization.getLangDataAtIndex(48) + "%7s" + " " + Localization.getLangDataAtIndex(49) + " " + risk, Localization.getLangDataAtIndex(i), backendModels.japan[i].getCaseNumber()));
-//                strB.append("</pre></html>");
+
+            if (Localization.getLang().equals("ja-jp")) {
+                this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAtIndex(47) + " " + Localization.getLangDataAtIndex(i) + "\t" + Localization.getLangDataAtIndex(48) + "%7s" + " " + Localization.getLangDataAtIndex(49) + " " + risk, backendModels.japan[i].getCaseNumber())) + "</pre></html>");
+            } else if (Localization.getLang().equals("en-us")) {
                 this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAtIndex(47) + " " + "%-10.10s" + Localization.getLangDataAtIndex(48) + "%7s" + "\n" + Localization.getLangDataAtIndex(49) + " " + risk, Localization.getLangDataAtIndex(i), backendModels.japan[i].getCaseNumber())) + "</pre></html>");
             }
         }
