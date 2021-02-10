@@ -38,12 +38,6 @@ public class MainDisplay extends JFrame {
     JScrollPane guideSectionPane;
     JPanel guideSectionImagePane1;
     JPanel guideSectionImagePane2;
-
-//    ImageIcon mapIcon;
-//    ImageIcon redDot;
-//    ImageIcon yellowDot;
-//    ImageIcon greenDot;
-//    JLabel redDotLabel;
     JLabel mapLabel;
     JPanel mapPanel;
     JScrollPane caseNumberPane;
@@ -226,6 +220,7 @@ public class MainDisplay extends JFrame {
 
     public ImageIcon fetchImage(String name) {
         Image image = new Image(name);
-        return new ImageIcon(image.getImage());
+        ImageIcon imageIcon = new ImageIcon(image.getImage());
+        return imageIcon;
     }
 }

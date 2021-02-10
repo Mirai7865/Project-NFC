@@ -8,7 +8,6 @@ package project.nfc;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.Scanner;
 import javax.swing.ImageIcon;
 
@@ -21,23 +20,21 @@ public class DrawMap {
     BufferedImage dotBlue;
     public int[] xLoc;
     public int[] yLoc;
-//    public String[] risk;
 
     public DrawMap() {
         Scanner scr = new Scanner(AccessFile.readFile("data" + File.separator + "dotLocation.txt"));
-        scr.useDelimiter("@.{0,10}=");
+        scr.useDelimiter("@");
         int count = 0;
         xLoc = new int[47];
         yLoc = new int[47];
-//        size = new String[47];
 
         while (scr.hasNext()) {
             String str = scr.next();
-            int index = str.indexOf(",");
-            int indexLast = str.lastIndexOf(",");
-            xLoc[count] = Integer.parseInt(str.substring(0, index));
-            yLoc[count] = Integer.parseInt(str.substring(index + 1, indexLast));
-//            size[count] = str.substring(indexLast + 1);
+            int indexEqualSign = str.indexOf("=");
+            int indexComma = str.indexOf(",");
+            int indexCommaLast = str.lastIndexOf(",");
+            xLoc[count] = Integer.parseInt(str.substring(indexEqualSign + 1, indexComma));
+            yLoc[count] = Integer.parseInt(str.substring(indexComma + 1, indexCommaLast));
             count++;
         }
     }
@@ -47,7 +44,6 @@ public class DrawMap {
         this.setDots();
         Graphics g = this.map.getGraphics();
         for (int i = 0; i < xLoc.length; i++) {
-//            System.out.println(pref[i].toString());
             if (pref[i].getRisk().equals("High")) {
                 g.drawImage(this.dotRed, xLoc[i], yLoc[i], null);
             } else if (pref[i].getRisk().equals("Moderate")) {

@@ -30,8 +30,8 @@ public class CaseNumberApi {
             while (scr.hasNext()) {
                 strB.append(scr.next());
             }
-//            data = strB.toString();
             scr.close();
+            con.disconnect();
         } catch (Exception ex) {
             System.out.println("Unable to grant connection to " + urlStr);
         }
