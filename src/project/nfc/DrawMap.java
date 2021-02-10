@@ -39,7 +39,7 @@ public class DrawMap {
         }
     }
 
-    public ImageIcon initialDraw(Prefecture[] pref) {
+    public ImageIcon initialDraw(Region[] pref) {
         this.setMap("japan_map.png");
         this.setDots();
         Graphics g = this.map.getGraphics();
