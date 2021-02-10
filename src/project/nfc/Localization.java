@@ -6,44 +6,44 @@
 package project.nfc;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Localization {
-
+    
     private static String language;
-    private static String[] langData = new String[57];
-
+    private static List<String> langData = new ArrayList<String>();
+    
     public Localization() {
     }
-
+    
     public static void setLang(String lang) {
         language = lang;
         loadLang();
     }
-
+    
     public static String getLang() {
         return language;
     }
-
+    
     private static void loadLang() {
         //load language files
+        langData.clear();
         String str = AccessFile.readFile("data" + File.separator + "localization" + File.separator + getLang() + ".txt");
         Scanner scr = new Scanner(str);
         scr.useDelimiter("@");
-        int num = 0;
         while (scr.hasNext()) {
             String s = scr.next();
-            langData[num] = s.substring(s.indexOf("=") + 1, s.length());
-            num++;
-//            System.out.println(langData[num]);
+            langData.add(s.substring(s.indexOf("=") + 1, s.length()));
         }
     }
-
-    public static String[] getLangData() { //return langData
+    
+    public static List<String> getLangData() { //return langData
         return langData;
     }
-
-    public static String getLangDataAtIndex(int index) { //return langData
-        return langData[index];
+    
+    public static String getLangDataAtIndex(int index) { //return langData at a particular index
+        return langData.get(index);
     }
 }
