@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class BackendModels {
 
-    public Region[] japan;
+    public Prefecture[] japan;
 
     public BackendModels() {
         this.initialSetUp();
