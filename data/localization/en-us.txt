@@ -56,3 +56,5 @@
 <高>=High
 <中>=Moderate
 <低>=Low
+<日本>=Japan
+<国>=Country:

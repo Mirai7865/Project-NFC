@@ -10,7 +10,8 @@ import java.util.Scanner;
 
 public class BackendModels {
 
-    public Prefecture[] japan;
+    public Prefecture[] japanPrefecture;
+    public Region japan;
 
     public BackendModels() {
         this.initialSetUp();
@@ -23,20 +24,25 @@ public class BackendModels {
 
         int[] caseNumberAry = CaseNumberApi.getCaseNumber();
         int count = 0;
-        this.japan = new Prefecture[47];
-        while (scr.hasNextLine()) {
+        int allJapanCaseNumber = 0;
+        int allJapanPopulation = 0;
+        this.japanPrefecture = new Prefecture[47];
+        while (count < 47) {
             Scanner prefData = new Scanner(scr.next());
             try {
                 String prefName = prefData.next();
                 int population = prefData.nextInt() * 1000;
                 String majorCity = prefData.next();
-                japan[count] = new Prefecture(prefName, caseNumberAry[count], population, majorCity);
+                japanPrefecture[count] = new Prefecture(prefName, caseNumberAry[count], population, majorCity);
+                allJapanCaseNumber += caseNumberAry[count];
+                allJapanPopulation += population;
             } catch (NumberFormatException ex) {
                 System.out.println("Exception in creating prefecture objects.");
             }
             prefData.close();
             count++;
         }
+        this.japan = new Region(scr.next(), allJapanCaseNumber, allJapanPopulation);
         scr.close();
     }
 }

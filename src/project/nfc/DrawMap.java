@@ -5,7 +5,9 @@
  */
 package project.nfc;
 
+import java.awt.Font;
 import java.awt.Graphics;
+import static java.awt.PageAttributes.ColorType.COLOR;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Scanner;
@@ -52,6 +54,15 @@ public class DrawMap {
                 g.drawImage(this.dotGreen, xLoc[i], yLoc[i], null);
             }
         }
+        g.drawImage(this.dotRed, 10, 10, null);
+        g.drawImage(this.dotOrange, 10, 50, null);
+        g.drawImage(this.dotGreen, 10, 90, null);
+        
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 13)); 
+        g.setColor(java.awt.Color.black);
+        g.drawString("= High Risk", 35, 25);
+        g.drawString("= Moderate Risk", 35, 65);
+        g.drawString("= Low Risk", 35, 105);
         return new ImageIcon(this.map);
     }
 

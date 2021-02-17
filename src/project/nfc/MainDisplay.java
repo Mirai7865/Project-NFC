@@ -68,7 +68,7 @@ public class MainDisplay extends JFrame {
         this.langEnButton.setText("English");
 
         this.mapPanel = new JPanel();
-        this.mapPanel.add(new JLabel(map.initialDraw(this.backendModels.japan)));
+        this.mapPanel.add(new JLabel(map.initialDraw(this.backendModels.japanPrefecture)));
         this.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAtIndex(50)));
 
         this.guidebookText = new JTextArea();
@@ -201,20 +201,33 @@ public class MainDisplay extends JFrame {
         //update contents inside the caseNumberList
         this.listModel.clear();
         String risk = null;
-        for (int i = 0; i < backendModels.japan.length; i++) {
-            if (backendModels.japan[i].getRisk().equals("High")) {
+        for (int i = 0; i < backendModels.japanPrefecture.length; i++) {
+            if (backendModels.japanPrefecture[i].getRisk().equals("High")) {
                 risk = Localization.getLangDataAtIndex(54);
-            } else if (backendModels.japan[i].getRisk().equals("Moderate")) {
+            } else if (backendModels.japanPrefecture[i].getRisk().equals("Moderate")) {
                 risk = Localization.getLangDataAtIndex(55);
-            } else if (backendModels.japan[i].getRisk().equals("Low")) {
+            } else if (backendModels.japanPrefecture[i].getRisk().equals("Low")) {
                 risk = Localization.getLangDataAtIndex(56);
             }
 
             if (Localization.getLang().equals("ja-jp")) {
-                this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAtIndex(47) + " " + Localization.getLangDataAtIndex(i) + "\t" + Localization.getLangDataAtIndex(48) + "%7s" + " " + Localization.getLangDataAtIndex(49) + " " + risk, backendModels.japan[i].getCaseNumber())) + "</pre></html>");
+                this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAtIndex(47) + " " + Localization.getLangDataAtIndex(i) + "\t" + Localization.getLangDataAtIndex(48) + "%7s" + " " + Localization.getLangDataAtIndex(49) + " " + risk, backendModels.japanPrefecture[i].getCaseNumber())) + "</pre></html>");
             } else if (Localization.getLang().equals("en-us")) {
-                this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAtIndex(47) + " " + "%-10.10s" + Localization.getLangDataAtIndex(48) + "%7s" + "\n" + Localization.getLangDataAtIndex(49) + " " + risk, Localization.getLangDataAtIndex(i), backendModels.japan[i].getCaseNumber())) + "</pre></html>");
+                this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAtIndex(47) + " " + "%-10.10s" + Localization.getLangDataAtIndex(48) + "%7s" + "\n" + Localization.getLangDataAtIndex(49) + " " + risk, Localization.getLangDataAtIndex(i), backendModels.japanPrefecture[i].getCaseNumber())) + "</pre></html>");
             }
+        }
+        if (backendModels.japan.getRisk().equals("High")) {
+            risk = Localization.getLangDataAtIndex(54);
+        } else if (backendModels.japan.getRisk().equals("Moderate")) {
+            risk = Localization.getLangDataAtIndex(55);
+        } else if (backendModels.japan.getRisk().equals("Low")) {
+            risk = Localization.getLangDataAtIndex(56);
+        }
+
+        if (Localization.getLang().equals("ja-jp")) {
+            this.listModel.add(0, "<html><pre>" + (String.format(Localization.getLangDataAtIndex(58) + "   " + Localization.getLangDataAtIndex(57) + "\t" + Localization.getLangDataAtIndex(48) + "%7s" + " " + Localization.getLangDataAtIndex(49) + " " + risk, backendModels.japan.getCaseNumber())) + "</pre></html>");
+        } else if (Localization.getLang().equals("en-us")) {
+            this.listModel.add(0, "<html><pre>" + (String.format(Localization.getLangDataAtIndex(58) + " " + "%-13.13s" + Localization.getLangDataAtIndex(48) + "%7s" + "\n" + Localization.getLangDataAtIndex(49) + " " + risk, Localization.getLangDataAtIndex(57), backendModels.japan.getCaseNumber())) + "</pre></html>");
         }
     }
 
@@ -224,3 +237,5 @@ public class MainDisplay extends JFrame {
         return imageIcon;
     }
 }
+//Prefecture
+//country

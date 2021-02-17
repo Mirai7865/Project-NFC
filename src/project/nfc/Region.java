@@ -5,7 +5,7 @@
  */
 package project.nfc;
 
-abstract class Region {
+public class Region {
 
     private String regionName;
     private int caseNumber;
