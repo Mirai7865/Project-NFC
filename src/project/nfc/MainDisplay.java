@@ -47,6 +47,7 @@ public class MainDisplay extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setMinimumSize(new Dimension(1200, 600));
         this.setTitle("Project NFC");
+        this.setResizable(false);
 
         this.mainPane = new JTabbedPane(JTabbedPane.TOP);
         this.caseNumberPanel = new JPanel(new GridBagLayout());
