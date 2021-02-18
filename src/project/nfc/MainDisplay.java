@@ -237,5 +237,3 @@ public class MainDisplay extends JFrame {
         return imageIcon;
     }
 }
-//Prefecture
-//country
