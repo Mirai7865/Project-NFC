@@ -5,6 +5,7 @@
  */
 package project.nfc;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -78,6 +79,9 @@ public class MainDisplay extends JFrame {
         this.guidebookText.setEditable(false);
 
         this.sidePanel = new JTextArea();
+        this.sidePanel.setPreferredSize(new Dimension(250, 200));
+//        this.sidePanel.setBackground(Color.lightGray);
+        this.sidePanel.setFont(new Font("monospaced", Font.BOLD, 20));
         this.sidePanel.setText(Localization.getLangDataAtIndex(58) + Localization.getLangDataAtIndex(57) + "\n" + Localization.getLangDataAtIndex(48) + backendModels.japan.getCaseNumber());
         this.sidePanel.setEditable(false);
 
@@ -261,7 +265,7 @@ public class MainDisplay extends JFrame {
             this.sidePanel.setText(Localization.getLangDataAtIndex(58) + Localization.getLangDataAtIndex(57) + "\n" + Localization.getLangDataAtIndex(48) + backendModels.japan.getCaseNumber());
         } else {
 //            this.sidePanel.setText(this.backendModels.japanPrefecture[index - 1].toString());
-            this.sidePanel.setText(Localization.getLangDataAtIndex(47) + " " + Localization.getLangDataAtIndex(index - 1) + "\n" + Localization.getLangDataAtIndex(48) + backendModels.japanPrefecture[index - 1].getCaseNumber());
+            this.sidePanel.setText(Localization.getLangDataAtIndex(47) + "" + Localization.getLangDataAtIndex(index - 1) + "\n" + Localization.getLangDataAtIndex(48) + backendModels.japanPrefecture[index - 1].getCaseNumber());
         }
     }
 }

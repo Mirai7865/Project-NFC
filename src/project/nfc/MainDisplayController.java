@@ -69,23 +69,14 @@ public class MainDisplayController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-//            int index = mainDisplay.caseNumberList.getSelectedIndex();
-//            System.out.println(index);
-//            System.out.println("This is mouseClicked responding");
         }
 
         @Override
         public void mousePressed(MouseEvent e) {
-//            int index = mainDisplay.caseNumberList.getSelectedIndex();
-//            System.out.println(index);
-//            System.out.println("This is mousePressed responding");
         }
 
         @Override
         public void mouseEntered(MouseEvent e) {
-//            int index = mainDisplay.caseNumberList.getSelectedIndex();
-//            System.out.println(index);
-//            System.out.println("This is mouseEntered responding");
         }
     }
 }
