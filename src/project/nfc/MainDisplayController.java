@@ -16,6 +16,8 @@ public class MainDisplayController {
     BackendModels backendModels;
     MainDisplay mainDisplay;
 
+    int selectedIndex = 0;
+
     public MainDisplayController(BackendModels models, MainDisplay mainDisplay) {
         this.backendModels = models;
         this.mainDisplay = mainDisplay;
@@ -36,6 +38,7 @@ public class MainDisplayController {
             mainDisplay.updateCaseNumberTextPane();
             mainDisplay.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAtIndex(51)));
             mainDisplay.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAtIndex(50)));
+            mainDisplay.updateSidePanel(selectedIndex);
         }
     }
 
@@ -47,6 +50,7 @@ public class MainDisplayController {
             mainDisplay.updateCaseNumberTextPane();
             mainDisplay.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAtIndex(51)));
             mainDisplay.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAtIndex(50)));
+            mainDisplay.updateSidePanel(selectedIndex);
         }
     }
 
@@ -59,9 +63,8 @@ public class MainDisplayController {
 
         @Override
         public void mouseReleased(MouseEvent me) {
-            int index = mainDisplay.caseNumberList.getSelectedIndex();
-//            System.out.println(index);
-//            System.out.println("This is mouseReleased responding");
+            selectedIndex = mainDisplay.caseNumberList.getSelectedIndex();
+            mainDisplay.updateSidePanel(selectedIndex);
         }
 
         @Override

@@ -60,6 +60,6 @@ public class Region {
 
     @Override
     public String toString() {
-        return "Region: " + this.getRegionName() + " Case Number: " + this.getCaseNumber();
+        return "Region: " + this.getRegionName() + ", Case Number: " + this.getCaseNumber();
     }
 }

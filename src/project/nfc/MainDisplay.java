@@ -32,8 +32,11 @@ public class MainDisplay extends JFrame {
     JButton langJpButton;
     JButton langEnButton;
     JTabbedPane mainPane;
+
     JPanel caseNumberPanel;
     JPanel guidePanel;
+    JTextArea sidePanel;
+
     JTextArea guidebookText;
     JScrollPane guideSectionPane;
     JPanel guideSectionImagePane1;
@@ -45,7 +48,7 @@ public class MainDisplay extends JFrame {
 
     private void initialComponents() {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setMinimumSize(new Dimension(1200, 600));
+        this.setMinimumSize(new Dimension(1500, 600));
         this.setTitle("Project NFC");
         this.setResizable(false);
 
@@ -56,7 +59,6 @@ public class MainDisplay extends JFrame {
         this.listModel = new DefaultListModel<>();
         this.caseNumberList = new JList(this.listModel);
         this.caseNumberList.setFont(new Font("monospaced", Font.BOLD, 14));
-//        this.caseNumberList.setPreferredSize(new Dimension(510, 1550));
 
         this.caseNumberPane = new JScrollPane(this.caseNumberList);
         this.caseNumberPane.setPreferredSize(new Dimension(380, 500));
@@ -74,6 +76,10 @@ public class MainDisplay extends JFrame {
 
         this.guidebookText = new JTextArea();
         this.guidebookText.setEditable(false);
+
+        this.sidePanel = new JTextArea();
+        this.sidePanel.setText(Localization.getLangDataAtIndex(58) + Localization.getLangDataAtIndex(57) + "\n" + Localization.getLangDataAtIndex(48) + backendModels.japan.getCaseNumber());
+        this.sidePanel.setEditable(false);
 
         Guide sensouji = new Guide("Sensouji", "Sensouji");
         this.guidebookText.setText(sensouji.getArticle());
@@ -142,6 +148,17 @@ public class MainDisplay extends JFrame {
 //        gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.NORTH;
         this.caseNumberPanel.add(this.mapPanel, gbc);
+
+        gbc = new GridBagConstraints();
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.fill = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.NORTH;
+        this.caseNumberPanel.add(this.sidePanel, gbc);
 
         Container mainDisplayPane = this.getContentPane();
         mainDisplayPane.setLayout(new GridBagLayout());
@@ -236,5 +253,15 @@ public class MainDisplay extends JFrame {
         Image image = new Image(name);
         ImageIcon imageIcon = new ImageIcon(image.getImage());
         return imageIcon;
+    }
+
+    public void updateSidePanel(int index) {
+        if (index == 0) {
+//            this.sidePanel.setText(this.backendModels.japan.toString());
+            this.sidePanel.setText(Localization.getLangDataAtIndex(58) + Localization.getLangDataAtIndex(57) + "\n" + Localization.getLangDataAtIndex(48) + backendModels.japan.getCaseNumber());
+        } else {
+//            this.sidePanel.setText(this.backendModels.japanPrefecture[index - 1].toString());
+            this.sidePanel.setText(Localization.getLangDataAtIndex(47) + " " + Localization.getLangDataAtIndex(index - 1) + "\n" + Localization.getLangDataAtIndex(48) + backendModels.japanPrefecture[index - 1].getCaseNumber());
+        }
     }
 }
