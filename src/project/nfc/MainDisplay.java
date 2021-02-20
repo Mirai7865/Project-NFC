@@ -81,7 +81,7 @@ public class MainDisplay extends JFrame {
         this.sidePanel = new JTextArea();
         this.sidePanel.setPreferredSize(new Dimension(250, 200));
 //        this.sidePanel.setBackground(Color.lightGray);
-        this.sidePanel.setFont(new Font("monospaced", Font.BOLD, 20));
+        this.sidePanel.setFont(new Font("MS Gothic", Font.BOLD, 20));
         this.updateSidePanel(0);
         this.sidePanel.setEditable(false);
 
@@ -270,7 +270,7 @@ public class MainDisplay extends JFrame {
             } else if (this.backendModels.japan.getRisk().equals("Low")) {
                 risk = Localization.getLangDataAtIndex(56);
             }
-            this.sidePanel.setText(Localization.getLangDataAtIndex(58) + Localization.getLangDataAtIndex(57) + "\n" + Localization.getLangDataAtIndex(48) + backendModels.japan.getCaseNumber() + "\n" + Localization.getLangDataAtIndex(49) + risk);
+            this.sidePanel.setText(Localization.getLangDataAtIndex(58) + Localization.getLangDataAtIndex(57) + "\n" + Localization.getLangDataAtIndex(48) + backendModels.japan.getCaseNumber() + "\n" + Localization.getLangDataAtIndex(59) + this.backendModels.japan.getCaseNumberDelta() + "\n" + Localization.getLangDataAtIndex(49) + risk);
         } else {
             if (this.backendModels.japanPrefecture[index - 1].getRisk().equals("High")) {
                 risk = Localization.getLangDataAtIndex(54);
@@ -279,7 +279,7 @@ public class MainDisplay extends JFrame {
             } else if (this.backendModels.japanPrefecture[index - 1].getRisk().equals("Low")) {
                 risk = Localization.getLangDataAtIndex(56);
             }
-            this.sidePanel.setText(Localization.getLangDataAtIndex(47) + "" + Localization.getLangDataAtIndex(index - 1) + "\n" + Localization.getLangDataAtIndex(48) + backendModels.japanPrefecture[index - 1].getCaseNumber() + "\n" + Localization.getLangDataAtIndex(49) + risk);
+            this.sidePanel.setText(Localization.getLangDataAtIndex(47) + "" + Localization.getLangDataAtIndex(index - 1) + "\n" + Localization.getLangDataAtIndex(48) + backendModels.japanPrefecture[index - 1].getCaseNumber() + "\n" + Localization.getLangDataAtIndex(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDelta() + "\n" + Localization.getLangDataAtIndex(49) + risk);
         }
     }
 }
