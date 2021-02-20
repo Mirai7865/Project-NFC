@@ -45,7 +45,7 @@ public class CaseNumberApi {
         if (str.equalsIgnoreCase("{\"errorInfo\":{\"errorFlag\":\"0\",\"errorCode\":null,\"errorMessage\":null},\"itemList\":[]}")) {
             System.out.println("Error in obtaining data from server.");
         }
-        for (int i = 0; i < 47; i++) {
+        for (int i = 0; i < 47 * 2; i++) {
             str = scr.next();
             startingIndex = str.indexOf("\"npatients\":") + 13;
             endingIndex = str.indexOf("\"},");
