@@ -11,7 +11,7 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class CaseNumberApi {
-    
+
     public CaseNumberApi() {
     }
 
@@ -39,7 +39,7 @@ public class CaseNumberApi {
         String str = "";
         int startingIndex = 0;
         int endingIndex = 0;
-        int[] caseNumber = new int[47];
+        int[] caseNumber = new int[47 * 2];
         str = scr.next();
 
         if (str.equalsIgnoreCase("{\"errorInfo\":{\"errorFlag\":\"0\",\"errorCode\":null,\"errorMessage\":null},\"itemList\":[]}")) {

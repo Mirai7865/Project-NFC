@@ -11,6 +11,7 @@ public class Region {
     private int caseNumber;
     private int population;
     private String risk;
+    private int caseNumberDelta;
 
     public Region(String regionName, int caseNumber, int population) {
         this.setRegionName(regionName);
@@ -33,6 +34,14 @@ public class Region {
 
     public int getCaseNumber() {
         return this.caseNumber;
+    }
+
+    public void setCaseNumberDelta(int caseNumberYesterday) {
+        this.caseNumberDelta = this.getCaseNumber() - caseNumberYesterday;
+    }
+
+    public int getCaseNumberDelta() {
+        return this.caseNumberDelta;
     }
 
     private void setPopulation(int population) {

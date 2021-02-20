@@ -36,6 +36,7 @@ public class BackendModels {
                 japanPrefecture[count] = new Prefecture(prefName, caseNumberAry[count], population, majorCity);
                 allJapanCaseNumber += caseNumberAry[count];
                 allJapanPopulation += population;
+//                System.out.println(caseNumberAry[count]);
             } catch (NumberFormatException ex) {
                 System.out.println("Exception in creating prefecture objects.");
             }
@@ -43,6 +44,16 @@ public class BackendModels {
             count++;
         }
         this.japan = new Region(scr.next(), allJapanCaseNumber, allJapanPopulation);
+
+        int allJapanCaseNumberDayBefore = 0;
+        while (count >= 47 && count < 47 * 2) {
+            japanPrefecture[count - 47].setCaseNumberDelta(caseNumberAry[count]);
+            allJapanCaseNumberDayBefore += caseNumberAry[count];
+//            System.out.println(caseNumberAry[count]);
+            count++;
+        }
+        this.japan.setCaseNumberDelta(allJapanCaseNumberDayBefore);
+//        System.out.println(this.japan.getCaseNumberDelta());
         scr.close();
     }
 }
