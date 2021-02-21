@@ -80,7 +80,7 @@ public class MainDisplay extends JFrame {
 
         this.sidePanel = new JTextArea();
         this.sidePanel.setPreferredSize(new Dimension(250, 200));
-//        this.sidePanel.setBackground(Color.lightGray);
+//        this.sidePanel.setBackground(Color.BLUE);
         this.sidePanel.setFont(new Font("MS Gothic", Font.BOLD, 20));
         this.updateSidePanel(0);
         this.sidePanel.setEditable(false);
