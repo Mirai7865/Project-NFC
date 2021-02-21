@@ -5,15 +5,14 @@
  */
 package project.nfc;
 
-
 public class Calculate {
 
     public Calculate() {
 
     }
 
-    public static double calculateRisk(int population, int caseNumber) {
-        double risk = (double)caseNumber / (double)population;
+    public static double calculateRisk(int population, int caseNumber, double averageCaseNumberIncrease) {
+        double risk = ((double) (averageCaseNumberIncrease) / (double) (population)) * 150;
 //        System.out.println(risk);
         return risk;
     }
