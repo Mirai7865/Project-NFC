@@ -12,12 +12,12 @@ public class Region {
     private int population;
     private String risk;
     private int caseNumberDelta;
+    private double caseNumberAverage;
 
     public Region(String regionName, int caseNumber, int population) {
         this.setRegionName(regionName);
         this.setCaseNumber(caseNumber);
         this.setPopulation(population);
-        this.setRisk();
     }
 
     private void setRegionName(String regionName) {
@@ -36,12 +36,20 @@ public class Region {
         return this.caseNumber;
     }
 
-    public void setCaseNumberDelta(int caseNumberYesterday) {
+    public void setCaseNumberDeltaWithDayPrior(int caseNumberYesterday) {
         this.caseNumberDelta = this.getCaseNumber() - caseNumberYesterday;
     }
 
-    public int getCaseNumberDelta() {
+    public int getCaseNumberDeltaWithDayPrior() {
         return this.caseNumberDelta;
+    }
+
+    public void setCaseNumberAverage(int caseNumber14daysAgo) {
+        this.caseNumberAverage = (this.getCaseNumber() - caseNumber14daysAgo) / 14.0;
+    }
+
+    public double getCaseNumberAverage() {
+        return this.caseNumberAverage;
     }
 
     private void setPopulation(int population) {
@@ -52,8 +60,8 @@ public class Region {
         return this.population;
     }
 
-    private void setRisk() {
-        double risk = Calculate.calculateRisk(this.getPopulation(), this.getCaseNumber());
+    public void setRisk() {
+        double risk = Calculate.calculateRisk(this.getPopulation(), this.getCaseNumber(), this.getCaseNumberAverage());
         if (risk > 0.003) {
             this.risk = "High";
         } else if (risk > 0.002) {

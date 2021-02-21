@@ -12,17 +12,24 @@ public class BackendModels {
 
     public Prefecture[] japanPrefecture;
     public Region japan;
+    private String data;
 
     public BackendModels() {
         this.initialSetUp();
     }
 
     private void initialSetUp() {
-        String data = AccessFile.readFile(("data" + File.separator + "prefecture.txt"));
+        int[] caseNumberAry = CaseNumberApi.getCaseNumber();
+        this.prefectureArraySetup(caseNumberAry);
+        this.deltaSetup(caseNumberAry);
+        this.averageIncreaseSetup(caseNumberAry);
+    }
+
+    private void prefectureArraySetup(int[] caseNumberAry) {
+        data = AccessFile.readFile(("data" + File.separator + "prefecture.txt"));
         Scanner scr = new Scanner(data);
         scr.useDelimiter("@");
 
-        int[] caseNumberAry = CaseNumberApi.getCaseNumber();
         int count = 0;
         int allJapanCaseNumber = 0;
         int allJapanPopulation = 0;
@@ -44,16 +51,30 @@ public class BackendModels {
             count++;
         }
         this.japan = new Region(scr.next(), allJapanCaseNumber, allJapanPopulation);
+        scr.close();
+    }
 
+    private void deltaSetup(int[] caseNumberAry) {
         int allJapanCaseNumberDayBefore = 0;
+        int count = 47;
         while (count >= 47 && count < 47 * 2) {
-            japanPrefecture[count - 47].setCaseNumberDelta(caseNumberAry[count]);
+            japanPrefecture[count - 47].setCaseNumberDeltaWithDayPrior(caseNumberAry[count]);
             allJapanCaseNumberDayBefore += caseNumberAry[count];
 //            System.out.println(caseNumberAry[count]);
             count++;
         }
-        this.japan.setCaseNumberDelta(allJapanCaseNumberDayBefore);
-//        System.out.println(this.japan.getCaseNumberDelta());
-        scr.close();
+        this.japan.setCaseNumberDeltaWithDayPrior(allJapanCaseNumberDayBefore);
+    }
+
+    private void averageIncreaseSetup(int[] caseNumberAry) {
+        int caseNumber14daysAgoJapanTotal = 0;
+        for (int i = 0; i < 47; i++) {
+            this.japanPrefecture[i].setCaseNumberAverage((caseNumberAry[47 * 14 + i]));
+            this.japanPrefecture[i].setRisk();
+            caseNumber14daysAgoJapanTotal += caseNumberAry[47 * 14 + i];
+//            System.out.println(this.japanPrefecture[i].getCaseNumberAverage());
+        }
+        this.japan.setCaseNumberAverage(caseNumber14daysAgoJapanTotal);
+        this.japan.setRisk();
     }
 }

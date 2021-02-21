@@ -59,3 +59,4 @@
 <日本>=Japan
 <国:>=Country:
 <新規感染者数:>=New Patients:
+<人口:>=Population:
