@@ -85,7 +85,7 @@ public class MainDisplay extends JFrame {
         this.updateSidePanel(0);
         this.sidePanel.setEditable(false);
 
-        Guide sensouji = new Guide("Sensouji", "Sensouji");
+        Guide sensouji = new Guide("Sensoji", null);
         this.guidebookText.setText(sensouji.getArticle());
         this.guidebookText.setFont(new Font(Font.SERIF, Font.PLAIN, 18));
         this.guidebookText.setSize(new Dimension(700, 700));

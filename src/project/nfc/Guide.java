@@ -6,6 +6,7 @@
 package project.nfc;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
@@ -47,10 +48,16 @@ public class Guide {
                 strB.append(scr.next());
                 strB.append(" ");
             }
+            if (strB.toString().contains(",\"missing\":")) {
+                IOException ex = new IOException();
+                throw ex;
+            }
+
             scr.close();
             con.disconnect();
         } catch (Exception ex) {
-            System.out.println("Unable to grant connection to " + urlStr);
+            this.article = "Unable to find " + this.articleTitle;
+            return;
         }
         String parsedArticle = parseJSON(strB.toString());
         this.article = parsedArticle.substring(parsedArticle.toString().indexOf("\"extract\":\"") + "\"extract\":\"".length(), parsedArticle.toString().lastIndexOf("\",\"ns\""));
