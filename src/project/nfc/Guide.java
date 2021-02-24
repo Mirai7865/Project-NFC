@@ -10,6 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.util.Scanner;
+import org.json.*;
 
 public class Guide {
 
@@ -20,14 +21,21 @@ public class Guide {
     public Guide(String articleTitle, String path) {
         this.articleTitle = articleTitle;
         this.path = path;
-        this.loadArticle();
+        if (this.path == null) {
+            this.loadArticleFromWiki();
+        } else {
+            this.loadArticleFromDisk(this.path);
+        }
     }
 
-    private void loadArticle() {
-//        this.article = AccessFile.readFile("data" + File.separator + "articles" + File.separator + this.path + ".txt");
-//        this.article = this.article.replaceFirst("@", "");
-//        this.article = this.article.replaceAll("@", "\n");
-        String urlStr = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=Senso-ji";
+    public void loadArticleFromDisk(String path) {
+        this.article = AccessFile.readFile("data" + File.separator + "articles" + File.separator + this.path + ".txt");
+        this.article = this.article.replaceFirst("@", "");
+        this.article = this.article.replaceAll("@", "\n");
+    }
+
+    private void loadArticleFromWiki() {
+        String urlStr = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=" + this.articleTitle;
         StringBuffer strB = new StringBuffer();
 
         try {
@@ -44,7 +52,9 @@ public class Guide {
         } catch (Exception ex) {
             System.out.println("Unable to grant connection to " + urlStr);
         }
-        this.article = strB.toString();
+        String parsedArticle = parseJSON(strB.toString());
+        this.article = parsedArticle.substring(parsedArticle.toString().indexOf("\"extract\":\"") + "\"extract\":\"".length(), parsedArticle.toString().lastIndexOf("\",\"ns\""));
+
     }
 
     public String getArticle() {
@@ -53,5 +63,11 @@ public class Guide {
 
     public String getArticleTitle() {
         return this.articleTitle;
+    }
+
+    public String parseJSON(String jsonStr) {
+        JSONObject obj = new JSONObject(jsonStr);
+        System.out.println(obj);
+        return obj.toString();
     }
 }
