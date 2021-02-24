@@ -11,22 +11,22 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Localization {
-    
+
     private static String language;
     private static List<String> langData = new ArrayList<String>();
-    
+
     public Localization() {
     }
-    
+
     public static void setLang(String lang) {
         language = lang;
         loadLang();
     }
-    
+
     public static String getLang() {
         return language;
     }
-    
+
     private static void loadLang() {
         //load language files
         langData.clear();
@@ -34,16 +34,21 @@ public class Localization {
         Scanner scr = new Scanner(str);
         scr.useDelimiter("@");
         while (scr.hasNext()) {
-            String s = scr.next();
-            langData.add(s.substring(s.indexOf("=") + 1, s.length()));
+            langData.add(scr.next());
         }
     }
-    
-    public static List<String> getLangData() { //return langData
-        return langData;
-    }
-    
+
+//    public static List<String> getLangData() { //return langData
+//        return langData;
+//    }
     public static String getLangDataAtIndex(int index) { //return langData at a particular index
-        return langData.get(index);
+        String str = langData.get(index);
+        return str.substring(str.indexOf("=") + 1, str.length());
+    }
+
+    public static String getLangDataContaining(String word) {
+        int index = langData.indexOf(word);
+        String str = langData.get(index);
+        return str.substring(str.indexOf("=") + 1, str.length());
     }
 }

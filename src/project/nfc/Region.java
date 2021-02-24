@@ -13,6 +13,7 @@ public class Region {
     private String risk;
     private int caseNumberDelta;
     private double caseNumberAverage;
+    private double riskValue;
 
     public Region(String regionName, int caseNumber, int population) {
         this.setRegionName(regionName);
@@ -61,10 +62,10 @@ public class Region {
     }
 
     public void setRisk() {
-        double risk = Calculate.calculateRisk(this.getPopulation(), this.getCaseNumber(), this.getCaseNumberAverage());
-        if (risk > 0.003) {
+        this.riskValue = Calculate.calculateRisk(this.getPopulation(), this.getCaseNumber(), this.getCaseNumberAverage());
+        if (this.riskValue > 0.003) {
             this.risk = "High";
-        } else if (risk > 0.002) {
+        } else if (this.riskValue > 0.002) {
             this.risk = "Moderate";
         } else {
             this.risk = "Low";
@@ -73,6 +74,10 @@ public class Region {
 
     public String getRisk() {
         return this.risk;
+    }
+
+    public double getRiskValue() {
+        return this.riskValue;
     }
 
     @Override
