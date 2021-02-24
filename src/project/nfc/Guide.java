@@ -74,7 +74,7 @@ public class Guide {
 
     public String parseJSON(String jsonStr) {
         JSONObject obj = new JSONObject(jsonStr);
-        System.out.println(obj);
+//        System.out.println(obj);
         return obj.toString();
     }
 }
