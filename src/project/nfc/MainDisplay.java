@@ -134,7 +134,7 @@ public class MainDisplay extends JFrame {
         gbc.anchor = GridBagConstraints.NORTH;
 //        mainDisplayPane.add(this.langEnButton, gbc);
         this.caseNumberPanel.add(this.langEnButton, gbc);
-        
+
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -145,7 +145,7 @@ public class MainDisplay extends JFrame {
 //        gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         this.caseNumberPanel.add(this.sortByRiskButton, gbc);
-        
+
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -231,7 +231,8 @@ public class MainDisplay extends JFrame {
         this.backendModels = bem;
         this.map = new DrawMap();
         this.initialComponents();
-        this.updateCaseNumberTextPane();
+//        this.updateCaseNumberTextPane();
+        this.sortByRegionNumber();
 
     }
 
@@ -302,6 +303,12 @@ public class MainDisplay extends JFrame {
 
     public void sortByRisk() {
         RegionCompareByRisk compare = new RegionCompareByRisk();
+        Arrays.sort(this.backendModels.japanPrefecture, compare);
+        this.updateCaseNumberTextPane();
+    }
+
+    public void sortByRegionNumber() {
+        RegionCompareByRegionNum compare = new RegionCompareByRegionNum();
         Arrays.sort(this.backendModels.japanPrefecture, compare);
         this.updateCaseNumberTextPane();
     }
