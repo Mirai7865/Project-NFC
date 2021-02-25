@@ -33,6 +33,7 @@ public class MainDisplay extends JFrame {
     JList caseNumberList;
     JButton langJpButton;
     JButton langEnButton;
+    JButton sortByRiskButton;
     JTabbedPane mainPane;
 
     JPanel caseNumberPanel;
@@ -71,6 +72,9 @@ public class MainDisplay extends JFrame {
 
         this.langEnButton = new JButton();
         this.langEnButton.setText("English");
+
+        this.sortByRiskButton = new JButton();
+        this.sortByRiskButton.setText("Sort By Risk");
 
         this.mapPanel = new JPanel();
         this.mapPanel.add(new JLabel(map.initialDraw(this.backendModels.japanPrefecture)));
@@ -130,7 +134,18 @@ public class MainDisplay extends JFrame {
         gbc.anchor = GridBagConstraints.NORTH;
 //        mainDisplayPane.add(this.langEnButton, gbc);
         this.caseNumberPanel.add(this.langEnButton, gbc);
-
+        
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 0;
+        gbc.gridheight = 0;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+//        gbc.fill = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        this.caseNumberPanel.add(this.sortByRiskButton, gbc);
+        
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -216,8 +231,7 @@ public class MainDisplay extends JFrame {
         this.backendModels = bem;
         this.map = new DrawMap();
         this.initialComponents();
-        this.sortByRisk();
-//        this.updateCaseNumberTextPane();
+        this.updateCaseNumberTextPane();
 
     }
 

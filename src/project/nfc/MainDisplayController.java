@@ -28,6 +28,7 @@ public class MainDisplayController {
         this.mainDisplay.langJpButton.addActionListener(new ChangeLanguageToJaAction());
         this.mainDisplay.langEnButton.addActionListener(new ChangeLanguageToEnAction());
         this.mainDisplay.caseNumberList.addMouseListener(new openSidePanelAction());
+        this.mainDisplay.sortByRiskButton.addActionListener(new SortByRiskAction());
     }
 
     private class ChangeLanguageToJaAction implements ActionListener {
@@ -51,6 +52,14 @@ public class MainDisplayController {
             mainDisplay.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAtIndex(51)));
             mainDisplay.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAtIndex(50)));
             mainDisplay.updateSidePanel(selectedIndex);
+        }
+    }
+
+    private class SortByRiskAction implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            mainDisplay.sortByRisk();
         }
     }
 
