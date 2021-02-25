@@ -47,8 +47,11 @@ public class Localization {
     }
 
     public static String getLangDataContaining(String word) {
-        int index = langData.indexOf(word);
-        String str = langData.get(index);
-        return str.substring(str.indexOf("=") + 1, str.length());
+        for (String phrase : langData) {
+            if (phrase.contains(word)) {
+                return phrase.substring(phrase.indexOf("=") + 1, phrase.length());
+            }
+        }
+        return null;
     }
 }

@@ -237,7 +237,7 @@ public class MainDisplay extends JFrame {
             if (Localization.getLang().equals("ja-jp")) {
                 this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAtIndex(47) + " " + Localization.getLangDataContaining(this.backendModels.japanPrefecture[i].getRegionName()) + "\t" + Localization.getLangDataAtIndex(48) + "%7s" + " " + Localization.getLangDataAtIndex(49) + " " + risk, backendModels.japanPrefecture[i].getCaseNumber())) + "</pre></html>");
             } else if (Localization.getLang().equals("en-us")) {
-                this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAtIndex(47) + " " + "%-10.10s" + Localization.getLangDataAtIndex(48) + "%7s" + "\n" + Localization.getLangDataAtIndex(49) + " " + risk, Localization.getLangDataAtIndex(i), backendModels.japanPrefecture[i].getCaseNumber())) + "</pre></html>");
+                this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAtIndex(47) + " " + "%-10.10s" + Localization.getLangDataAtIndex(48) + "%7s" + "\n" + Localization.getLangDataAtIndex(49) + " " + risk, Localization.getLangDataContaining(this.backendModels.japanPrefecture[i].getRegionName()), backendModels.japanPrefecture[i].getCaseNumber())) + "</pre></html>");
             }
         }
         if (this.backendModels.japan.getRisk().equals("High")) {
@@ -272,7 +272,8 @@ public class MainDisplay extends JFrame {
             } else if (this.backendModels.japan.getRisk().equals("Low")) {
                 risk = Localization.getLangDataAtIndex(56);
             }
-            this.sidePanel.setText(Localization.getLangDataAtIndex(58) + Localization.getLangDataAtIndex(57) + "\n" + Localization.getLangDataAtIndex(60) + this.backendModels.japan.getPopulation() + "\n" + Localization.getLangDataAtIndex(48) + backendModels.japan.getCaseNumber() + "\n" + Localization.getLangDataAtIndex(59) + this.backendModels.japan.getCaseNumberDeltaWithDayPrior() + "\n" + Localization.getLangDataAtIndex(49) + risk);
+//            String popProcessed = String.format("%-10.10s", this.backendModels.japan.getCaseNumber());
+            this.sidePanel.setText((String.format(Localization.getLangDataAtIndex(58) + Localization.getLangDataAtIndex(57) + "\n" + Localization.getLangDataAtIndex(60) + "%9.9s" + "\n" + Localization.getLangDataAtIndex(48) + "%-15.15s" + "\n" + Localization.getLangDataAtIndex(59) + this.backendModels.japan.getCaseNumberDeltaWithDayPrior() + "\n" + Localization.getLangDataAtIndex(49) + risk, this.backendModels.japan.getPopulation(), this.backendModels.japan.getCaseNumber())));
         } else {
             if (this.backendModels.japanPrefecture[index - 1].getRisk().equals("High")) {
                 risk = Localization.getLangDataAtIndex(54);
@@ -281,7 +282,7 @@ public class MainDisplay extends JFrame {
             } else if (this.backendModels.japanPrefecture[index - 1].getRisk().equals("Low")) {
                 risk = Localization.getLangDataAtIndex(56);
             }
-            this.sidePanel.setText(Localization.getLangDataAtIndex(47) + "" + Localization.getLangDataAtIndex(index - 1) + "\n" + Localization.getLangDataAtIndex(60) + this.backendModels.japanPrefecture[index - 1].getPopulation() + "\n" + Localization.getLangDataAtIndex(48) + backendModels.japanPrefecture[index - 1].getCaseNumber() + "\n" + Localization.getLangDataAtIndex(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior() + "\n" + Localization.getLangDataAtIndex(49) + risk);
+            this.sidePanel.setText(String.format(Localization.getLangDataAtIndex(47) + "" + Localization.getLangDataContaining(this.backendModels.japanPrefecture[index - 1].getRegionName()) + "\n" + Localization.getLangDataAtIndex(60) + "%9.9s" + "\n" + Localization.getLangDataAtIndex(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior() + "\n" + Localization.getLangDataAtIndex(49) + risk, this.backendModels.japanPrefecture[index - 1].getPopulation()));
         }
     }
 
