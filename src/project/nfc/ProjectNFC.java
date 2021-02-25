@@ -5,7 +5,6 @@
  */
 package project.nfc;
 
-
 public class ProjectNFC {
 
     /**

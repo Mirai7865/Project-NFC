@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 public class MainDisplay extends JFrame {
@@ -36,6 +37,7 @@ public class MainDisplay extends JFrame {
     JButton sortByRiskButton;
     JTabbedPane mainPane;
 
+    JTextArea clock;
     JPanel caseNumberPanel;
     JPanel guidePanel;
     JTextArea sidePanel;
@@ -62,6 +64,15 @@ public class MainDisplay extends JFrame {
         this.listModel = new DefaultListModel<>();
         this.caseNumberList = new JList(this.listModel);
         this.caseNumberList.setFont(new Font("monospaced", Font.BOLD, 14));
+
+        this.clock = new JTextArea();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new Clock();
+            }
+
+        });
 
         this.caseNumberPane = new JScrollPane(this.caseNumberList);
         this.caseNumberPane.setPreferredSize(new Dimension(380, 500));
