@@ -14,9 +14,11 @@ public class Region {
     private int caseNumberDelta;
     private double caseNumberAverage;
     private double riskValue;
+    private int regionNumber;
 
-    public Region(String regionName, int caseNumber, int population) {
+    public Region(String regionName, int regionNumber, int caseNumber, int population) {
         this.setRegionName(regionName);
+        this.setRegionNumber(regionNumber);
         this.setCaseNumber(caseNumber);
         this.setPopulation(population);
     }
@@ -27,6 +29,14 @@ public class Region {
 
     public String getRegionName() {
         return regionName;
+    }
+
+    private void setRegionNumber(int regionNum) {
+        this.regionNumber = regionNum;
+    }
+
+    public int getRegionNumber() {
+        return this.regionNumber;
     }
 
     private void setCaseNumber(int caseNumber) {

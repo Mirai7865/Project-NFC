@@ -10,8 +10,8 @@ public class Prefecture extends Region {
     private String majorCity;
     private String weatherForecast;
 
-    public Prefecture(String prefectureName, int caseNumber, int population, String majorCity) {
-        super(prefectureName, caseNumber, population);
+    public Prefecture(String prefectureName, int regionNumber, int caseNumber, int population, String majorCity) {
+        super(prefectureName, regionNumber, caseNumber, population);
         this.setmajorCity(majorCity);
     }
 

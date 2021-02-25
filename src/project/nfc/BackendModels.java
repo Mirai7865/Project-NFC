@@ -40,7 +40,7 @@ public class BackendModels {
                 String prefName = prefData.next();
                 int population = prefData.nextInt() * 1000;
                 String majorCity = prefData.next();
-                japanPrefecture[count] = new Prefecture(prefName, caseNumberAry[count], population, majorCity);
+                japanPrefecture[count] = new Prefecture(prefName, count + 1, caseNumberAry[count], population, majorCity);
                 allJapanCaseNumber += caseNumberAry[count];
                 allJapanPopulation += population;
 //                System.out.println(caseNumberAry[count]);
@@ -50,7 +50,7 @@ public class BackendModels {
             prefData.close();
             count++;
         }
-        this.japan = new Region(scr.next(), allJapanCaseNumber, allJapanPopulation);
+        this.japan = new Region(scr.next(), 0, allJapanCaseNumber, allJapanPopulation);
         scr.close();
     }
 
