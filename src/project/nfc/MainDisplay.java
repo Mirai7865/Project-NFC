@@ -231,8 +231,7 @@ public class MainDisplay extends JFrame {
         this.backendModels = bem;
         this.map = new DrawMap();
         this.initialComponents();
-//        this.updateCaseNumberTextPane();
-        this.sortByRegionNumber();
+        this.updateCaseNumberTextPane();
 
     }
 

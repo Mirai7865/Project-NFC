@@ -16,7 +16,8 @@ public class MainDisplayController {
     BackendModels backendModels;
     MainDisplay mainDisplay;
 
-    int selectedIndex = 0;
+    private int selectedIndex = 0;
+    private boolean sortedByRisk = false;
 
     public MainDisplayController(BackendModels models, MainDisplay mainDisplay) {
         this.backendModels = models;
@@ -59,7 +60,15 @@ public class MainDisplayController {
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-            mainDisplay.sortByRisk();
+            if (sortedByRisk == false) {
+                mainDisplay.sortByRisk();
+                mainDisplay.sortByRiskButton.setText("Reset Sort");
+                sortedByRisk = true;
+            } else {
+                mainDisplay.sortByRegionNumber();
+                mainDisplay.sortByRiskButton.setText("Sort By Risk");
+                sortedByRisk = false;
+            }
         }
     }
 
