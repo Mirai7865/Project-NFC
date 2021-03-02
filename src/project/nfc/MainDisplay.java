@@ -64,6 +64,8 @@ public class MainDisplay extends JFrame {
         this.caseNumberList.setFont(new Font("monospaced", Font.BOLD, 14));
 
         this.clockTextArea = new JTextArea();
+        this.clockTextArea.setFont(new Font("Times New Roman", Font.BOLD, 40));
+//        this.clockTextArea.setBorder(BorderFactory.createTitledBorder("Current Time in JST"));
 
         this.caseNumberPane = new JScrollPane(this.caseNumberList);
         this.caseNumberPane.setPreferredSize(new Dimension(380, 500));
