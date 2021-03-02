@@ -37,7 +37,7 @@ public class MainDisplay extends JFrame {
     JButton sortByRiskButton;
     JTabbedPane mainPane;
 
-    JTextArea clock;
+    JTextArea clockTextArea;
     JPanel caseNumberPanel;
     JPanel guidePanel;
     JTextArea sidePanel;
@@ -65,14 +65,8 @@ public class MainDisplay extends JFrame {
         this.caseNumberList = new JList(this.listModel);
         this.caseNumberList.setFont(new Font("monospaced", Font.BOLD, 14));
 
-        this.clock = new JTextArea();
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Clock();
-            }
-
-        });
+        this.clockTextArea = new JTextArea();
+        Clock clock = new Clock(this.clockTextArea);
 
         this.caseNumberPane = new JScrollPane(this.caseNumberList);
         this.caseNumberPane.setPreferredSize(new Dimension(380, 500));
@@ -88,7 +82,7 @@ public class MainDisplay extends JFrame {
         this.sortByRiskButton.setText("Sort By Risk");
 
         this.mapPanel = new JPanel();
-        this.mapPanel.add(new JLabel(map.initialDraw(this.backendModels.japanPrefecture)));
+        this.mapPanel.add(new JLabel(backendModels.map.initialDraw(this.backendModels.japanPrefecture)));
         this.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));
 
         this.guidebookText = new JTextArea();
@@ -156,6 +150,18 @@ public class MainDisplay extends JFrame {
 //        gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         this.caseNumberPanel.add(this.sortByRiskButton, gbc);
+
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 0;
+        gbc.gridheight = 0;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+//        gbc.fill = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+//        mainDisplayPane.add(this.langJpButton, gbc);
+        this.caseNumberPanel.add(this.clockTextArea, gbc);
 
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -240,8 +246,11 @@ public class MainDisplay extends JFrame {
     public MainDisplay(BackendModels bem) {
         //Create JFrame and locate all the components. Also update caseNumber.
         this.backendModels = bem;
-        this.map = new DrawMap();
+        this.backendModels.map = new DrawMap();
         this.initialComponents();
+        this.backendModels.clock = new Clock(this.clockTextArea);
+        this.backendModels.cThread = new Thread(this.backendModels.clock);
+        this.backendModels.cThread.start();
         this.updateCaseNumberTextPane();
 
     }
