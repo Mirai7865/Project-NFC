@@ -5,10 +5,10 @@
  */
 package project.nfc;
 
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 public class Clock implements Runnable {
 
@@ -27,8 +27,10 @@ public class Clock implements Runnable {
                 return;
             }
 
-            long dateInMillisecond = new Date().getTime();
-            this.textArea.setText(Long.toString(dateInMillisecond));
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            dateFormat.setTimeZone(TimeZone.getTimeZone("JST"));
+            Date date = new Date();
+            this.textArea.setText(dateFormat.format(date));
         }
     }
 }

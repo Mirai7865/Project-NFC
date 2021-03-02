@@ -5,7 +5,6 @@
  */
 package project.nfc;
 
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -23,7 +22,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 public class MainDisplay extends JFrame {
@@ -66,7 +64,6 @@ public class MainDisplay extends JFrame {
         this.caseNumberList.setFont(new Font("monospaced", Font.BOLD, 14));
 
         this.clockTextArea = new JTextArea();
-        Clock clock = new Clock(this.clockTextArea);
 
         this.caseNumberPane = new JScrollPane(this.caseNumberList);
         this.caseNumberPane.setPreferredSize(new Dimension(380, 500));
