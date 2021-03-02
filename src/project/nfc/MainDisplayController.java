@@ -38,8 +38,8 @@ public class MainDisplayController {
         public void actionPerformed(ActionEvent ae) {
             Localization.setLang("ja-jp");
             mainDisplay.updateCaseNumberTextPane();
-            mainDisplay.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAtIndex(51)));
-            mainDisplay.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAtIndex(50)));
+            mainDisplay.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(51)));
+            mainDisplay.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));
             mainDisplay.updateSidePanel(selectedIndex);
         }
     }
@@ -50,8 +50,8 @@ public class MainDisplayController {
         public void actionPerformed(ActionEvent ae) {
             Localization.setLang("en-us");
             mainDisplay.updateCaseNumberTextPane();
-            mainDisplay.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAtIndex(51)));
-            mainDisplay.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAtIndex(50)));
+            mainDisplay.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(51)));
+            mainDisplay.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));
             mainDisplay.updateSidePanel(selectedIndex);
         }
     }
