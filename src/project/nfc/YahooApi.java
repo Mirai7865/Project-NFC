@@ -19,8 +19,8 @@ public class YahooApi {
 
     public YahooApi() {
         //Create http request 
-        //client ID dj00aiZpPVJKbXh0dnZ3SllqdSZzPWNvbnN1bWVyc2VjcmV0Jng9M2M-
-        String urlStr = "https://map.yahooapis.jp/weather/V1/place?coordinates=139.732293,35.663613&appid=dj00aiZpPVJKbXh0dnZ3SllqdSZzPWNvbnN1bWVyc2VjcmV0Jng9M2M-";
+        String apiKey = "02fd994e9f537d6f68bdccd39f801d57";
+        String urlStr = "api.openweathermap.org/data/2.5/weather?q=" + "&appid=" + apiKey;
         URL url;
         try {
             url = new URL(new URI(urlStr).toASCIIString());
