@@ -5,41 +5,35 @@
  */
 package project.nfc;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class WeatherAPI {
 
+    private static String apiKey = "02fd994e9f537d6f68bdccd39f801d57";
+
     public WeatherAPI() {
         //Create http request 
-        String apiKey = "02fd994e9f537d6f68bdccd39f801d57";
-        String urlStr = "api.openweathermap.org/data/2.5/weather?q=" + "&appid=" + apiKey;
-        URL url;
+    }
+
+    public static String getForecast(String cityName) { //The plan is to get weather data by connecting to yahoo weather(one of the most reliable sources). Will be working on this later.
+        String urlStr = "api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKey;
+        StringBuffer strB = new StringBuffer();
         try {
-            url = new URL(new URI(urlStr).toASCIIString());
+            URL url = new URL(new URI(urlStr + apiKey).toASCIIString());
             HttpURLConnection con = (HttpURLConnection) (url.openConnection());
             con.connect();
             Scanner scr = new Scanner(url.openStream());
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(WeatherAPI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(WeatherAPI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(WeatherAPI.class.getName()).log(Level.SEVERE, null, ex);
+            while (scr.hasNext()) {
+                strB.append(scr.next());
+            }
+            scr.close();
+            con.disconnect();
+        } catch (Exception ex) {
+            System.out.println("Failed to fetch weather data of " + cityName);
         }
-    }
-
-    public String[] getForecast(HttpURLConnection data) { //The plan is to get weather data by connecting to yahoo weather(one of the most reliable sources). Will be working on this later.
-        //create for-loop
-        //get weather forecast and store into an array
-        //return array
-        return null;
+        return strB.toString();
     }
 }
