@@ -15,9 +15,9 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class YahooApi {
+public class WeatherAPI {
 
-    public YahooApi() {
+    public WeatherAPI() {
         //Create http request 
         String apiKey = "02fd994e9f537d6f68bdccd39f801d57";
         String urlStr = "api.openweathermap.org/data/2.5/weather?q=" + "&appid=" + apiKey;
@@ -28,11 +28,11 @@ public class YahooApi {
             con.connect();
             Scanner scr = new Scanner(url.openStream());
         } catch (URISyntaxException ex) {
-            Logger.getLogger(YahooApi.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WeatherAPI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MalformedURLException ex) {
-            Logger.getLogger(YahooApi.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WeatherAPI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(YahooApi.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WeatherAPI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
