@@ -5,10 +5,12 @@
  */
 package project.nfc;
 
+import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class WeatherAPI {
 
@@ -19,10 +21,10 @@ public class WeatherAPI {
     }
 
     public static String getForecast(String cityName) { //The plan is to get weather data by connecting to yahoo weather(one of the most reliable sources). Will be working on this later.
-        String urlStr = "api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKey;
+        String urlStr = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKey;
         StringBuffer strB = new StringBuffer();
         try {
-            URL url = new URL(new URI(urlStr + apiKey).toASCIIString());
+            URL url = new URL(urlStr);
             HttpURLConnection con = (HttpURLConnection) (url.openConnection());
             con.connect();
             Scanner scr = new Scanner(url.openStream());
@@ -31,9 +33,16 @@ public class WeatherAPI {
             }
             scr.close();
             con.disconnect();
-        } catch (Exception ex) {
-            System.out.println("Failed to fetch weather data of " + cityName);
+        } catch (IOException e) {
+            System.out.println("Failed to fetch weather data.");
         }
-        return strB.toString();
+
+        String data = strB.toString();
+        System.out.println(data);
+        data = data.substring(data.indexOf("\"main\":"));
+        String weather = data.substring(data.indexOf(":\"") + 2, data.indexOf(",") - 1);
+
+        System.out.println(weather);
+        return weather;
     }
 }
