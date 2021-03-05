@@ -21,7 +21,7 @@ public class Prefecture extends Region {
         this.majorCityJP = city;
     }
 
-    public String getMajorCityNameJp() {
+    public String getMajorCityJp() {
         return this.majorCityJP;
     }
 
@@ -29,7 +29,7 @@ public class Prefecture extends Region {
         this.majorCityEng = city;
     }
 
-    public String getMajorCityNameEng() {
+    public String getMajorCityEng() {
         return this.majorCityEng;
     }
 
@@ -39,5 +39,11 @@ public class Prefecture extends Region {
 
     public String getWeatherForecast() {
         return this.weatherForecast;
+    }
+
+    @Override
+    public String toString() {
+        String string = "Region: " + this.getRegionName() + ", Case Number: " + this.getCaseNumber() + " Major City: " + this.getMajorCityEng() + " Weather: " + this.getWeatherForecast();
+        return string;
     }
 }
