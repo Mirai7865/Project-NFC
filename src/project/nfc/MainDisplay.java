@@ -305,7 +305,6 @@ public class MainDisplay extends JFrame {
             } else if (this.backendModels.japan.getRisk().equals("Low")) {
                 risk = Localization.getLangDataAt(56);
             }
-//            String popProcessed = String.format("%-10.10s", this.backendModels.japan.getCaseNumber());
             this.sidePanel.setText((String.format(Localization.getLangDataAt(58) + Localization.getLangDataAt(57) + "\n" + Localization.getLangDataAt(60) + "%9.9s" + "\n" + Localization.getLangDataAt(48) + "%-15.15s" + "\n" + Localization.getLangDataAt(59) + this.backendModels.japan.getCaseNumberDeltaWithDayPrior() + "\n" + Localization.getLangDataAt(49) + risk, this.backendModels.japan.getPopulation(), this.backendModels.japan.getCaseNumber())));
         } else {
             if (this.backendModels.japanPrefecture[index - 1].getRisk().equals("High")) {

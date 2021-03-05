@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class WeatherAPI {
 
@@ -38,11 +36,8 @@ public class WeatherAPI {
         }
 
         String data = strB.toString();
-        System.out.println(data);
         data = data.substring(data.indexOf("\"main\":"));
         String weather = data.substring(data.indexOf(":\"") + 2, data.indexOf(",") - 1);
-
-        System.out.println(weather);
         return weather;
     }
 }

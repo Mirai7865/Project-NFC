@@ -33,8 +33,8 @@ public class Prefecture extends Region {
         return this.majorCityEng;
     }
 
-    public void setWeatherForecast(String weather) {
-        this.weatherForecast = weather;
+    public void setWeatherForecast() {
+        this.weatherForecast = WeatherAPI.getForecast(this.getMajorCityEng());
     }
 
     public String getWeatherForecast() {
