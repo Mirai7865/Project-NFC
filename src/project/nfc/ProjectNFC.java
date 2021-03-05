@@ -12,7 +12,7 @@ public class ProjectNFC {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        WeatherAPI.getForecast("Tokyo");
+//        WeatherAPI.getForecast("Chiba");
         Localization.setLang("en-us");
         BackendModels backendModels = new BackendModels();
         MainDisplay mainDisplay = new MainDisplay(backendModels);

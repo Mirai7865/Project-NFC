@@ -42,8 +42,9 @@ public class BackendModels {
             try {
                 String prefName = prefData.next();
                 int population = prefData.nextInt() * 1000;
-                String majorCity = prefData.next();
-                japanPrefecture[count] = new Prefecture(prefName, count + 1, caseNumberAry[count], population, majorCity);
+                String majorCityJP = prefData.next();
+                String majorCityEng = prefData.next();
+                japanPrefecture[count] = new Prefecture(prefName, count + 1, caseNumberAry[count], population, majorCityJP, majorCityEng);
                 allJapanCaseNumber += caseNumberAry[count];
                 allJapanPopulation += population;
 //                System.out.println(caseNumberAry[count]);
