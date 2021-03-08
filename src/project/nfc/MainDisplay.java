@@ -5,7 +5,6 @@
  */
 package project.nfc;
 
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -23,7 +22,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 public class MainDisplay extends JFrame {
@@ -37,7 +35,7 @@ public class MainDisplay extends JFrame {
     JButton sortByRiskButton;
     JTabbedPane mainPane;
 
-    JTextArea clock;
+    JTextArea clockTextArea;
     JPanel caseNumberPanel;
     JPanel guidePanel;
     JTextArea sidePanel;
@@ -65,18 +63,13 @@ public class MainDisplay extends JFrame {
         this.caseNumberList = new JList(this.listModel);
         this.caseNumberList.setFont(new Font("monospaced", Font.BOLD, 14));
 
-        this.clock = new JTextArea();
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Clock();
-            }
-
-        });
+        this.clockTextArea = new JTextArea();
+        this.clockTextArea.setFont(new Font("Times New Roman", Font.BOLD, 40));
+//        this.clockTextArea.setBorder(BorderFactory.createTitledBorder("Current Time in JST"));
 
         this.caseNumberPane = new JScrollPane(this.caseNumberList);
         this.caseNumberPane.setPreferredSize(new Dimension(380, 500));
-        this.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAtIndex(51)));
+        this.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(51)));
 
         this.langJpButton = new JButton();
         this.langJpButton.setText("日本語");
@@ -88,8 +81,8 @@ public class MainDisplay extends JFrame {
         this.sortByRiskButton.setText("Sort By Risk");
 
         this.mapPanel = new JPanel();
-        this.mapPanel.add(new JLabel(map.initialDraw(this.backendModels.japanPrefecture)));
-        this.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAtIndex(50)));
+        this.mapPanel.add(new JLabel(backendModels.map.initialDraw(this.backendModels.japanPrefecture)));
+        this.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));
 
         this.guidebookText = new JTextArea();
         this.guidebookText.setEditable(false);
@@ -160,6 +153,18 @@ public class MainDisplay extends JFrame {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.gridwidth = 0;
+        gbc.gridheight = 0;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+//        gbc.fill = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+//        mainDisplayPane.add(this.langJpButton, gbc);
+        this.caseNumberPanel.add(this.clockTextArea, gbc);
+
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbc.weightx = 1;
@@ -194,7 +199,7 @@ public class MainDisplay extends JFrame {
         Container mainDisplayPane = this.getContentPane();
         mainDisplayPane.setLayout(new GridBagLayout());
 
-        this.mainPane.addTab(Localization.getLangDataAtIndex(52), null, this.caseNumberPanel, "Shows case numbers");
+        this.mainPane.addTab(Localization.getLangDataAt(52), null, this.caseNumberPanel, "Shows case numbers");
 
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -229,7 +234,7 @@ public class MainDisplay extends JFrame {
         gbc.anchor = GridBagConstraints.SOUTH;
         this.guidePanel.add(this.guideSectionImagePane2, gbc);
 
-        this.mainPane.addTab(Localization.getLangDataAtIndex(53), null, this.guidePanel, "Guidebook section");
+        this.mainPane.addTab(Localization.getLangDataAt(53), null, this.guidePanel, "Guidebook section");
 
         mainDisplayPane.add(this.mainPane);
         this.mapPanel.setVisible(true);
@@ -240,8 +245,11 @@ public class MainDisplay extends JFrame {
     public MainDisplay(BackendModels bem) {
         //Create JFrame and locate all the components. Also update caseNumber.
         this.backendModels = bem;
-        this.map = new DrawMap();
+        this.backendModels.map = new DrawMap();
         this.initialComponents();
+        this.backendModels.clock = new Clock(this.clockTextArea);
+        this.backendModels.cThread = new Thread(this.backendModels.clock);
+        this.backendModels.cThread.start();
         this.updateCaseNumberTextPane();
 
     }
@@ -252,31 +260,31 @@ public class MainDisplay extends JFrame {
         String risk = null;
         for (int i = 0; i < this.backendModels.japanPrefecture.length; i++) {
             if (this.backendModels.japanPrefecture[i].getRisk().equals("High")) {
-                risk = Localization.getLangDataAtIndex(54);
+                risk = Localization.getLangDataAt(54);
             } else if (this.backendModels.japanPrefecture[i].getRisk().equals("Moderate")) {
-                risk = Localization.getLangDataAtIndex(55);
+                risk = Localization.getLangDataAt(55);
             } else if (this.backendModels.japanPrefecture[i].getRisk().equals("Low")) {
-                risk = Localization.getLangDataAtIndex(56);
+                risk = Localization.getLangDataAt(56);
             }
 
             if (Localization.getLang().equals("ja-jp")) {
-                this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAtIndex(47) + " " + Localization.getLangDataContaining(this.backendModels.japanPrefecture[i].getRegionName()) + "\t" + Localization.getLangDataAtIndex(48) + "%7s" + " " + Localization.getLangDataAtIndex(49) + " " + risk, backendModels.japanPrefecture[i].getCaseNumber())) + "</pre></html>");
+                this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAt(47) + " " + Localization.getLangDataContaining(this.backendModels.japanPrefecture[i].getRegionName()) + "\t" + Localization.getLangDataAt(48) + "%7s" + " " + Localization.getLangDataAt(49) + " " + risk, backendModels.japanPrefecture[i].getCaseNumber())) + "</pre></html>");
             } else if (Localization.getLang().equals("en-us")) {
-                this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAtIndex(47) + " " + "%-10.10s" + Localization.getLangDataAtIndex(48) + "%7s" + "\n" + Localization.getLangDataAtIndex(49) + " " + risk, Localization.getLangDataContaining(this.backendModels.japanPrefecture[i].getRegionName()), backendModels.japanPrefecture[i].getCaseNumber())) + "</pre></html>");
+                this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAt(47) + " " + "%-10.10s" + Localization.getLangDataAt(48) + "%7s" + "\n" + Localization.getLangDataAt(49) + " " + risk, Localization.getLangDataContaining(this.backendModels.japanPrefecture[i].getRegionName()), backendModels.japanPrefecture[i].getCaseNumber())) + "</pre></html>");
             }
         }
         if (this.backendModels.japan.getRisk().equals("High")) {
-            risk = Localization.getLangDataAtIndex(54);
+            risk = Localization.getLangDataAt(54);
         } else if (this.backendModels.japan.getRisk().equals("Moderate")) {
-            risk = Localization.getLangDataAtIndex(55);
+            risk = Localization.getLangDataAt(55);
         } else if (backendModels.japan.getRisk().equals("Low")) {
-            risk = Localization.getLangDataAtIndex(56);
+            risk = Localization.getLangDataAt(56);
         }
 
         if (Localization.getLang().equals("ja-jp")) {
-            this.listModel.add(0, "<html><pre>" + (String.format(Localization.getLangDataAtIndex(58) + "   " + Localization.getLangDataAtIndex(57) + "\t" + Localization.getLangDataAtIndex(48) + "%7s" + " " + Localization.getLangDataAtIndex(49) + " " + risk, backendModels.japan.getCaseNumber())) + "</pre></html>");
+            this.listModel.add(0, "<html><pre>" + (String.format(Localization.getLangDataAt(58) + "   " + Localization.getLangDataAt(57) + "\t" + Localization.getLangDataAt(48) + "%7s" + " " + Localization.getLangDataAt(49) + " " + risk, backendModels.japan.getCaseNumber())) + "</pre></html>");
         } else if (Localization.getLang().equals("en-us")) {
-            this.listModel.add(0, "<html><pre>" + (String.format(Localization.getLangDataAtIndex(58) + " " + "%-13.13s" + Localization.getLangDataAtIndex(48) + "%7s" + "\n" + Localization.getLangDataAtIndex(49) + " " + risk, Localization.getLangDataAtIndex(57), backendModels.japan.getCaseNumber())) + "</pre></html>");
+            this.listModel.add(0, "<html><pre>" + (String.format(Localization.getLangDataAt(58) + " " + "%-13.13s" + Localization.getLangDataAt(48) + "%7s" + "\n" + Localization.getLangDataAt(49) + " " + risk, Localization.getLangDataAt(57), backendModels.japan.getCaseNumber())) + "</pre></html>");
         }
     }
 
@@ -291,23 +299,22 @@ public class MainDisplay extends JFrame {
 
         if (index == 0) {
             if (this.backendModels.japan.getRisk().equals("High")) {
-                risk = Localization.getLangDataAtIndex(54);
+                risk = Localization.getLangDataAt(54);
             } else if (this.backendModels.japan.getRisk().equals("Moderate")) {
-                risk = Localization.getLangDataAtIndex(55);
+                risk = Localization.getLangDataAt(55);
             } else if (this.backendModels.japan.getRisk().equals("Low")) {
-                risk = Localization.getLangDataAtIndex(56);
+                risk = Localization.getLangDataAt(56);
             }
-//            String popProcessed = String.format("%-10.10s", this.backendModels.japan.getCaseNumber());
-            this.sidePanel.setText((String.format(Localization.getLangDataAtIndex(58) + Localization.getLangDataAtIndex(57) + "\n" + Localization.getLangDataAtIndex(60) + "%9.9s" + "\n" + Localization.getLangDataAtIndex(48) + "%-15.15s" + "\n" + Localization.getLangDataAtIndex(59) + this.backendModels.japan.getCaseNumberDeltaWithDayPrior() + "\n" + Localization.getLangDataAtIndex(49) + risk, this.backendModels.japan.getPopulation(), this.backendModels.japan.getCaseNumber())));
+            this.sidePanel.setText((String.format(Localization.getLangDataAt(58) + Localization.getLangDataAt(57) + "\n" + Localization.getLangDataAt(60) + "%9.9s" + "\n" + Localization.getLangDataAt(48) + "%-15.15s" + "\n" + Localization.getLangDataAt(59) + this.backendModels.japan.getCaseNumberDeltaWithDayPrior() + "\n" + Localization.getLangDataAt(49) + risk, this.backendModels.japan.getPopulation(), this.backendModels.japan.getCaseNumber())));
         } else {
             if (this.backendModels.japanPrefecture[index - 1].getRisk().equals("High")) {
-                risk = Localization.getLangDataAtIndex(54);
+                risk = Localization.getLangDataAt(54);
             } else if (this.backendModels.japanPrefecture[index - 1].getRisk().equals("Moderate")) {
-                risk = Localization.getLangDataAtIndex(55);
+                risk = Localization.getLangDataAt(55);
             } else if (this.backendModels.japanPrefecture[index - 1].getRisk().equals("Low")) {
-                risk = Localization.getLangDataAtIndex(56);
+                risk = Localization.getLangDataAt(56);
             }
-            this.sidePanel.setText(String.format(Localization.getLangDataAtIndex(47) + "" + Localization.getLangDataContaining(this.backendModels.japanPrefecture[index - 1].getRegionName()) + "\n" + Localization.getLangDataAtIndex(60) + "%9.9s" + "\n" + Localization.getLangDataAtIndex(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior() + "\n" + Localization.getLangDataAtIndex(49) + risk, this.backendModels.japanPrefecture[index - 1].getPopulation()));
+            this.sidePanel.setText(String.format(Localization.getLangDataAt(47) + "" + Localization.getLangDataContaining(this.backendModels.japanPrefecture[index - 1].getRegionName()) + "\n" + Localization.getLangDataAt(60) + "%9.9s" + "\n" + Localization.getLangDataAt(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior() + "\n" + Localization.getLangDataAt(49) + risk, this.backendModels.japanPrefecture[index - 1].getPopulation()));
         }
     }
 

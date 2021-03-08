@@ -38,18 +38,19 @@ public class Localization {
         }
     }
 
-//    public static List<String> getLangData() { //return langData
-//        return langData;
-//    }
-    public static String getLangDataAtIndex(int index) { //return langData at a particular index
+    public static List<String> getLangData() { //return langData
+        return langData;
+    }
+    
+    public static String getLangDataAt(int index) { //return langData at a particular index
         String str = langData.get(index);
         return str.substring(str.indexOf("=") + 1, str.length());
     }
 
     public static String getLangDataContaining(String word) {
-        for (String phrase : langData) {
-            if (phrase.contains(word)) {
-                return phrase.substring(phrase.indexOf("=") + 1, phrase.length());
+        for (String data : langData) {
+            if (data.contains(word)) {
+                return data.substring(data.indexOf("=") + 1, data.length());
             }
         }
         return null;

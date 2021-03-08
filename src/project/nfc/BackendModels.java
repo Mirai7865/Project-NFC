@@ -12,7 +12,9 @@ public class BackendModels {
 
     public Prefecture[] japanPrefecture;
     public Region japan;
-    private String data;
+    public DrawMap map;
+    public Clock clock;
+    public Thread cThread;
 
     public BackendModels() {
         this.initialSetUp();
@@ -20,13 +22,14 @@ public class BackendModels {
 
     private void initialSetUp() {
         int[] caseNumberAry = CaseNumberApi.getCaseNumber();
-        this.prefectureArraySetup(caseNumberAry);
-        this.deltaSetup(caseNumberAry);
-        this.averageIncreaseSetup(caseNumberAry);
+        this.createPrefectureArray(caseNumberAry);
+        this.countDelta(caseNumberAry);
+        this.setAverageIncrease(caseNumberAry);
+        this.map = new DrawMap();
     }
 
-    private void prefectureArraySetup(int[] caseNumberAry) {
-        data = AccessFile.readFile(("data" + File.separator + "prefecture.txt"));
+    private void createPrefectureArray(int[] caseNumberAry) {
+        String data = AccessFile.readFile(("data" + File.separator + "prefecture.txt"));
         Scanner scr = new Scanner(data);
         scr.useDelimiter("@");
 
@@ -39,8 +42,9 @@ public class BackendModels {
             try {
                 String prefName = prefData.next();
                 int population = prefData.nextInt() * 1000;
-                String majorCity = prefData.next();
-                japanPrefecture[count] = new Prefecture(prefName, count + 1, caseNumberAry[count], population, majorCity);
+                String majorCityJP = prefData.next();
+                String majorCityEng = prefData.next();
+                japanPrefecture[count] = new Prefecture(prefName, count + 1, caseNumberAry[count], population, majorCityJP, majorCityEng);
                 allJapanCaseNumber += caseNumberAry[count];
                 allJapanPopulation += population;
 //                System.out.println(caseNumberAry[count]);
@@ -54,7 +58,7 @@ public class BackendModels {
         scr.close();
     }
 
-    private void deltaSetup(int[] caseNumberAry) {
+    private void countDelta(int[] caseNumberAry) {
         int allJapanCaseNumberDayBefore = 0;
         int count = 47;
         while (count >= 47 && count < 47 * 2) {
@@ -66,7 +70,7 @@ public class BackendModels {
         this.japan.setCaseNumberDeltaWithDayPrior(allJapanCaseNumberDayBefore);
     }
 
-    private void averageIncreaseSetup(int[] caseNumberAry) {
+    private void setAverageIncrease(int[] caseNumberAry) {
         int caseNumber14daysAgoJapanTotal = 0;
         for (int i = 0; i < 47; i++) {
             this.japanPrefecture[i].setCaseNumberAverage((caseNumberAry[47 * 14 + i]));

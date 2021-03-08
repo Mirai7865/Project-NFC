@@ -7,27 +7,43 @@ package project.nfc;
 
 public class Prefecture extends Region {
 
-    private String majorCity;
+    private String majorCityJP;
+    private String majorCityEng;
     private String weatherForecast;
 
-    public Prefecture(String prefectureName, int regionNumber, int caseNumber, int population, String majorCity) {
+    public Prefecture(String prefectureName, int regionNumber, int caseNumber, int population, String majorCityJP, String majorCityEng) {
         super(prefectureName, regionNumber, caseNumber, population);
-        this.setmajorCity(majorCity);
+        this.setMajorCityJP(majorCityJP);
+        this.setMajorCityEng(majorCityEng);
     }
 
-    private void setmajorCity(String city) {
-        this.majorCity = city;
+    private void setMajorCityJP(String city) {
+        this.majorCityJP = city;
     }
 
-    public String getMajorCityName() {
-        return this.majorCity;
+    public String getMajorCityJp() {
+        return this.majorCityJP;
     }
 
-    private void setWeatherForecast(String weather) {
-        this.weatherForecast = weather;
+    private void setMajorCityEng(String city) {
+        this.majorCityEng = city;
+    }
+
+    public String getMajorCityEng() {
+        return this.majorCityEng;
+    }
+
+    public void setWeatherForecast() {
+        this.weatherForecast = WeatherAPI.getForecast(this.getMajorCityEng());
     }
 
     public String getWeatherForecast() {
         return this.weatherForecast;
+    }
+
+    @Override
+    public String toString() {
+        String string = "Region: " + this.getRegionName() + ", Case Number: " + this.getCaseNumber() + " Major City: " + this.getMajorCityEng() + " Weather: " + this.getWeatherForecast();
+        return string;
     }
 }
