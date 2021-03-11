@@ -82,9 +82,12 @@ public class MainDisplayController {
         @Override
         public void mouseReleased(MouseEvent me) {
             selectedIndex = mainDisplay.caseNumberList.getSelectedIndex();
-            mainDisplay.backendModels.japanPrefecture[selectedIndex - 1].setWeatherForecast();
             mainDisplay.updateSidePanel(selectedIndex);
-
+            backendModels.japanPrefecture[selectedIndex - 1].setWeatherForecast();
+            mainDisplay.sidePanel.append("\n" + backendModels.japanPrefecture[selectedIndex - 1].getWeatherForecast());
+//            SidePanelUpdater updater = new SidePanelUpdater(backendModels, selectedIndex);
+//            Thread updaterThread = new Thread(updater);
+//            updaterThread.start();
         }
 
         @Override

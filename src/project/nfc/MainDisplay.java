@@ -312,9 +312,8 @@ public class MainDisplay extends JFrame {
                     + "%-15.15s"
                     + "\n" + Localization.getLangDataAt(59)
                     + this.backendModels.japan.getCaseNumberDeltaWithDayPrior()
-                    + "\n" + Localization.getLangDataAt(49) + risk
-                    + "\n" + "The Weather is " + this.backendModels.japanPrefecture[index].getWeatherForecast(),
-                    this.backendModels.japan.getPopulation(), this.backendModels.japan.getCaseNumber())));
+                    + "\n" + Localization.getLangDataAt(49) + risk /*+ "\n" + "The Weather is " + this.backendModels.japanPrefecture[index].getWeatherForecast()*/,
+                     this.backendModels.japan.getPopulation(), this.backendModels.japan.getCaseNumber())));
 
         } else {
             if (this.backendModels.japanPrefecture[index - 1].getRisk().equals("High")) {
@@ -328,9 +327,8 @@ public class MainDisplay extends JFrame {
                     + "\n" + Localization.getLangDataAt(60)
                     + "%9.9s"
                     + "\n" + Localization.getLangDataAt(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior()
-                    + "\n" + Localization.getLangDataAt(49) + risk
-                    + "\n" + "The Weather is " + this.backendModels.japanPrefecture[index - 1].getWeatherForecast(),
-                    this.backendModels.japanPrefecture[index - 1].getPopulation()));
+                    + "\n" + Localization.getLangDataAt(49) + risk /*+ "\n" + "The Weather is " + this.backendModels.japanPrefecture[index - 1].getWeatherForecast()*/,
+                     this.backendModels.japanPrefecture[index - 1].getPopulation()));
         }
     }
 
