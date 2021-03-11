@@ -10,20 +10,22 @@ import javax.swing.JTextArea;
 public class SidePanelUpdater implements Runnable {
 
     private boolean run;
-    public JTextArea sidePanel;
-    public BackendModels backendModels;
+    private JTextArea sidePanel;
+    private BackendModels backendModels;
     private int selectedIndex;
+    private MainDisplay mainDisplay;
 
-    public SidePanelUpdater(BackendModels bem, int index) {
+    public SidePanelUpdater(BackendModels bem, MainDisplay mainDisplay, int index) {
         this.run = true;
         this.backendModels = bem;
         this.selectedIndex = index;
+        this.mainDisplay = mainDisplay;
     }
 
     @Override
     public void run() {
-        while (this.run) {
-            this.backendModels.japanPrefecture[selectedIndex - 1].setWeatherForecast();
-        }
+        backendModels.japanPrefecture[selectedIndex - 1].setWeatherForecast();
+        mainDisplay.sidePanel.append("\n" + backendModels.japanPrefecture[selectedIndex - 1].getWeatherForecast());
+//        System.out.println(backendModels.japanPrefecture[selectedIndex - 1].getWeatherForecast());
     }
 }
