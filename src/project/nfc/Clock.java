@@ -22,7 +22,7 @@ public class Clock implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
+        while (run) {
             if (!this.run) {
                 return;
             }

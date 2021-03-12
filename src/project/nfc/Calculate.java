@@ -12,7 +12,7 @@ public class Calculate {
     }
 
     public static double calculateRisk(int population, int caseNumber, double averageCaseNumberIncrease) {
-        double risk = ((double) (averageCaseNumberIncrease) / (double) (population)) * 150;
+        double risk = ((double) (averageCaseNumberIncrease) / (double) (population));
 //        System.out.println(risk);
         return risk;
     }
