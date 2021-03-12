@@ -30,7 +30,7 @@ public class BackendModels {
     }
 
     private void createPrefectureArray(int[] caseNumberAry) {
-        String data = AccessFile.readFile(("data" + File.separator + "prefecture.txt"));
+        String data = AccessFile.readFile(("data" + File.separator + "prefecture data" + File.separator + "prefecture.txt"));
         Scanner scr = new Scanner(data);
         scr.useDelimiter("@");
 

@@ -24,7 +24,7 @@ public class DrawMap {
     private int[] yLoc;
 
     public DrawMap() {
-        Scanner scr = new Scanner(AccessFile.readFile("data" + File.separator + "dotLocation.txt"));
+        Scanner scr = new Scanner(AccessFile.readFile("data" + File.separator + "images" + File.separator +"dotLocation.txt"));
         scr.useDelimiter("@");
         int count = 0;
         xLoc = new int[47];
