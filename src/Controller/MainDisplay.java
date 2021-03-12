@@ -11,7 +11,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.text.NumberFormat;
 import java.util.Arrays;
+import java.util.Formatter;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -24,6 +26,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
+import javax.swing.text.NumberFormatter;
 
 public class MainDisplay extends JFrame {
 
@@ -297,6 +300,8 @@ public class MainDisplay extends JFrame {
 
     public void updateSidePanel(int index) {
         String risk = "";
+        NumberFormat fmt = NumberFormat.getInstance();
+        fmt.setGroupingUsed(true);
 
         if (index == 0) {
             if (this.backendModels.japan.getRisk().equals("High")) {
@@ -306,15 +311,14 @@ public class MainDisplay extends JFrame {
             } else if (this.backendModels.japan.getRisk().equals("Low")) {
                 risk = Localization.getLangDataAt(56);
             }
-            this.sidePanel.setText((String.format(Localization.getLangDataAt(58) + Localization.getLangDataAt(57)
-                    + "\n" + Localization.getLangDataAt(60)
-                    + "%9.9s"
-                    + "\n" + Localization.getLangDataAt(48)
-                    + "%-15.15s"
-                    + "\n" + Localization.getLangDataAt(59)
-                    + this.backendModels.japan.getCaseNumberDeltaWithDayPrior()
-                    + "\n" + Localization.getLangDataAt(49) + risk,
-                    this.backendModels.japan.getPopulation(), this.backendModels.japan.getCaseNumber())));
+            this.sidePanel.setText(Localization.getLangDataAt(58) + Localization.getLangDataAt(57)
+                    + "\n" + Localization.getLangDataAt(60));
+            this.sidePanel.append(fmt.format(this.backendModels.japan.getPopulation()));
+            this.sidePanel.append("\n" + Localization.getLangDataAt(48));
+            this.sidePanel.append(fmt.format(this.backendModels.japan.getCaseNumber()));
+            this.sidePanel.append("\n" + Localization.getLangDataAt(59));
+            this.sidePanel.append(fmt.format(this.backendModels.japan.getCaseNumberDeltaWithDayPrior()));
+            this.sidePanel.append("\n" + Localization.getLangDataAt(49) + risk);
 
         } else {
             if (this.backendModels.japanPrefecture[index - 1].getRisk().equals("High")) {
@@ -324,13 +328,12 @@ public class MainDisplay extends JFrame {
             } else if (this.backendModels.japanPrefecture[index - 1].getRisk().equals("Low")) {
                 risk = Localization.getLangDataAt(56);
             }
-            this.sidePanel.setText(String.format(Localization.getLangDataAt(47) + "" + Localization.getLangDataContaining(this.backendModels.japanPrefecture[index - 1].getRegionName())
-                    + "\n" + Localization.getLangDataAt(60)
-                    + "%9.9s"
-                    + "\n" + Localization.getLangDataAt(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior()
+            this.sidePanel.setText(Localization.getLangDataAt(47) + "" + Localization.getLangDataContaining(this.backendModels.japanPrefecture[index - 1].getRegionName())
+                    + "\n" + Localization.getLangDataAt(60));
+            this.sidePanel.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getPopulation()).toString());
+            this.sidePanel.append("\n" + Localization.getLangDataAt(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior()
                     + "\n" + Localization.getLangDataAt(49) + risk
-                    + "\n" + "Weather: " + this.backendModels.japanPrefecture[index - 1].getWeatherForecast(),
-                    this.backendModels.japanPrefecture[index - 1].getPopulation()));
+                    + "\n" + "Weather: " + this.backendModels.japanPrefecture[index - 1].getWeatherForecast());
         }
     }
 
