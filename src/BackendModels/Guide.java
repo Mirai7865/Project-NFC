@@ -72,7 +72,7 @@ public class Guide {
         return this.articleTitle;
     }
 
-    public String parseJSON(String jsonStr) {
+    private String parseJSON(String jsonStr) {
         JSONObject obj = new JSONObject(jsonStr);
 //        System.out.println(obj);
         return obj.toString();

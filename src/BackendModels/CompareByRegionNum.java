@@ -7,7 +7,7 @@ package BackendModels;
 
 import java.util.Comparator;
 
-public class RegionCompareByRegionNum implements Comparator {
+public class CompareByRegionNum implements Comparator {
 
     @Override
     public int compare(Object obj, Object secondObject) {

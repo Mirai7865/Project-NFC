@@ -41,18 +41,21 @@ public class Localization {
     public static List<String> getLangData() { //return langData
         return langData;
     }
-    
+
     public static String getLangDataAt(int index) { //return langData at a particular index
+        if (index <= -1) {
+            return null;
+        }
         String str = langData.get(index);
         return str.substring(str.indexOf("=") + 1, str.length());
     }
 
-    public static String getLangDataContaining(String word) {
-        for (String data : langData) {
-            if (data.contains(word)) {
-                return data.substring(data.indexOf("=") + 1, data.length());
+    public static int indexOf(String word) {
+        for (int i = 0; i < langData.size(); i++) {
+            if (langData.get(i).contains(word)) {
+                return i;
             }
         }
-        return null;
+        return -1;
     }
 }
