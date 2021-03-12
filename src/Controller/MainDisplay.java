@@ -3,14 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project.nfc.Controller;
+package Controller;
 
-import project.nfc.BackendModels.Image;
-import project.nfc.BackendModels.RegionCompareByRegionNum;
-import project.nfc.BackendModels.RegionCompareByRisk;
-import project.nfc.BackendModels.Guide;
-import project.nfc.BackendModels.Localization;
-import Controller.BackendModels;
+import BackendModels.*;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -29,8 +24,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
-import project.nfc.Controller.Clock;
-import project.nfc.Controller.DrawMap;
 
 public class MainDisplay extends JFrame {
 
@@ -321,7 +314,7 @@ public class MainDisplay extends JFrame {
                     + "\n" + Localization.getLangDataAt(59)
                     + this.backendModels.japan.getCaseNumberDeltaWithDayPrior()
                     + "\n" + Localization.getLangDataAt(49) + risk /*+ "\n" + "The Weather is " + this.backendModels.japanPrefecture[index].getWeatherForecast()*/,
-                     this.backendModels.japan.getPopulation(), this.backendModels.japan.getCaseNumber())));
+                    this.backendModels.japan.getPopulation(), this.backendModels.japan.getCaseNumber())));
 
         } else {
             if (this.backendModels.japanPrefecture[index - 1].getRisk().equals("High")) {
@@ -336,7 +329,7 @@ public class MainDisplay extends JFrame {
                     + "%9.9s"
                     + "\n" + Localization.getLangDataAt(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior()
                     + "\n" + Localization.getLangDataAt(49) + risk /*+ "\n" + "The Weather is " + this.backendModels.japanPrefecture[index - 1].getWeatherForecast()*/,
-                     this.backendModels.japanPrefecture[index - 1].getPopulation()));
+                    this.backendModels.japanPrefecture[index - 1].getPopulation()));
         }
     }
 

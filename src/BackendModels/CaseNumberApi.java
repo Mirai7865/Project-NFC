@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BackendModels.API;
+package BackendModels;
 
 import java.net.HttpURLConnection;
 import java.net.URI;

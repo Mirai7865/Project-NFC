@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project.nfc.Controller;
+package Controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -3,11 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project.nfc.Controller;
+package Controller;
 
-import project.nfc.BackendModels.Prefecture;
-import project.nfc.BackendModels.Image;
-import project.nfc.BackendModels.AccessFile;
+import BackendModels.*;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;

@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project.nfc.BackendModels;
-
-import BackendModels.API.WeatherAPI;
+package BackendModels;
 
 public class Prefecture extends Region {
 

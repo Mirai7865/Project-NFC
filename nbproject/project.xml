@@ -6,7 +6,7 @@
             <name>Project NFC</name>
             <source-roots>
                 <root id="src.data.dir"/>
-                <root id="src.dir"/>
+                <root id="src.dir" name="src"/>
             </source-roots>
             <test-roots>
                 <root id="test.src.dir"/>

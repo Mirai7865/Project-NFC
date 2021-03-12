@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project.nfc.BackendModels;
-
-import project.nfc.BackendModels.Calculate;
+package BackendModels;
 
 public class Region {
 
@@ -17,6 +15,8 @@ public class Region {
     private double caseNumberAverage;
     private double riskValue;
     private int regionNumber;
+
+    public boolean testing = true;
 
     public Region(String regionName, int regionNumber, int caseNumber, int population) {
         this.setRegionName(regionName);

@@ -1,7 +1,6 @@
-package project.nfc.Controller;
+package Controller;
 
-import project.nfc.BackendModels.Localization;
-import Controller.BackendModels;
+import BackendModels.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;

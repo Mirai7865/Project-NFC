@@ -5,10 +5,8 @@
  */
 package Main_Class;
 
-import project.nfc.Controller.MainDisplayController;
-import project.nfc.Controller.MainDisplay;
-import project.nfc.BackendModels.Localization;
-import Controller.BackendModels;
+import Controller.*;
+import BackendModels.*;
 
 public class ProjectNFC {
 

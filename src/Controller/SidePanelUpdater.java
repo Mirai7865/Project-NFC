@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project.nfc.Controller;
+package Controller;
 
 import Controller.BackendModels;
+import BackendModels.*;
 import javax.swing.JTextArea;
 
 public class SidePanelUpdater implements Runnable {
@@ -25,8 +26,8 @@ public class SidePanelUpdater implements Runnable {
 
     @Override
     public void run() {
-        backendModels.japanPrefecture[selectedIndex - 1].setWeatherForecast();
-        mainDisplay.sidePanel.append("\n" + backendModels.japanPrefecture[selectedIndex - 1].getWeatherForecast());
+        this.backendModels.japanPrefecture[selectedIndex - 1].setWeatherForecast();
+        this.mainDisplay.sidePanel.append("\n" + backendModels.japanPrefecture[selectedIndex - 1].getWeatherForecast());
 //        System.out.println(backendModels.japanPrefecture[selectedIndex - 1].getWeatherForecast());
     }
 }

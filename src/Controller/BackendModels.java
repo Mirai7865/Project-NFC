@@ -5,14 +5,9 @@
  */
 package Controller;
 
-import BackendModels.API.CaseNumberApi;
+import BackendModels.*;
 import java.io.File;
 import java.util.Scanner;
-import project.nfc.BackendModels.AccessFile;
-import project.nfc.BackendModels.Prefecture;
-import project.nfc.BackendModels.Region;
-import project.nfc.Controller.Clock;
-import project.nfc.Controller.DrawMap;
 
 public class BackendModels {
 
