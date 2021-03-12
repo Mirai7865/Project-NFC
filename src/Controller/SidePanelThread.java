@@ -5,11 +5,10 @@
  */
 package Controller;
 
-import Controller.BackendModels;
 import BackendModels.*;
 import javax.swing.JTextArea;
 
-public class SidePanelUpdater implements Runnable {
+public class SidePanelThread implements Runnable {
 
     private boolean run;
     private JTextArea sidePanel;
@@ -17,7 +16,7 @@ public class SidePanelUpdater implements Runnable {
     private int selectedIndex;
     private MainDisplay mainDisplay;
 
-    public SidePanelUpdater(BackendModels bem, MainDisplay mainDisplay, int index) {
+    public SidePanelThread(BackendModels bem, MainDisplay mainDisplay, int index) {
         this.run = true;
         this.backendModels = bem;
         this.selectedIndex = index;
@@ -27,7 +26,8 @@ public class SidePanelUpdater implements Runnable {
     @Override
     public void run() {
         this.backendModels.japanPrefecture[selectedIndex - 1].setWeatherForecast();
-        this.mainDisplay.sidePanel.append("\n" + backendModels.japanPrefecture[selectedIndex - 1].getWeatherForecast());
-//        System.out.println(backendModels.japanPrefecture[selectedIndex - 1].getWeatherForecast());
+        String content = this.mainDisplay.sidePanel.getText();
+        content = content.replaceAll("Updating...", backendModels.japanPrefecture[selectedIndex - 1].getWeatherForecast());
+        this.mainDisplay.sidePanel.setText(content);
     }
 }

@@ -20,7 +20,6 @@ public class ProjectNFC {
         BackendModels backendModels = new BackendModels();
         MainDisplay mainDisplay = new MainDisplay(backendModels);
         MainDisplayController mdc = new MainDisplayController(backendModels, mainDisplay);
-
     }
 
 }

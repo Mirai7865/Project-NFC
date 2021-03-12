@@ -15,6 +15,7 @@ public class Prefecture extends Region {
         super(prefectureName, regionNumber, caseNumber, population);
         this.setMajorCityJP(majorCityJP);
         this.setMajorCityEng(majorCityEng);
+        this.weatherForecast = "Updating...";
     }
 
     private void setMajorCityJP(String city) {

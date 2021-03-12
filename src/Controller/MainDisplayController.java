@@ -84,9 +84,13 @@ public class MainDisplayController {
         public void mouseReleased(MouseEvent me) {
             selectedIndex = mainDisplay.caseNumberList.getSelectedIndex();
             mainDisplay.updateSidePanel(selectedIndex);
-            SidePanelUpdater updater = new SidePanelUpdater(backendModels, mainDisplay, selectedIndex);
-            Thread updaterThread = new Thread(updater);
-            updaterThread.start();
+            if (selectedIndex - 1 >= 0) {
+                if (backendModels.japanPrefecture[selectedIndex - 1].getWeatherForecast().equals("Updating...")) {
+                    SidePanelThread updater = new SidePanelThread(backendModels, mainDisplay, selectedIndex);
+                    Thread updaterThread = new Thread(updater);
+                    updaterThread.start();
+                }
+            }
         }
 
         @Override

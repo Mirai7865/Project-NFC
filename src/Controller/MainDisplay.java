@@ -313,7 +313,7 @@ public class MainDisplay extends JFrame {
                     + "%-15.15s"
                     + "\n" + Localization.getLangDataAt(59)
                     + this.backendModels.japan.getCaseNumberDeltaWithDayPrior()
-                    + "\n" + Localization.getLangDataAt(49) + risk /*+ "\n" + "The Weather is " + this.backendModels.japanPrefecture[index].getWeatherForecast()*/,
+                    + "\n" + Localization.getLangDataAt(49) + risk,
                     this.backendModels.japan.getPopulation(), this.backendModels.japan.getCaseNumber())));
 
         } else {
@@ -328,7 +328,8 @@ public class MainDisplay extends JFrame {
                     + "\n" + Localization.getLangDataAt(60)
                     + "%9.9s"
                     + "\n" + Localization.getLangDataAt(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior()
-                    + "\n" + Localization.getLangDataAt(49) + risk /*+ "\n" + "The Weather is " + this.backendModels.japanPrefecture[index - 1].getWeatherForecast()*/,
+                    + "\n" + Localization.getLangDataAt(49) + risk
+                    + "\n" + "Weather: " + this.backendModels.japanPrefecture[index - 1].getWeatherForecast(),
                     this.backendModels.japanPrefecture[index - 1].getPopulation()));
         }
     }
