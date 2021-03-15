@@ -33,6 +33,7 @@ public class WeatherAPI {
             con.disconnect();
         } catch (IOException e) {
             System.out.println("Failed to fetch weather data.");
+            return "Failed";
         }
 
         String data = strB.toString();
