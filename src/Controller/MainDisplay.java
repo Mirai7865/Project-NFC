@@ -301,14 +301,15 @@ public class MainDisplay extends JFrame {
         NumberFormat fmt = NumberFormat.getInstance();
         fmt.setGroupingUsed(true);
 
+        if (this.backendModels.japan.getRisk().equals("High")) {
+            risk = Localization.getLangDataAt(54);
+        } else if (this.backendModels.japan.getRisk().equals("Moderate")) {
+            risk = Localization.getLangDataAt(55);
+        } else if (this.backendModels.japan.getRisk().equals("Low")) {
+            risk = Localization.getLangDataAt(56);
+        }
+
         if (index == 0) {
-            if (this.backendModels.japan.getRisk().equals("High")) {
-                risk = Localization.getLangDataAt(54);
-            } else if (this.backendModels.japan.getRisk().equals("Moderate")) {
-                risk = Localization.getLangDataAt(55);
-            } else if (this.backendModels.japan.getRisk().equals("Low")) {
-                risk = Localization.getLangDataAt(56);
-            }
             this.sidePanel.setText(Localization.getLangDataAt(58) + Localization.getLangDataAt(57)
                     + "\n" + Localization.getLangDataAt(60));
             this.sidePanel.append(fmt.format(this.backendModels.japan.getPopulation()));
@@ -319,16 +320,11 @@ public class MainDisplay extends JFrame {
             this.sidePanel.append("\n" + Localization.getLangDataAt(49) + risk);
 
         } else {
-            if (this.backendModels.japanPrefecture[index - 1].getRisk().equals("High")) {
-                risk = Localization.getLangDataAt(54);
-            } else if (this.backendModels.japanPrefecture[index - 1].getRisk().equals("Moderate")) {
-                risk = Localization.getLangDataAt(55);
-            } else if (this.backendModels.japanPrefecture[index - 1].getRisk().equals("Low")) {
-                risk = Localization.getLangDataAt(56);
-            }
             this.sidePanel.setText(Localization.getLangDataAt(47) + "" + Localization.getLangDataAt(Localization.indexOf(this.backendModels.japanPrefecture[index - 1].getRegionName()))
                     + "\n" + Localization.getLangDataAt(60));
-            this.sidePanel.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getPopulation()).toString());
+            this.sidePanel.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getPopulation()));
+            this.sidePanel.append("\n" + Localization.getLangDataAt(48));
+            this.sidePanel.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getCaseNumber()));
             this.sidePanel.append("\n" + Localization.getLangDataAt(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior()
                     + "\n" + Localization.getLangDataAt(49) + risk
                     + "\n" + "Weather: " + this.backendModels.japanPrefecture[index - 1].getWeatherForecast());
