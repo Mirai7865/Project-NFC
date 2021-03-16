@@ -6,18 +6,14 @@
 package Controller;
 
 import BackendModels.*;
-import javax.swing.JTextArea;
 
 public class SidePanelThread implements Runnable {
 
-    private boolean run;
-    private JTextArea sidePanel;
     private BackendModels backendModels;
     private int selectedIndex;
     private MainDisplay mainDisplay;
 
     public SidePanelThread(BackendModels bem, MainDisplay mainDisplay, int index) {
-        this.run = true;
         this.backendModels = bem;
         this.selectedIndex = index;
         this.mainDisplay = mainDisplay;
@@ -25,9 +21,10 @@ public class SidePanelThread implements Runnable {
 
     @Override
     public void run() {
-        this.backendModels.japanPrefecture[selectedIndex - 1].setWeatherForecast();
+        this.backendModels.japanPrefecture[selectedIndex - 1].callAPI();
         String content = this.mainDisplay.sidePanel.getText();
-        content = content.replaceAll("Updating...", backendModels.japanPrefecture[selectedIndex - 1].getWeatherForecast());
+        content = content.replace("Weather: Updating...", "Weather: " + backendModels.japanPrefecture[selectedIndex - 1].getWeatherForecast());
+        content = content.replace("Temperature: Updating...", "Temperature: " + backendModels.japanPrefecture[selectedIndex - 1].getTemp());
         this.mainDisplay.sidePanel.setText(content);
     }
 }

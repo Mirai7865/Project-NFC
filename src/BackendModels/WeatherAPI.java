@@ -18,8 +18,8 @@ public class WeatherAPI {
         //Create http request 
     }
 
-    public static String getForecast(String cityName) { //The plan is to get weather data by connecting to yahoo weather(one of the most reliable sources). Will be working on this later.
-        String urlStr = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKey;
+    public static void getForecast(Prefecture pref) { //The plan is to get weather data by connecting to yahoo weather(one of the most reliable sources). Will be working on this later.
+        String urlStr = "https://api.openweathermap.org/data/2.5/weather?q=" + pref.getMajorCityEng() + "&appid=" + apiKey;
         StringBuffer strB = new StringBuffer();
         try {
             URL url = new URL(urlStr);
@@ -33,11 +33,15 @@ public class WeatherAPI {
             con.disconnect();
         } catch (IOException e) {
             System.out.println("Failed to fetch weather data.");
+            pref.setWeatherForecast("Failed");
         }
 
         String data = strB.toString();
-        data = data.substring(data.indexOf("\"main\":"));
-        String weather = data.substring(data.indexOf(":\"") + 2, data.indexOf(",") - 1);
-        return weather;
+//        System.out.println(data);
+        String weather = data.substring(data.indexOf("\"main\":\"") + 8, data.indexOf(",\"description\"") - 1);
+        double tempKelvin = Double.valueOf(data.substring(data.indexOf("\"temp\":") + 7, data.indexOf(",\"feels_like\"") - 1));
+        int temp = (int) Math.round(tempKelvin - 273.15);
+        pref.setTemp(temp);
+        pref.setWeatherForecast(weather);
     }
 }
