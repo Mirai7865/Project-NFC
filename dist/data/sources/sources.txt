@@ -1,0 +1,9 @@
+All the sources of the APIs and images used in the application. 
+If not specified, the files were created by the coder.
+
+Case Number API=https://opendata.corona.go.jp/api/Covid19JapanAll
+https://corona.go.jp/dashboard/
+
+Map of Japan=https://www.start-point.net/maps/material/img/map2/shiro/w.png
+https://www.start-point.net/maps/material/
+
