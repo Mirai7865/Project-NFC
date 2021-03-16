@@ -1,4 +1,4 @@
-package Controller;
+package View_Controller;
 
 import BackendModels.*;
 import java.awt.event.ActionEvent;
@@ -86,7 +86,7 @@ public class MainDisplayController {
             mainDisplay.updateSidePanel(selectedIndex);
             if (selectedIndex - 1 >= 0) {
                 if (backendModels.japanPrefecture[selectedIndex - 1].getWeatherForecast().equals("Updating...")) {
-                    SidePanelThread updater = new SidePanelThread(backendModels, mainDisplay, selectedIndex);
+                    SidePanelThread updater = new SidePanelThread(backendModels, mainDisplay, mainDisplay.sidePanel, selectedIndex);
                     Thread updaterThread = new Thread(updater);
                     updaterThread.start();
                 }

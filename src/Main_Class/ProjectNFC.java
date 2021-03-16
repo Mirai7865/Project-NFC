@@ -5,7 +5,9 @@
  */
 package Main_Class;
 
-import Controller.*;
+import View_Controller.BackendModels;
+import View_Controller.MainDisplayController;
+import View_Controller.MainDisplay;
 import BackendModels.*;
 
 public class ProjectNFC {

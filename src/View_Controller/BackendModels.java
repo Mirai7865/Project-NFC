@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package View_Controller;
 
+import BackendModels.DrawMap;
 import BackendModels.*;
 import java.io.File;
 import java.util.Scanner;
@@ -26,7 +27,9 @@ public class BackendModels {
         this.createPrefectureArray(caseNumberAry);
         this.countDelta(caseNumberAry);
         this.setAverageIncrease(caseNumberAry);
-        this.map = new DrawMap();
+        this.map = null;
+        this.clock = null;
+        this.cThread = null;
     }
 
     private void createPrefectureArray(int[] caseNumberAry) {
