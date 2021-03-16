@@ -67,6 +67,8 @@ public class MainDisplay extends JFrame {
 
         this.clockTextArea = new JTextArea();
         this.clockTextArea.setFont(new Font("Times New Roman", Font.BOLD, 40));
+        this.clockTextArea.setEditable(false);
+        this.clockTextArea.setFocusable(false);
 //        this.clockTextArea.setBorder(BorderFactory.createTitledBorder("Current Time in JST"));
 
         this.caseNumberPane = new JScrollPane(this.caseNumberList);
@@ -243,6 +245,10 @@ public class MainDisplay extends JFrame {
         this.mapPanel.setVisible(true);
         this.setVisible(true);
         this.pack();
+
+        this.backendModels.clock = new Clock(this.clockTextArea);
+        this.backendModels.cThread = new Thread(this.backendModels.clock);
+        this.backendModels.cThread.start();
     }
 
     public MainDisplay(BackendModels bem) {
@@ -250,9 +256,6 @@ public class MainDisplay extends JFrame {
         this.backendModels = bem;
         this.backendModels.map = new DrawMap();
         this.initialComponents();
-        this.backendModels.clock = new Clock(this.clockTextArea);
-        this.backendModels.cThread = new Thread(this.backendModels.clock);
-        this.backendModels.cThread.start();
         this.updateCaseNumberTextPane();
 
     }
