@@ -36,11 +36,11 @@ public class Guide {
     }
 
     private void loadArticleFromWiki() {
-        String urlStr = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=" + this.articleTitle;
+        this.path = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=" + this.articleTitle;
         StringBuffer strB = new StringBuffer();
 
         try {
-            URL url = new URL(new URI(urlStr).toASCIIString());
+            URL url = new URL(new URI(this.path).toASCIIString());
             HttpURLConnection con = (HttpURLConnection) (url.openConnection());
             con.connect();
             Scanner scr = new Scanner(url.openStream());
@@ -61,7 +61,6 @@ public class Guide {
         }
         String parsedArticle = parseJSON(strB.toString());
         this.article = parsedArticle.substring(parsedArticle.toString().indexOf("\"extract\":\"") + "\"extract\":\"".length(), parsedArticle.toString().lastIndexOf("\",\"ns\""));
-
     }
 
     public String getArticle() {

@@ -16,8 +16,6 @@ public class Region {
     private double riskValue;
     private int regionNumber;
 
-    public boolean testing = true;
-
     public Region(String regionName, int regionNumber, int caseNumber, int population) {
         this.setRegionName(regionName);
         this.setRegionNumber(regionNumber);

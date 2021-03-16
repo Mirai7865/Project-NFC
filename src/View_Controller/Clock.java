@@ -33,4 +33,12 @@ public class Clock implements Runnable {
             this.textArea.setText(dateFormat.format(date));
         }
     }
+
+    public void stop() {
+        this.run = false;
+    }
+
+    public boolean getCurrentState() {
+        return this.run;
+    }
 }

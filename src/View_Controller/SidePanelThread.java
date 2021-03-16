@@ -26,7 +26,7 @@ public class SidePanelThread implements Runnable {
     public void run() {
         this.backendModels.japanPrefecture[selectedIndex - 1].callAPI();
         String content = this.sidePanel.getText();
-        content = content.replace("Weather: Updating...", "Weather: " + backendModels.japanPrefecture[selectedIndex - 1].getWeatherForecast());
+        content = content.replace("Weather: Updating...", "Weather: " + backendModels.japanPrefecture[selectedIndex - 1].getWeather());
         content = content.replace("Temperature: Updating...", "Temperature: " + backendModels.japanPrefecture[selectedIndex - 1].getTemp());
         this.sidePanel.setText(content);
     }

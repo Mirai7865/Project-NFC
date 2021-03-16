@@ -33,7 +33,7 @@ public class WeatherAPI {
             con.disconnect();
         } catch (IOException e) {
             System.out.println("Failed to fetch weather data.");
-            pref.setWeatherForecast("Failed");
+            pref.setWeather("Failed");
         }
 
         String data = strB.toString();
@@ -42,6 +42,6 @@ public class WeatherAPI {
         double tempKelvin = Double.valueOf(data.substring(data.indexOf("\"temp\":") + 7, data.indexOf(",\"feels_like\"") - 1));
         int temp = (int) Math.round(tempKelvin - 273.15);
         pref.setTemp(temp);
-        pref.setWeatherForecast(weather);
+        pref.setWeather(weather);
     }
 }

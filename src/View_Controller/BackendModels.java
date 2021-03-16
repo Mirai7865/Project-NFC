@@ -24,15 +24,19 @@ public class BackendModels {
 
     private void initialSetUp() {
         int[] caseNumberAry = CaseNumberApi.getCaseNumber();
-        this.createPrefectureArray(caseNumberAry);
+        
+        this.setPrefectureArray(caseNumberAry);
         this.countDelta(caseNumberAry);
         this.setAverageIncrease(caseNumberAry);
+        
+        Localization.setLang("en-us");
+        
         this.map = null;
         this.clock = null;
         this.cThread = null;
     }
 
-    private void createPrefectureArray(int[] caseNumberAry) {
+    private void setPrefectureArray(int[] caseNumberAry) {
         String data = AccessFile.readFile(("data" + File.separator + "prefecture data" + File.separator + "prefecture.txt"));
         Scanner scr = new Scanner(data);
         scr.useDelimiter("@");

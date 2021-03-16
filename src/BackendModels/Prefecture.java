@@ -40,7 +40,7 @@ public class Prefecture extends Region {
         WeatherAPI.getForecast(this);
     }
 
-    public void setWeatherForecast(String weather) {
+    public void setWeather(String weather) {
         this.weatherForecast = weather;
     }
 
@@ -52,13 +52,13 @@ public class Prefecture extends Region {
         return this.temperature;
     }
 
-    public String getWeatherForecast() {
+    public String getWeather() {
         return this.weatherForecast;
     }
 
     @Override
     public String toString() {
-        String string = "Region: " + this.getRegionName() + ", Case Number: " + this.getCaseNumber() + " Major City: " + this.getMajorCityEng() + " Weather: " + this.getWeatherForecast();
+        String string = "Region: " + this.getRegionName() + ", Case Number: " + this.getCaseNumber() + " Major City: " + this.getMajorCityEng() + " Weather: " + this.getWeather();
         return string;
     }
 }

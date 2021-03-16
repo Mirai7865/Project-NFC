@@ -274,8 +274,8 @@ public class MainDisplay extends JFrame {
             this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAt(58) + " " + "%-13.13s" + Localization.getLangDataAt(48) + "%7s" + "\n" + Localization.getLangDataAt(49) + " " + risk, Localization.getLangDataAt(57), backendModels.japan.getCaseNumber())) + "</pre></html>");
         }
 
-        for (int i = 1; i <= this.backendModels.japanPrefecture.length; i++) {
-            risk = this.convertRisk(i);
+        for (int i = 0; i < this.backendModels.japanPrefecture.length; i++) {
+            risk = this.convertRisk(i + 1);
             if (Localization.getLang().equals("ja-jp")) {
                 this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAt(47) + " " + Localization.getLangDataAt(Localization.indexOf(this.backendModels.japanPrefecture[i].getRegionName())) + "\t" + Localization.getLangDataAt(48) + "%7s" + " " + Localization.getLangDataAt(49) + " " + risk, backendModels.japanPrefecture[i].getCaseNumber())) + "</pre></html>");
             } else if (Localization.getLang().equals("en-us")) {
@@ -313,7 +313,7 @@ public class MainDisplay extends JFrame {
             this.sidePanel.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getCaseNumber()));
             this.sidePanel.append("\n" + Localization.getLangDataAt(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior()
                     + "\n" + Localization.getLangDataAt(49) + risk
-                    + "\n" + "Weather: " + this.backendModels.japanPrefecture[index - 1].getWeatherForecast()
+                    + "\n" + "Weather: " + this.backendModels.japanPrefecture[index - 1].getWeather()
                     + "\n" + "Temperature: " + this.backendModels.japanPrefecture[index - 1].getTemp()
             );
         }
@@ -341,7 +341,7 @@ public class MainDisplay extends JFrame {
             } else {
                 risk = Localization.getLangDataAt(56);
             }
-        } else if (index < this.backendModels.japanPrefecture.length) {
+        } else if (index <= this.backendModels.japanPrefecture.length) {
             if (this.backendModels.japanPrefecture[index - 1].getRisk().equals("High")) {
                 risk = Localization.getLangDataAt(54);
             } else if (this.backendModels.japanPrefecture[index - 1].getRisk().equals("Moderate")) {
