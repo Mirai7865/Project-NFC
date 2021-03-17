@@ -13,6 +13,7 @@ import java.util.Scanner;
 public class Localization {
 
     private static String language;
+    private static File[] langFiles;
     private static List<String> langData = new ArrayList<String>();
 
     public Localization() {
@@ -20,7 +21,7 @@ public class Localization {
 
     public static void setLang(String lang) {
         File folder = new File("data" + File.separator + "localization");
-        File[] langFiles = folder.listFiles();
+        langFiles = folder.listFiles();
 
         if (langFiles == null) {
             System.out.println("Found no lang data files.");
@@ -77,5 +78,13 @@ public class Localization {
             }
         }
         return -1;
+    }
+
+    public static String[] getLangFileNames() {
+        String str[] = new String[langFiles.length];
+        for (int i = 0; i < langFiles.length; i++) {
+            str[i] = langFiles[i].getName();
+        }
+        return str;
     }
 }

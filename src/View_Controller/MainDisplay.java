@@ -18,6 +18,7 @@ import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -41,12 +42,17 @@ public class MainDisplay extends JFrame {
     JTextArea clockTextArea;
     JPanel caseNumberPanel;
     JPanel guidePanel;
+    JPanel settingsPanel;
     JTextArea sidePanel;
 
     JTextArea guidebookText;
     JScrollPane guideSectionPane;
     JPanel guideSectionImagePane1;
     JPanel guideSectionImagePane2;
+    
+    JComboBox langChoices;
+    JButton langChoiceApply;
+    
     JLabel mapLabel;
     JPanel mapPanel;
     JScrollPane caseNumberPane;
@@ -61,7 +67,8 @@ public class MainDisplay extends JFrame {
         this.mainPane = new JTabbedPane(JTabbedPane.TOP);
         this.caseNumberPanel = new JPanel(new GridBagLayout());
         this.guidePanel = new JPanel(new GridBagLayout());
-
+        this.settingsPanel = new JPanel(new GridBagLayout());
+        
         this.listModel = new DefaultListModel<>();
         this.caseNumberList = new JList(this.listModel);
         this.caseNumberList.setFont(new Font("monospaced", Font.BOLD, 14));
@@ -118,7 +125,11 @@ public class MainDisplay extends JFrame {
         this.guideSectionImagePane2 = new JPanel();
         this.guideSectionImagePane2.add(new JLabel(this.fetchImage("Kaminarimon from distance.jpg")));
         this.guideSectionImagePane2.setBorder(BorderFactory.createTitledBorder("Take another look at Kaminarimon!"));
-
+        
+        this.langChoices = new JComboBox(Localization.getLangFileNames());
+        this.langChoiceApply = new JButton();
+        this.langChoiceApply.setText("Apply language setting");
+        
         GridBagConstraints gbc;
 
         gbc = new GridBagConstraints();
@@ -241,7 +252,31 @@ public class MainDisplay extends JFrame {
         this.guidePanel.add(this.guideSectionImagePane2, gbc);
 
         this.mainPane.addTab(Localization.getLangDataAt(53), null, this.guidePanel, "Guidebook section");
-
+        
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+//        gbc.fill = GridBagConstraints.CENTER;
+//        gbc.anchor = GridBagConstraints.SOUTHEAST;
+        this.settingsPanel.add(this.langChoices, gbc);
+        
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+//        gbc.fill = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.NORTH;
+        this.settingsPanel.add(this.langChoiceApply, gbc);
+        
+        this.mainPane.addTab("User settings", null, this.settingsPanel, "Per ser settings");
+        
         mainDisplayPane.add(this.mainPane);
         this.mapPanel.setVisible(true);
         this.setVisible(true);

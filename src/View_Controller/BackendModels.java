@@ -17,7 +17,6 @@ public class BackendModels {
     public DrawMap map;
     public Clock clock;
     public Thread cThread;
-    public Loc locale;
 
     public BackendModels() {
         this.initialSetUp();
@@ -30,8 +29,8 @@ public class BackendModels {
         this.countDelta(caseNumberAry);
         this.setAverageIncrease(caseNumberAry);
         
-        locale = new Loc();
-        Localization.setLang(locale.getLanguage());
+//        locale = new Loc();
+        Localization.setLang(System.getProperty("user.language"));
         
         this.map = null;
         this.clock = null;
