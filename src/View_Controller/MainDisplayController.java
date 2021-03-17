@@ -18,7 +18,7 @@ public class MainDisplayController {
     MainDisplay mainDisplay;
 
     private int selectedIndex = 0;
-    private boolean sortedByRisk = false;
+    private int sort = 0;
 
     public MainDisplayController(BackendModels models, MainDisplay mainDisplay) {
         this.backendModels = models;
@@ -30,7 +30,7 @@ public class MainDisplayController {
         this.mainDisplay.langJpButton.addActionListener(new ChangeLanguageToJaAction());
         this.mainDisplay.langEnButton.addActionListener(new ChangeLanguageToEnAction());
         this.mainDisplay.caseNumberList.addMouseListener(new openSidePanelAction());
-        this.mainDisplay.sortByRiskButton.addActionListener(new SortByRiskAction());
+        this.mainDisplay.sortByRiskButton.addActionListener(new SortAction());
     }
 
     private class ChangeLanguageToJaAction implements ActionListener {
@@ -57,18 +57,22 @@ public class MainDisplayController {
         }
     }
 
-    private class SortByRiskAction implements ActionListener {
+    private class SortAction implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-            if (sortedByRisk == false) {
+            if (sort == 0) {
                 mainDisplay.sortByRisk();
-                mainDisplay.sortByRiskButton.setText("Reset Sort");
-                sortedByRisk = true;
+                mainDisplay.sortByRiskButton.setText("Sort By Total Case Number");
+                sort = 1;
+            } else if (sort == 1) {
+                mainDisplay.sortByCaseNumber();
+                mainDisplay.sortByRiskButton.setText("Reset sort");
+                sort = 2;
             } else {
                 mainDisplay.sortByRegionNumber();
                 mainDisplay.sortByRiskButton.setText("Sort By Risk");
-                sortedByRisk = false;
+                sort = 0;
             }
         }
     }

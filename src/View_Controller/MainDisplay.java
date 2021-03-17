@@ -330,7 +330,13 @@ public class MainDisplay extends JFrame {
         Arrays.sort(this.backendModels.japanPrefecture, compare);
         this.updateCaseNumberTextPane();
     }
-
+    
+    public void sortByCaseNumber() {
+        CompareByCase compare = new CompareByCase();
+        Arrays.sort(this.backendModels.japanPrefecture, compare);
+        this.updateCaseNumberTextPane();
+    }
+    
     private String convertRisk(int index) {
         String risk = "";
         if (index == 0) {
