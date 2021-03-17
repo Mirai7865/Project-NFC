@@ -51,7 +51,6 @@ public class Localization {
         //load language files
         langData.clear();
         String str = AccessFile.readFile("data" + File.separator + "localization" + File.separator + getLang() + ".txt");
-        System.out.println(str);
         Scanner scr = new Scanner(str);
         scr.useDelimiter("@");
         while (scr.hasNext()) {

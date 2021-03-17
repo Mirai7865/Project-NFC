@@ -31,7 +31,6 @@ public class BackendModels {
         this.setAverageIncrease(caseNumberAry);
         
         locale = new Loc();
-        System.out.println(locale.getLanguage());
         Localization.setLang(locale.getLanguage());
         
         this.map = null;

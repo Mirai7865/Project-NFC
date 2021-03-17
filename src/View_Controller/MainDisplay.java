@@ -7,8 +7,6 @@ package View_Controller;
 
 import BackendModels.DrawMap;
 import BackendModels.*;
-import View_Controller.BackendModels;
-import View_Controller.Clock;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -260,7 +258,6 @@ public class MainDisplay extends JFrame {
         this.backendModels.map = new DrawMap();
         this.initialComponents();
         this.updateCaseNumberTextPane();
-//        System.out.println(this.listModel.elementAt(1));
     }
 
     public void updateCaseNumberTextPane() {
