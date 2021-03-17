@@ -37,7 +37,7 @@ public class MainDisplayController {
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-            Localization.setLang("ja-jp");
+            Localization.setLang("ja");
             mainDisplay.updateCaseNumberTextPane();
             mainDisplay.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(51)));
             mainDisplay.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));
@@ -49,7 +49,7 @@ public class MainDisplayController {
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-            Localization.setLang("en-us");
+            Localization.setLang("en");
             mainDisplay.updateCaseNumberTextPane();
             mainDisplay.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(51)));
             mainDisplay.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));

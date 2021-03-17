@@ -19,7 +19,27 @@ public class Localization {
     }
 
     public static void setLang(String lang) {
-        language = lang;
+        File folder = new File("data" + File.separator + "localization");
+        File[] langFiles = folder.listFiles();
+
+        if (langFiles == null) {
+            System.out.println("Found no lang data files.");
+            return;
+        }
+
+        boolean matched = false;
+        for (File langFile : langFiles) {
+//            System.out.println((langFile.getName()).replaceAll(".txt", ""));
+            if ((langFile.getName()).replaceAll(".txt", "").equals(lang)) {
+                language = lang;
+//                System.out.println("Found lang file.");
+                matched = true;
+                break;
+            }
+        }
+        if (matched == false) {
+            language = "en";
+        }
         loadLang();
     }
 
@@ -31,6 +51,7 @@ public class Localization {
         //load language files
         langData.clear();
         String str = AccessFile.readFile("data" + File.separator + "localization" + File.separator + getLang() + ".txt");
+        System.out.println(str);
         Scanner scr = new Scanner(str);
         scr.useDelimiter("@");
         while (scr.hasNext()) {

@@ -260,7 +260,7 @@ public class MainDisplay extends JFrame {
         this.backendModels.map = new DrawMap();
         this.initialComponents();
         this.updateCaseNumberTextPane();
-
+//        System.out.println(this.listModel.elementAt(1));
     }
 
     public void updateCaseNumberTextPane() {
@@ -268,17 +268,17 @@ public class MainDisplay extends JFrame {
         this.listModel.clear();
         String risk = this.convertRisk(0);
 
-        if (Localization.getLang().equals("ja-jp")) {
+        if (Localization.getLang().equals("ja")) {
             this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAt(58) + "   " + Localization.getLangDataAt(57) + "\t" + Localization.getLangDataAt(48) + "%7s" + " " + Localization.getLangDataAt(49) + " " + risk, backendModels.japan.getCaseNumber())) + "</pre></html>");
-        } else if (Localization.getLang().equals("en-us")) {
+        } else if (Localization.getLang().equals("en")) {
             this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAt(58) + " " + "%-13.13s" + Localization.getLangDataAt(48) + "%7s" + "\n" + Localization.getLangDataAt(49) + " " + risk, Localization.getLangDataAt(57), backendModels.japan.getCaseNumber())) + "</pre></html>");
         }
 
         for (int i = 0; i < this.backendModels.japanPrefecture.length; i++) {
             risk = this.convertRisk(i + 1);
-            if (Localization.getLang().equals("ja-jp")) {
+            if (Localization.getLang().equals("ja")) {
                 this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAt(47) + " " + Localization.getLangDataAt(Localization.indexOf(this.backendModels.japanPrefecture[i].getRegionName())) + "\t" + Localization.getLangDataAt(48) + "%7s" + " " + Localization.getLangDataAt(49) + " " + risk, backendModels.japanPrefecture[i].getCaseNumber())) + "</pre></html>");
-            } else if (Localization.getLang().equals("en-us")) {
+            } else if (Localization.getLang().equals("en")) {
                 this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAt(47) + " " + "%-10.10s" + Localization.getLangDataAt(48) + "%7s" + "\n" + Localization.getLangDataAt(49) + " " + risk, Localization.getLangDataAt(Localization.indexOf(this.backendModels.japanPrefecture[i].getRegionName())), backendModels.japanPrefecture[i].getCaseNumber())) + "</pre></html>");
             }
         }
