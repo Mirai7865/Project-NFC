@@ -45,7 +45,7 @@ public class MainDisplay extends JFrame {
     JPanel caseNumberPanel;
     JPanel guidePanel;
     JPanel settingsPanel;
-    JTextArea sidePanel;
+    JTextArea sidePane;
 
     JTextArea guidebookText;
     JScrollPane guideSectionPane;
@@ -97,22 +97,21 @@ public class MainDisplay extends JFrame {
         this.sortByRiskButton.setText("Sort By Risk");
 
         this.hyperLink = new JTextArea();
-        this.hyperLink.setText("https://opendata.corona.go.jp/api/Covid19JapanAll");
+        this.hyperLink.setText("Source: https://opendata.corona.go.jp/api/Covid19JapanAll");
 
-        this.mapPanel = new JPanel();
-        this.mapPanel.add(new JLabel(backendModels.map.initialDraw(this.backendModels.japanPrefecture)));
+        this.mapPanel = new JPanel(new GridBagLayout());
         this.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));
 
         this.guidebookText = new JTextArea();
         this.guidebookText.setEditable(false);
 
-        this.sidePanel = new JTextArea();
-        this.sidePanel.setPreferredSize(new Dimension(250, 200));
-        this.sidePanel.setBackground(new Color(0, 0, 0, 0));
-        this.sidePanel.setFont(new Font("MS Gothic", Font.BOLD, 20));
+        this.sidePane = new JTextArea();
+        this.sidePane.setPreferredSize(new Dimension(250, 200));
+//        this.sidePane.setBackground(new Color(0, 0, 0, 0));
+        this.sidePane.setFont(new Font("MS Gothic", Font.BOLD, 20));
+        this.sidePane.setEditable(false);
+        this.sidePane.setBorder(BorderFactory.createTitledBorder("Region Data"));
         this.updateSidePanel(0);
-        this.sidePanel.setEditable(false);
-        this.sidePanel.setBorder(BorderFactory.createTitledBorder("Region Data"));
 
         Guide sensouji = new Guide("Sensoji", null);
         this.guidebookText.setText(sensouji.getArticle());
@@ -213,6 +212,17 @@ public class MainDisplay extends JFrame {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.gridwidth = 3;
+        gbc.gridheight = 3;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+//        gbc.fill = GridBagConstraints.CENTER;
+//        gbc.anchor = GridBagConstraints.NORTH;
+        this.mapPanel.add(new JLabel(backendModels.map.initialDraw(this.backendModels.japanPrefecture)));
+
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbc.weightx = 1;
@@ -230,7 +240,7 @@ public class MainDisplay extends JFrame {
         gbc.weighty = 1;
         gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.NORTH;
-        this.caseNumberPanel.add(this.sidePanel, gbc);
+        this.caseNumberPanel.add(this.sidePane, gbc);
 
         Container mainDisplayPane = this.getContentPane();
         mainDisplayPane.setLayout(new GridBagLayout());
@@ -347,22 +357,22 @@ public class MainDisplay extends JFrame {
         fmt.setGroupingUsed(true);
 
         if (index == 0) {
-            this.sidePanel.setText(Localization.getLangDataAt(58) + Localization.getLangDataAt(57)
+            this.sidePane.setText(Localization.getLangDataAt(58) + Localization.getLangDataAt(57)
                     + "\n" + Localization.getLangDataAt(60));
-            this.sidePanel.append(fmt.format(this.backendModels.japan.getPopulation()));
-            this.sidePanel.append("\n" + Localization.getLangDataAt(48));
-            this.sidePanel.append(fmt.format(this.backendModels.japan.getCaseNumber()));
-            this.sidePanel.append("\n" + Localization.getLangDataAt(59));
-            this.sidePanel.append(fmt.format(this.backendModels.japan.getCaseNumberDeltaWithDayPrior()));
-            this.sidePanel.append("\n" + Localization.getLangDataAt(49) + risk);
+            this.sidePane.append(fmt.format(this.backendModels.japan.getPopulation()));
+            this.sidePane.append("\n" + Localization.getLangDataAt(48));
+            this.sidePane.append(fmt.format(this.backendModels.japan.getCaseNumber()));
+            this.sidePane.append("\n" + Localization.getLangDataAt(59));
+            this.sidePane.append(fmt.format(this.backendModels.japan.getCaseNumberDeltaWithDayPrior()));
+            this.sidePane.append("\n" + Localization.getLangDataAt(49) + risk);
 
         } else {
-            this.sidePanel.setText(Localization.getLangDataAt(47) + "" + Localization.getLangDataAt(Localization.indexOf(this.backendModels.japanPrefecture[index - 1].getRegionName()))
+            this.sidePane.setText(Localization.getLangDataAt(47) + "" + Localization.getLangDataAt(Localization.indexOf(this.backendModels.japanPrefecture[index - 1].getRegionName()))
                     + "\n" + Localization.getLangDataAt(60));
-            this.sidePanel.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getPopulation()));
-            this.sidePanel.append("\n" + Localization.getLangDataAt(48));
-            this.sidePanel.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getCaseNumber()));
-            this.sidePanel.append("\n" + Localization.getLangDataAt(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior()
+            this.sidePane.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getPopulation()));
+            this.sidePane.append("\n" + Localization.getLangDataAt(48));
+            this.sidePane.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getCaseNumber()));
+            this.sidePane.append("\n" + Localization.getLangDataAt(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior()
                     + "\n" + Localization.getLangDataAt(49) + risk
                     + "\n" + "Weather: " + this.backendModels.japanPrefecture[index - 1].getWeather()
                     + "\n" + "Temperature: " + this.backendModels.japanPrefecture[index - 1].getTemp()
