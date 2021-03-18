@@ -7,6 +7,7 @@ package View_Controller;
 
 import BackendModels.DrawMap;
 import BackendModels.*;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -37,28 +38,30 @@ public class MainDisplay extends JFrame {
     JButton langJpButton;
     JButton langEnButton;
     JButton sortByRiskButton;
+    JTextArea hyperLink;
     JTabbedPane mainPane;
 
     JTextArea clockTextArea;
     JPanel caseNumberPanel;
     JPanel guidePanel;
     JPanel settingsPanel;
-    JTextArea sidePanel;
+    JTextArea sidePane;
 
     JTextArea guidebookText;
     JScrollPane guideSectionPane;
     JPanel guideSectionImagePane1;
     JPanel guideSectionImagePane2;
-    
+
     JComboBox langChoices;
     JButton langChoiceApply;
-    
+
     JLabel mapLabel;
     JPanel mapPanel;
     JScrollPane caseNumberPane;
     DefaultListModel<String> listModel;
 
     private void initialComponents() {
+
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setMinimumSize(new Dimension(1500, 600));
         this.setTitle("Project NFC");
@@ -68,13 +71,14 @@ public class MainDisplay extends JFrame {
         this.caseNumberPanel = new JPanel(new GridBagLayout());
         this.guidePanel = new JPanel(new GridBagLayout());
         this.settingsPanel = new JPanel(new GridBagLayout());
-        
+
         this.listModel = new DefaultListModel<>();
         this.caseNumberList = new JList(this.listModel);
         this.caseNumberList.setFont(new Font("monospaced", Font.BOLD, 14));
 
         this.clockTextArea = new JTextArea();
         this.clockTextArea.setFont(new Font("Times New Roman", Font.BOLD, 40));
+//        this.clockTextArea.setBackground(new Color(0, 0, 0, 0));
         this.clockTextArea.setEditable(false);
         this.clockTextArea.setFocusable(false);
 //        this.clockTextArea.setBorder(BorderFactory.createTitledBorder("Current Time in JST"));
@@ -92,20 +96,24 @@ public class MainDisplay extends JFrame {
         this.sortByRiskButton = new JButton();
         this.sortByRiskButton.setText("Sort By Risk");
 
-        this.mapPanel = new JPanel();
-        this.mapPanel.add(new JLabel(backendModels.map.initialDraw(this.backendModels.japanPrefecture)));
+        this.hyperLink = new JTextArea();
+        this.hyperLink.setEditable(false);
+        this.hyperLink.setBackground(new Color(0, 0, 0, 0));
+        this.hyperLink.setText("Source: https://opendata.corona.go.jp/api/Covid19JapanAll");
+
+        this.mapPanel = new JPanel(new GridBagLayout());
         this.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));
 
         this.guidebookText = new JTextArea();
         this.guidebookText.setEditable(false);
 
-        this.sidePanel = new JTextArea();
-        this.sidePanel.setPreferredSize(new Dimension(250, 200));
-//        this.sidePanel.setBackground(Color.BLUE);
-        this.sidePanel.setFont(new Font("MS Gothic", Font.BOLD, 20));
+        this.sidePane = new JTextArea();
+        this.sidePane.setPreferredSize(new Dimension(250, 200));
+//        this.sidePane.setBackground(new Color(0, 0, 0, 0));
+        this.sidePane.setFont(new Font("MS Gothic", Font.BOLD, 20));
+        this.sidePane.setEditable(false);
+        this.sidePane.setBorder(BorderFactory.createTitledBorder("Region Data"));
         this.updateSidePanel(0);
-        this.sidePanel.setEditable(false);
-        this.sidePanel.setBorder(BorderFactory.createTitledBorder("Region Data"));
 
         Guide sensouji = new Guide("Sensoji", null);
         this.guidebookText.setText(sensouji.getArticle());
@@ -125,11 +133,12 @@ public class MainDisplay extends JFrame {
         this.guideSectionImagePane2 = new JPanel();
         this.guideSectionImagePane2.add(new JLabel(this.fetchImage("Kaminarimon from distance.jpg")));
         this.guideSectionImagePane2.setBorder(BorderFactory.createTitledBorder("Take another look at Kaminarimon!"));
-        
+
         this.langChoices = new JComboBox(Localization.getLangFileNames());
+        this.langChoices.setEditable(false);
         this.langChoiceApply = new JButton();
         this.langChoiceApply.setText("Apply language setting");
-        
+
         GridBagConstraints gbc;
 
         gbc = new GridBagConstraints();
@@ -203,6 +212,28 @@ public class MainDisplay extends JFrame {
         this.caseNumberPanel.add(this.mapPanel, gbc);
 
         gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 3;
+        gbc.gridheight = 3;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+//        gbc.fill = GridBagConstraints.CENTER;
+//        gbc.anchor = GridBagConstraints.NORTH;
+        this.mapPanel.add(new JLabel(backendModels.map.initialDraw(this.backendModels.japanPrefecture)));
+
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+//        gbc.fill = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.SOUTHEAST;
+        this.mapPanel.add(this.hyperLink, gbc);
+
+        gbc = new GridBagConstraints();
         gbc.gridx = 2;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
@@ -211,7 +242,7 @@ public class MainDisplay extends JFrame {
         gbc.weighty = 1;
         gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.NORTH;
-        this.caseNumberPanel.add(this.sidePanel, gbc);
+        this.caseNumberPanel.add(this.sidePane, gbc);
 
         Container mainDisplayPane = this.getContentPane();
         mainDisplayPane.setLayout(new GridBagLayout());
@@ -252,7 +283,7 @@ public class MainDisplay extends JFrame {
         this.guidePanel.add(this.guideSectionImagePane2, gbc);
 
         this.mainPane.addTab(Localization.getLangDataAt(53), null, this.guidePanel, "Guidebook section");
-        
+
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -263,7 +294,7 @@ public class MainDisplay extends JFrame {
 //        gbc.fill = GridBagConstraints.CENTER;
 //        gbc.anchor = GridBagConstraints.SOUTHEAST;
         this.settingsPanel.add(this.langChoices, gbc);
-        
+
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -274,9 +305,9 @@ public class MainDisplay extends JFrame {
 //        gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.NORTH;
         this.settingsPanel.add(this.langChoiceApply, gbc);
-        
+
         this.mainPane.addTab("User settings", null, this.settingsPanel, "Per ser settings");
-        
+
         mainDisplayPane.add(this.mainPane);
         this.mapPanel.setVisible(true);
         this.setVisible(true);
@@ -328,22 +359,22 @@ public class MainDisplay extends JFrame {
         fmt.setGroupingUsed(true);
 
         if (index == 0) {
-            this.sidePanel.setText(Localization.getLangDataAt(58) + Localization.getLangDataAt(57)
+            this.sidePane.setText(Localization.getLangDataAt(58) + Localization.getLangDataAt(57)
                     + "\n" + Localization.getLangDataAt(60));
-            this.sidePanel.append(fmt.format(this.backendModels.japan.getPopulation()));
-            this.sidePanel.append("\n" + Localization.getLangDataAt(48));
-            this.sidePanel.append(fmt.format(this.backendModels.japan.getCaseNumber()));
-            this.sidePanel.append("\n" + Localization.getLangDataAt(59));
-            this.sidePanel.append(fmt.format(this.backendModels.japan.getCaseNumberDeltaWithDayPrior()));
-            this.sidePanel.append("\n" + Localization.getLangDataAt(49) + risk);
+            this.sidePane.append(fmt.format(this.backendModels.japan.getPopulation()));
+            this.sidePane.append("\n" + Localization.getLangDataAt(48));
+            this.sidePane.append(fmt.format(this.backendModels.japan.getCaseNumber()));
+            this.sidePane.append("\n" + Localization.getLangDataAt(59));
+            this.sidePane.append(fmt.format(this.backendModels.japan.getCaseNumberDeltaWithDayPrior()));
+            this.sidePane.append("\n" + Localization.getLangDataAt(49) + risk);
 
         } else {
-            this.sidePanel.setText(Localization.getLangDataAt(47) + "" + Localization.getLangDataAt(Localization.indexOf(this.backendModels.japanPrefecture[index - 1].getRegionName()))
+            this.sidePane.setText(Localization.getLangDataAt(47) + "" + Localization.getLangDataAt(Localization.indexOf(this.backendModels.japanPrefecture[index - 1].getRegionName()))
                     + "\n" + Localization.getLangDataAt(60));
-            this.sidePanel.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getPopulation()));
-            this.sidePanel.append("\n" + Localization.getLangDataAt(48));
-            this.sidePanel.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getCaseNumber()));
-            this.sidePanel.append("\n" + Localization.getLangDataAt(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior()
+            this.sidePane.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getPopulation()));
+            this.sidePane.append("\n" + Localization.getLangDataAt(48));
+            this.sidePane.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getCaseNumber()));
+            this.sidePane.append("\n" + Localization.getLangDataAt(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior()
                     + "\n" + Localization.getLangDataAt(49) + risk
                     + "\n" + "Weather: " + this.backendModels.japanPrefecture[index - 1].getWeather()
                     + "\n" + "Temperature: " + this.backendModels.japanPrefecture[index - 1].getTemp()
@@ -362,13 +393,13 @@ public class MainDisplay extends JFrame {
         Arrays.sort(this.backendModels.japanPrefecture, compare);
         this.updateCaseNumberTextPane();
     }
-    
+
     public void sortByCaseNumber() {
         CompareByCase compare = new CompareByCase();
         Arrays.sort(this.backendModels.japanPrefecture, compare);
         this.updateCaseNumberTextPane();
     }
-    
+
     private String convertRisk(int index) {
         String risk = "";
         if (index == 0) {
