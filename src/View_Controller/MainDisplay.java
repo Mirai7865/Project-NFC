@@ -27,6 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 public class MainDisplay extends JFrame {
@@ -98,11 +99,12 @@ public class MainDisplay extends JFrame {
 
         this.hyperLink = new JTextArea();
         this.hyperLink.setEditable(false);
-        this.hyperLink.setBackground(new Color(0, 0, 0, 0));
+//        this.hyperLink.setBackground(new Color(0, 0, 0, 0));
         this.hyperLink.setText("Source: https://corona.go.jp/dashboard");
         this.hyperLink.setForeground(Color.BLUE);
 
         this.mapPanel = new JPanel(new GridBagLayout());
+        this.mapPanel.setBackground(Color.WHITE);
         this.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));
 
         this.guidebookText = new JTextArea();
