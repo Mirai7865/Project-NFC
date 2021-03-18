@@ -12,16 +12,17 @@ import java.util.Scanner;
 
 public class CaseNumberApi {
 
+    private static String apiURL = "https://opendata.corona.go.jp/api/Covid19JapanAll";
+
     public CaseNumberApi() {
     }
 
     public static int[] getCaseNumber() {
         //use switch statement to count the caseNumbers for each prefecture
-        String urlStr = "https://opendata.corona.go.jp/api/Covid19JapanAll";
         StringBuffer strB = new StringBuffer();
 
         try {
-            URL url = new URL(new URI(urlStr).toASCIIString());
+            URL url = new URL(new URI(apiURL).toASCIIString());
             HttpURLConnection con = (HttpURLConnection) (url.openConnection());
             con.connect();
             Scanner scr = new Scanner(url.openStream());
@@ -31,7 +32,7 @@ public class CaseNumberApi {
             scr.close();
             con.disconnect();
         } catch (Exception ex) {
-            System.out.println("Unable to grant connection to " + urlStr);
+            System.out.println("Unable to grant connection to " + apiURL);
         }
 
         Scanner scr = new Scanner(strB.toString());
@@ -52,5 +53,9 @@ public class CaseNumberApi {
             caseNumber[i] = Integer.parseInt(str.substring(startingIndex, endingIndex));
         }
         return caseNumber;
+    }
+
+    public static String getAPIURL() {
+        return apiURL;
     }
 }

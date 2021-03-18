@@ -1,6 +1,7 @@
 package View_Controller;
 
 import BackendModels.*;
+import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,7 +41,7 @@ public class MainDisplayController {
         this.mainDisplay.sortByRiskButton.addActionListener(new SortAction());
 //        this.mainDisplay.langChoices.addMouseListener(new chooseLanguageAction());
         this.mainDisplay.langChoiceApply.addActionListener(new ApplyLangSettingAction());
-        this.mainDisplay.hyperLink.addMouseListener(new openSidePanelAction());
+        this.mainDisplay.hyperLink.addMouseListener(new openCaseNumberSourceAction());
     }
 
     private class ChangeLanguageToJaAction implements ActionListener {
@@ -139,38 +140,37 @@ public class MainDisplayController {
             mainDisplay.updateSidePanel(selectedIndexCaseNumberField);
 
         }
+    }
 
-        private class openSidePanelAction implements MouseListener {
+    private class openCaseNumberSourceAction implements MouseListener {
 
-            @Override
-            public void mouseExited(MouseEvent me) {
+        @Override
+        public void mouseExited(MouseEvent me) {
+            mainDisplay.hyperLink.setForeground(Color.BLUE);
+        }
 
+        @Override
+        public void mouseReleased(MouseEvent me) {
+            try {
+                Desktop.getDesktop().browse(new URI("https://corona.go.jp/dashboard/"));
+            } catch (IOException ex) {
+                System.out.println("Possibly no internet connection.");
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(MainDisplayController.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
 
-            @Override
-            public void mouseReleased(MouseEvent me) {
-                String url_open = "https://opendata.corona.go.jp/api/Covid19JapanAll";
-                try {
-//                    java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
-                    Desktop.getDesktop().browse(new URI("https://opendata.corona.go.jp/api/Covid19JapanAll"));
-                } catch (IOException ex) {
-                    System.out.println("Possible no internet connection.");
-                } catch (URISyntaxException ex) {
-                    Logger.getLogger(MainDisplayController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+        @Override
+        public void mouseClicked(MouseEvent e) {
+        }
 
-            @Override
-            public void mouseClicked(MouseEvent e) {
-            }
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
 
-            @Override
-            public void mousePressed(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            mainDisplay.hyperLink.setForeground(new Color(128, 0, 128));
         }
     }
 }

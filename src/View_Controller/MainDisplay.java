@@ -99,7 +99,8 @@ public class MainDisplay extends JFrame {
         this.hyperLink = new JTextArea();
         this.hyperLink.setEditable(false);
         this.hyperLink.setBackground(new Color(0, 0, 0, 0));
-        this.hyperLink.setText("Source: https://opendata.corona.go.jp/api/Covid19JapanAll");
+        this.hyperLink.setText("Source: https://corona.go.jp/dashboard");
+        this.hyperLink.setForeground(Color.BLUE);
 
         this.mapPanel = new JPanel(new GridBagLayout());
         this.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));
