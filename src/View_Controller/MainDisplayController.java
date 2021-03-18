@@ -1,10 +1,16 @@
 package View_Controller;
 
 import BackendModels.*;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 
 /*
@@ -34,6 +40,7 @@ public class MainDisplayController {
         this.mainDisplay.sortByRiskButton.addActionListener(new SortAction());
 //        this.mainDisplay.langChoices.addMouseListener(new chooseLanguageAction());
         this.mainDisplay.langChoiceApply.addActionListener(new ApplyLangSettingAction());
+        this.mainDisplay.hyperLink.addMouseListener(new openSidePanelAction());
     }
 
     private class ChangeLanguageToJaAction implements ActionListener {
@@ -133,5 +140,37 @@ public class MainDisplayController {
 
         }
 
+        private class openSidePanelAction implements MouseListener {
+
+            @Override
+            public void mouseExited(MouseEvent me) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent me) {
+                String url_open = "https://opendata.corona.go.jp/api/Covid19JapanAll";
+                try {
+//                    java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
+                    Desktop.getDesktop().browse(new URI("https://opendata.corona.go.jp/api/Covid19JapanAll"));
+                } catch (IOException ex) {
+                    System.out.println("Possible no internet connection.");
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(MainDisplayController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+        }
     }
 }

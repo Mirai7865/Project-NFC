@@ -97,6 +97,8 @@ public class MainDisplay extends JFrame {
         this.sortByRiskButton.setText("Sort By Risk");
 
         this.hyperLink = new JTextArea();
+        this.hyperLink.setEditable(false);
+        this.hyperLink.setBackground(new Color(0, 0, 0, 0));
         this.hyperLink.setText("Source: https://opendata.corona.go.jp/api/Covid19JapanAll");
 
         this.mapPanel = new JPanel(new GridBagLayout());
