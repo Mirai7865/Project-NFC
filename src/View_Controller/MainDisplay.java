@@ -42,6 +42,7 @@ public class MainDisplay extends JFrame {
     JTextArea hyperLink;
     JTabbedPane mainPane;
 
+    JPanel clockLabel;
     JTextArea clockTextArea;
     JPanel caseNumberPanel;
     JPanel guidePanel;
@@ -78,11 +79,14 @@ public class MainDisplay extends JFrame {
         this.caseNumberList.setFont(new Font("monospaced", Font.BOLD, 14));
 
         this.clockTextArea = new JTextArea();
-        this.clockTextArea.setFont(new Font("Times New Roman", Font.BOLD, 40));
-//        this.clockTextArea.setBackground(new Color(0, 0, 0, 0));
+        this.clockTextArea.setFont(new Font("Times New Roman", Font.BOLD, 42));
         this.clockTextArea.setEditable(false);
         this.clockTextArea.setFocusable(false);
-//        this.clockTextArea.setBorder(BorderFactory.createTitledBorder("Current Time in JST"));
+        
+        this.clockLabel = new JPanel();
+        this.clockLabel.add(this.clockTextArea);
+        this.clockLabel.setBackground(Color.WHITE);
+        this.clockLabel.setBorder(BorderFactory.createTitledBorder("Current Time in JST"));
 
         this.caseNumberPane = new JScrollPane(this.caseNumberList);
         this.caseNumberPane.setPreferredSize(new Dimension(380, 500));
@@ -99,7 +103,7 @@ public class MainDisplay extends JFrame {
 
         this.hyperLink = new JTextArea();
         this.hyperLink.setEditable(false);
-//        this.hyperLink.setBackground(new Color(0, 0, 0, 0));
+        this.hyperLink.setOpaque(false);
         this.hyperLink.setText("Source: https://corona.go.jp/dashboard");
         this.hyperLink.setForeground(Color.BLUE);
 
@@ -188,8 +192,7 @@ public class MainDisplay extends JFrame {
         gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.NORTHWEST;
-//        mainDisplayPane.add(this.langJpButton, gbc);
-        this.caseNumberPanel.add(this.clockTextArea, gbc);
+        this.caseNumberPanel.add(this.clockLabel, gbc);
 
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
