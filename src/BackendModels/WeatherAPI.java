@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 public class WeatherAPI {
 
@@ -32,16 +34,21 @@ public class WeatherAPI {
             scr.close();
             con.disconnect();
         } catch (IOException e) {
-            System.out.println("Failed to fetch weather data.");
-            pref.setWeather("Failed");
+            JOptionPane.showMessageDialog(null, "Failed to get weather data from API", "Error", ERROR_MESSAGE);
+            System.exit(0);
         }
 
         String data = strB.toString();
 //        System.out.println(data);
-        String weather = data.substring(data.indexOf("\"main\":\"") + 8, data.indexOf(",\"description\"") - 1);
-        double tempKelvin = Double.valueOf(data.substring(data.indexOf("\"temp\":") + 7, data.indexOf(",\"feels_like\"") - 1));
-        int temp = (int) Math.round(tempKelvin - 273.15);
-        pref.setTemp(temp);
-        pref.setWeather(weather);
+        try {
+            String weather = data.substring(data.indexOf("\"main\":\"") + 8, data.indexOf(",\"description\"") - 1);
+            double tempKelvin = Double.valueOf(data.substring(data.indexOf("\"temp\":") + 7, data.indexOf(",\"feels_like\"") - 1));
+            int temp = (int) Math.round(tempKelvin - 273.15);
+            pref.setTemp(temp);
+            pref.setWeather(weather);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Unable to process weather data.", "Error", ERROR_MESSAGE);
+            System.exit(0);
+        }
     }
 }

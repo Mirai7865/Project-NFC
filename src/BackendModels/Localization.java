@@ -9,6 +9,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 public class Localization {
 
@@ -24,8 +26,8 @@ public class Localization {
         langFiles = folder.listFiles();
 
         if (langFiles == null) {
-            System.out.println("Found no lang data files.");
-            return;
+            JOptionPane.showMessageDialog(null, "Unable to find Language files.", "Error", ERROR_MESSAGE);
+            System.exit(0);
         }
 
         boolean matched = false;

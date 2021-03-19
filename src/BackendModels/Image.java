@@ -9,6 +9,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 public class Image {
 
@@ -24,7 +26,8 @@ public class Image {
             imgPath = new File(("data" + File.separator + "images" + File.separator + name));
             this.img = ImageIO.read(imgPath);
         } catch (IOException e) {
-            System.out.println("Unable to find image " + name);
+            JOptionPane.showMessageDialog(null, "No such file found: " + name, "Error", ERROR_MESSAGE);
+            System.exit(0);
         }
     }
 

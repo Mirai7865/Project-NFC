@@ -63,7 +63,6 @@ public class DrawMap {
         g.drawString("= High Risk", 35, 25);
         g.drawString("= Moderate Risk", 35, 65);
         g.drawString("= Low Risk", 35, 105);
-//        g.drawString("Data from " + "https://opendata.corona.go.jp/api/Covid19JapanAll", 365, 580);
         return new ImageIcon(this.map);
     }
 

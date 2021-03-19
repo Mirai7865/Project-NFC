@@ -5,7 +5,6 @@
  */
 package View_Controller;
 
-import BackendModels.DrawMap;
 import BackendModels.*;
 import java.awt.Color;
 import java.awt.Container;
@@ -23,11 +22,13 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.CLOSED_OPTION;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 public class MainDisplay extends JFrame {
@@ -82,7 +83,7 @@ public class MainDisplay extends JFrame {
         this.clockTextArea.setFont(new Font("Times New Roman", Font.BOLD, 42));
         this.clockTextArea.setEditable(false);
         this.clockTextArea.setFocusable(false);
-        
+
         this.clockLabel = new JPanel();
         this.clockLabel.add(this.clockTextArea);
         this.clockLabel.setBackground(Color.WHITE);
@@ -330,6 +331,7 @@ public class MainDisplay extends JFrame {
         this.backendModels.map = new DrawMap();
         this.initialComponents();
         this.updateCaseNumberTextPane();
+        
     }
 
     public void updateCaseNumberTextPane() {
@@ -426,7 +428,8 @@ public class MainDisplay extends JFrame {
             }
         } else {
             risk = "Error";
-            System.out.println("The index " + index + " is out of bounds.");
+            JOptionPane.showMessageDialog(null, "Error in MainDispaly.convertRisk", "Error", CLOSED_OPTION);
+            System.exit(0);
         }
         return risk;
     }

@@ -8,6 +8,8 @@ package BackendModels;
 import java.io.*;
 import java.util.Scanner;
 import java.io.IOException;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 public class AccessFile {
 
@@ -38,11 +40,12 @@ public class AccessFile {
             scr.close();
             //return String
             if (strBfer.toString().equals("")) {
-                System.out.println("Nothing inside file");
-                return null;
+                JOptionPane.showMessageDialog(null, "Nothing found inside " + path, "Error", ERROR_MESSAGE);
+                System.exit(0);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to find file at " + path);
+            JOptionPane.showMessageDialog(null, "No such file found at " + path, "Error", ERROR_MESSAGE);
+            System.exit(0);
         }
         return strBfer.toString();
     }
@@ -62,7 +65,8 @@ public class AccessFile {
             fw.close();
             //catch IOException
         } catch (IOException IOE) {
-            System.out.println("Unable to find file at " + path);
+            JOptionPane.showMessageDialog(null, "No such file found at " + path, "Error", ERROR_MESSAGE);
+            System.exit(0);
         }
     }
 }

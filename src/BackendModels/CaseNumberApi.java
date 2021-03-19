@@ -9,6 +9,8 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 public class CaseNumberApi {
 
@@ -32,7 +34,8 @@ public class CaseNumberApi {
             scr.close();
             con.disconnect();
         } catch (Exception ex) {
-            System.out.println("Unable to grant connection to " + apiURL);
+            JOptionPane.showMessageDialog(null, "Unable to connect to " + apiURL, "Error", ERROR_MESSAGE);
+            System.exit(0);
         }
 
         Scanner scr = new Scanner(strB.toString());
@@ -44,7 +47,8 @@ public class CaseNumberApi {
         str = scr.next();
 
         if (str.equalsIgnoreCase("{\"errorInfo\":{\"errorFlag\":\"0\",\"errorCode\":null,\"errorMessage\":null},\"itemList\":[]}")) {
-            System.out.println("Error in obtaining data from server.");
+            JOptionPane.showMessageDialog(null, "No data returned from API", "Error", ERROR_MESSAGE);
+            System.exit(0);
         }
         for (int i = 0; i < 47 * 15; i++) {
             str = scr.next();

@@ -11,6 +11,8 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import org.json.*;
 
 public class Guide {
@@ -56,8 +58,8 @@ public class Guide {
             scr.close();
             con.disconnect();
         } catch (Exception ex) {
-            this.article = "Unable to find " + this.articleTitle;
-            return;
+            JOptionPane.showMessageDialog(null, "Unable to find " + this.articleTitle, "Error", ERROR_MESSAGE);
+            System.exit(0);
         }
         String parsedArticle = parseJSON(strB.toString());
         this.article = parsedArticle.substring(parsedArticle.toString().indexOf("\"extract\":\"") + "\"extract\":\"".length(), parsedArticle.toString().lastIndexOf("\",\"ns\""));
