@@ -39,6 +39,6 @@ Key features will be:
 	
   ✧	Multi-language support 
 	
-  -	English, Japanese; potentially other languages, but I will need to use Google Translate for those.
+  -	English, Japanese; potentially other languages as well, but I will need to use Google Translate for those.
 
 My program will prevent the spread of COVID-19, by introducing features that help the user to avoid the high-risk areas, checklists that help the user perform a self-assessment, and information that are essential to get proper medical treatment. Since it also acts as a guide for the visitors, as it shares information that are beneficial for the visitors to enjoy the Olympic games, and also have a great vacation in the cities of Japan. Since the year of 2020 was an awful year, we must make the year of 2021 to be a much better year, with smiles and happiness amongst all the people on Earth. Successfully holding the Tokyo Olympics and Paralympics would be a great step towards that. 
