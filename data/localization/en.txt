@@ -60,3 +60,8 @@
 <国:>=Country:
 <新規感染者数:>=New Patients:
 <人口:>=Population:
+<aa>=Weather:
+<aa>=Temperature
+<aa>=Source:
+<aa>=Current Time in JST
+<aa>=User Settings

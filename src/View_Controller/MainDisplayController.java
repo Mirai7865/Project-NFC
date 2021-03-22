@@ -136,7 +136,7 @@ public class MainDisplayController {
             mainDisplay.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));
             mainDisplay.mainPane.setTitleAt(0, Localization.getLangDataAt(52));
             mainDisplay.mainPane.setTitleAt(1, Localization.getLangDataAt(53));
-            mainDisplay.mainPane.setTitleAt(2, "User settings");
+            mainDisplay.mainPane.setTitleAt(2, Localization.getLangDataAt(65));
             mainDisplay.updateSidePanel(selectedIndexCaseNumberField);
 
         }

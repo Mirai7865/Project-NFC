@@ -87,7 +87,7 @@ public class MainDisplay extends JFrame {
         this.clockLabel = new JPanel();
         this.clockLabel.add(this.clockTextArea);
         this.clockLabel.setBackground(Color.WHITE);
-        this.clockLabel.setBorder(BorderFactory.createTitledBorder("Current Time in JST"));
+        this.clockLabel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(64)));
 
         this.caseNumberPane = new JScrollPane(this.caseNumberList);
         this.caseNumberPane.setPreferredSize(new Dimension(380, 500));
@@ -313,7 +313,7 @@ public class MainDisplay extends JFrame {
         gbc.anchor = GridBagConstraints.NORTH;
         this.settingsPanel.add(this.langChoiceApply, gbc);
 
-        this.mainPane.addTab("User settings", null, this.settingsPanel, "Per ser settings");
+        this.mainPane.addTab(Localization.getLangDataAt(65), null, this.settingsPanel, "Per user settings");
 
         mainDisplayPane.add(this.mainPane);
         this.mapPanel.setVisible(true);
@@ -331,7 +331,7 @@ public class MainDisplay extends JFrame {
         this.backendModels.map = new DrawMap();
         this.initialComponents();
         this.updateCaseNumberTextPane();
-        
+
     }
 
     public void updateCaseNumberTextPane() {
@@ -384,8 +384,8 @@ public class MainDisplay extends JFrame {
             this.sidePane.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getCaseNumber()));
             this.sidePane.append("\n" + Localization.getLangDataAt(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior()
                     + "\n" + Localization.getLangDataAt(49) + risk
-                    + "\n" + "Weather: " + this.backendModels.japanPrefecture[index - 1].getWeather()
-                    + "\n" + "Temperature: " + this.backendModels.japanPrefecture[index - 1].getTemp()
+                    + "\n" + Localization.getLangDataAt(61) + " " + this.backendModels.japanPrefecture[index - 1].getWeather()
+                    + "\n" + Localization.getLangDataAt(62) + " " + this.backendModels.japanPrefecture[index - 1].getTemp()
             );
         }
     }
