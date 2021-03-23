@@ -384,10 +384,18 @@ public class MainDisplay extends JFrame {
             this.sidePane.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getCaseNumber()));
             this.sidePane.append("\n" + Localization.getLangDataAt(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior()
                     + "\n" + Localization.getLangDataAt(49) + risk
-                    + "\n" + Localization.getLangDataAt(61) + " " + this.backendModels.japanPrefecture[index - 1].getWeather()
+                    + "\n" + Localization.getLangDataAt(61) + " " + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather())
                     + "\n" + Localization.getLangDataAt(62) + " " + this.backendModels.japanPrefecture[index - 1].getTemp()
             );
+            System.out.println(this.backendModels.japanPrefecture[index - 1].getTemp());
         }
+    }
+
+    private String localizeWeather(String weather) {
+        if (weather.equals("Updating...")) {
+            return Localization.getLangDataAt(72);
+        }
+        return weather;
     }
 
     public void sortByRisk() {

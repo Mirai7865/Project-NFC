@@ -74,15 +74,15 @@ public class MainDisplayController {
         public void actionPerformed(ActionEvent ae) {
             if (sort == 0) {
                 mainDisplay.sortByRisk();
-                mainDisplay.sortByRiskButton.setText(Localization.getLangDataAt(67) + " " + Localization.getLangDataAt(68));
+                mainDisplay.sortByRiskButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(68));
                 sort = 1;
             } else if (sort == 1) {
                 mainDisplay.sortByCaseNumber();
-                mainDisplay.sortByRiskButton.setText(Localization.getLangDataAt(67) + " " + Localization.getLangDataAt(69));
+                mainDisplay.sortByRiskButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(69));
                 sort = 2;
             } else {
                 mainDisplay.sortByRegionNumber();
-                mainDisplay.sortByRiskButton.setText(Localization.getLangDataAt(67) + " " + Localization.getLangDataAt(67));
+                mainDisplay.sortByRiskButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(67));
                 sort = 0;
             }
         }
