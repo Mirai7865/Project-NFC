@@ -42,6 +42,8 @@ public class WeatherAPI {
 //        System.out.println(data);
         try {
             String weather = data.substring(data.indexOf("\"main\":\"") + 8, data.indexOf(",\"description\"") - 1);
+            String icon = data.substring(data.indexOf("\"icon\":") + 8, data.indexOf("\"}],\"base\"") - 1);
+            System.out.println(icon);
             double tempKelvin = Double.valueOf(data.substring(data.indexOf("\"temp\":") + 7, data.indexOf(",\"feels_like\"") - 1));
             int temp = (int) Math.round(tempKelvin - 273.15);
             pref.setTemp(temp);
