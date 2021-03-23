@@ -375,7 +375,6 @@ public class MainDisplay extends JFrame {
             this.sidePane.append("\n" + Localization.getLangDataAt(59));
             this.sidePane.append(fmt.format(this.backendModels.japan.getCaseNumberDeltaWithDayPrior()));
             this.sidePane.append("\n" + Localization.getLangDataAt(49) + risk);
-
         } else {
             this.sidePane.setText(Localization.getLangDataAt(47) + "" + Localization.getLangDataAt(Localization.indexOf(this.backendModels.japanPrefecture[index - 1].getRegionName()))
                     + "\n" + Localization.getLangDataAt(60));
@@ -385,7 +384,7 @@ public class MainDisplay extends JFrame {
             this.sidePane.append("\n" + Localization.getLangDataAt(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior()
                     + "\n" + Localization.getLangDataAt(49) + risk
                     + "\n" + Localization.getLangDataAt(61) + " " + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather())
-                    + "\n" + Localization.getLangDataAt(62) + " " + this.backendModels.japanPrefecture[index - 1].getTemp()
+                    + "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp())
             );
 
         }
@@ -396,6 +395,13 @@ public class MainDisplay extends JFrame {
             return Localization.getLangDataAt(72);
         }
         return weather;
+    }
+
+    private String localizeTemp(String temp) {
+        if (temp.equals("Updating...")) {
+            return Localization.getLangDataAt(72);
+        }
+        return temp;
     }
 
     public void sortByRisk() {
