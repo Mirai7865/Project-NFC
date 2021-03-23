@@ -74,15 +74,15 @@ public class MainDisplayController {
         public void actionPerformed(ActionEvent ae) {
             if (sort == 0) {
                 mainDisplay.sortByRisk();
-                mainDisplay.sortByRiskButton.setText("Sort By Total Case Number");
+                mainDisplay.sortByRiskButton.setText(Localization.getLangDataAt(67) + " " + Localization.getLangDataAt(68));
                 sort = 1;
             } else if (sort == 1) {
                 mainDisplay.sortByCaseNumber();
-                mainDisplay.sortByRiskButton.setText("Reset sort");
+                mainDisplay.sortByRiskButton.setText(Localization.getLangDataAt(67) + " " + Localization.getLangDataAt(69));
                 sort = 2;
             } else {
                 mainDisplay.sortByRegionNumber();
-                mainDisplay.sortByRiskButton.setText("Sort By Risk");
+                mainDisplay.sortByRiskButton.setText(Localization.getLangDataAt(67) + " " + Localization.getLangDataAt(67));
                 sort = 0;
             }
         }
@@ -100,7 +100,7 @@ public class MainDisplayController {
             selectedIndexCaseNumberField = mainDisplay.caseNumberList.getSelectedIndex();
             mainDisplay.updateSidePanel(selectedIndexCaseNumberField);
             if (selectedIndexCaseNumberField - 1 >= 0) {
-                if (backendModels.japanPrefecture[selectedIndexCaseNumberField - 1].getWeather().equals("Updating...")) {
+                if (backendModels.japanPrefecture[selectedIndexCaseNumberField - 1].getWeather().equals("Updating..."))  {
                     SidePanelThread updater = new SidePanelThread(backendModels, mainDisplay, mainDisplay.sidePane, selectedIndexCaseNumberField);
                     Thread updaterThread = new Thread(updater);
                     updaterThread.start();

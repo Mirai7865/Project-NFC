@@ -100,12 +100,12 @@ public class MainDisplay extends JFrame {
         this.langEnButton.setText("English");
 
         this.sortByRiskButton = new JButton();
-        this.sortByRiskButton.setText("Sort By Risk");
+        this.sortByRiskButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(67));
 
         this.hyperLink = new JTextArea();
         this.hyperLink.setEditable(false);
         this.hyperLink.setOpaque(false);
-        this.hyperLink.setText("Source: https://corona.go.jp/dashboard");
+        this.hyperLink.setText(Localization.getLangDataAt(63) + " https://corona.go.jp/dashboard");
         this.hyperLink.setForeground(Color.BLUE);
 
         this.mapPanel = new JPanel(new GridBagLayout());
@@ -120,7 +120,7 @@ public class MainDisplay extends JFrame {
 //        this.sidePane.setBackground(new Color(0, 0, 0, 0));
         this.sidePane.setFont(new Font("MS Gothic", Font.BOLD, 20));
         this.sidePane.setEditable(false);
-        this.sidePane.setBorder(BorderFactory.createTitledBorder("Region Data"));
+        this.sidePane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(70)));
         this.updateSidePanel(0);
 
         Guide sensouji = new Guide("Sensoji", null);
@@ -145,7 +145,7 @@ public class MainDisplay extends JFrame {
         this.langChoices = new JComboBox(Localization.getLangFileNames());
         this.langChoices.setEditable(false);
         this.langChoiceApply = new JButton();
-        this.langChoiceApply.setText("Apply language setting");
+        this.langChoiceApply.setText(Localization.getLangDataAt(71));
 
         GridBagConstraints gbc;
 
