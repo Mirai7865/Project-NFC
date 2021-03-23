@@ -387,7 +387,7 @@ public class MainDisplay extends JFrame {
                     + "\n" + Localization.getLangDataAt(61) + " " + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather())
                     + "\n" + Localization.getLangDataAt(62) + " " + this.backendModels.japanPrefecture[index - 1].getTemp()
             );
-            System.out.println(this.backendModels.japanPrefecture[index - 1].getTemp());
+
         }
     }
 

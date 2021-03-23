@@ -46,6 +46,7 @@ public class WeatherAPI {
             int temp = (int) Math.round(tempKelvin - 273.15);
             pref.setTemp(temp);
             pref.setWeather(weather);
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Unable to process weather data.", "Error", ERROR_MESSAGE);
             System.exit(0);
