@@ -43,12 +43,18 @@ public class WeatherAPI {
         try {
             String weather = data.substring(data.indexOf("\"main\":\"") + 8, data.indexOf(",\"description\"") - 1);
             String icon = data.substring(data.indexOf("\"icon\":") + 8, data.indexOf("\"}],\"base\"") - 1);
-            System.out.println(icon);
+//            System.out.println(icon);
             double tempKelvin = Double.valueOf(data.substring(data.indexOf("\"temp\":") + 7, data.indexOf(",\"feels_like\"") - 1));
+            double tempMinKelvin = Double.valueOf(data.substring(data.indexOf("\"temp_min\":") + 11, data.indexOf(",\"temp_max") - 1));
+            double tempMaxKelvin = Double.valueOf(data.substring(data.indexOf("\"temp_max\":") + 11, data.indexOf(",\"pressure\":") - 1));
+            int minTemp = (int) Math.round(tempMinKelvin - 273.15);
+            int maxTemp = (int) Math.round(tempMaxKelvin - 273.15);
             int temp = (int) Math.round(tempKelvin - 273.15);
             pref.setTemp(temp);
             pref.setWeather(weather);
-            
+            System.out.println(data);
+            System.out.println(minTemp);
+            System.out.println(maxTemp);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Unable to process weather data.", "Error", ERROR_MESSAGE);
             System.exit(0);
