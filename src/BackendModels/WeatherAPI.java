@@ -21,7 +21,7 @@ public class WeatherAPI {
     }
 
     public static void getForecast(Prefecture pref) { //The plan is to get weather data by connecting to yahoo weather(one of the most reliable sources). Will be working on this later.
-        String urlStr = "https://api.openweathermap.org/data/2.5/onecall?lat=35.6762&lon=139.6503&exclude=" + "&appid=" + apiKey;
+        String urlStr = "https://api.openweathermap.org/data/2.5/onecall?lat=" + pref.getCityLat() + "&lon=" + pref.getCityLongi() + "&exclude=" + "&appid=" + apiKey;
         StringBuffer strB = new StringBuffer();
         try {
             URL url = new URL(urlStr);
@@ -45,7 +45,7 @@ public class WeatherAPI {
             System.out.println(weather);
 //            String icon = data.substring(data.indexOf("\"icon\":") + 8, data.indexOf("\"}],\"base\"") - 1);
 ////            System.out.println(icon);
-            double tempKelvin = Double.valueOf(data.substring(data.indexOf("\"temp\":") + 7, data.indexOf(",\"feels_like\"") - 1));
+            double tempKelvin = Double.valueOf(data.substring(data.indexOf("\"temp\":") + 7, data.indexOf(",\"feels_like\"")));
 //            double tempMinKelvin = Double.valueOf(data.substring(data.indexOf("\"temp_min\":") + 11, data.indexOf(",\"temp_max") - 1));
 //            double tempMaxKelvin = Double.valueOf(data.substring(data.indexOf("\"temp_max\":") + 11, data.indexOf(",\"pressure\":") - 1));
 //            int minTemp = (int) Math.round(tempMinKelvin - 273.15);
@@ -53,6 +53,8 @@ public class WeatherAPI {
             int temp = (int) Math.round(tempKelvin - 273.15);
 //            System.out.println(minTemp);
 //            System.out.println(maxTemp);
+//            System.out.println(tempKelvin);
+//            System.out.println(temp);
             pref.setTemp(temp);
             pref.setWeather(weather);
         } catch (Exception e) {
