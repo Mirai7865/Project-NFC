@@ -39,7 +39,6 @@ public class MainDisplayController {
         this.mainDisplay.langEnButton.addActionListener(new ChangeLanguageToEnAction());
         this.mainDisplay.caseNumberList.addMouseListener(new openSidePanelAction());
         this.mainDisplay.sortByRiskButton.addActionListener(new SortAction());
-//        this.mainDisplay.langChoices.addMouseListener(new chooseLanguageAction());
         this.mainDisplay.langChoiceApply.addActionListener(new ApplyLangSettingAction());
         this.mainDisplay.hyperLink.addMouseListener(new openCaseNumberSourceAction());
     }
@@ -49,10 +48,7 @@ public class MainDisplayController {
         @Override
         public void actionPerformed(ActionEvent ae) {
             Localization.setLang("ja");
-            mainDisplay.updateCaseNumberTextPane();
-            mainDisplay.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(51)));
-            mainDisplay.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));
-            mainDisplay.updateSidePanel(selectedIndexCaseNumberField);
+            mainDisplay.updateAll(selectedIndexCaseNumberField, sort);
         }
     }
 
@@ -61,10 +57,7 @@ public class MainDisplayController {
         @Override
         public void actionPerformed(ActionEvent ae) {
             Localization.setLang("en");
-            mainDisplay.updateCaseNumberTextPane();
-            mainDisplay.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(51)));
-            mainDisplay.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));
-            mainDisplay.updateSidePanel(selectedIndexCaseNumberField);
+            mainDisplay.updateAll(selectedIndexCaseNumberField, sort);
         }
     }
 
@@ -131,13 +124,7 @@ public class MainDisplayController {
             } else if (selectedIndexLanguageField == 1) {
                 Localization.setLang("ja");
             }
-            mainDisplay.updateCaseNumberTextPane();
-            mainDisplay.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(51)));
-            mainDisplay.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));
-            mainDisplay.mainPane.setTitleAt(0, Localization.getLangDataAt(52));
-            mainDisplay.mainPane.setTitleAt(1, Localization.getLangDataAt(53));
-            mainDisplay.mainPane.setTitleAt(2, Localization.getLangDataAt(65));
-            mainDisplay.updateSidePanel(selectedIndexCaseNumberField);
+            mainDisplay.updateAll(selectedIndexCaseNumberField, sort);
 
         }
     }

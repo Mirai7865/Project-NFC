@@ -24,7 +24,6 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.CLOSED_OPTION;
-import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -383,7 +382,7 @@ public class MainDisplay extends JFrame {
             this.sidePane.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getCaseNumber()));
             this.sidePane.append("\n" + Localization.getLangDataAt(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior()
                     + "\n" + Localization.getLangDataAt(49) + risk
-                    + "\n" + Localization.getLangDataAt(61) + " " + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather())
+                    + "\n\n" + Localization.getLangDataAt(61) + " " + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather())
                     + "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp())
             );
 
@@ -446,5 +445,25 @@ public class MainDisplay extends JFrame {
             System.exit(0);
         }
         return risk;
+    }
+
+    public void updateAll(int index, int sortType) {
+        this.updateCaseNumberTextPane();
+        this.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(51)));
+        this.sidePane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(70)));
+        this.clockLabel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(64)));
+        this.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));
+        this.hyperLink.setText(Localization.getLangDataAt(63) +  " https://corona.go.jp/dashboard");
+        this.mainPane.setTitleAt(0, Localization.getLangDataAt(52));
+        this.mainPane.setTitleAt(1, Localization.getLangDataAt(53));
+        this.mainPane.setTitleAt(2, Localization.getLangDataAt(65));
+        this.updateSidePanel(index);
+        if (sortType == 0) {
+            this.sortByRiskButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(67));
+        } else if (sortType == 1) {
+            this.sortByRiskButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(68));
+        } else {
+            this.sortByRiskButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(69));
+        }
     }
 }

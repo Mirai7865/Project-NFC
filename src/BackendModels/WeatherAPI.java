@@ -39,10 +39,10 @@ public class WeatherAPI {
         }
 
         String data = strB.toString();
-        System.out.println(data);
+//        System.out.println(data);
         try {
             String weather = data.substring(data.indexOf("\"main\":\"") + 8, data.indexOf(",\"description\"") - 1);
-            System.out.println(weather);
+//            System.out.println(weather);
 //            String icon = data.substring(data.indexOf("\"icon\":") + 8, data.indexOf("\"}],\"base\"") - 1);
 ////            System.out.println(icon);
             double tempKelvin = Double.valueOf(data.substring(data.indexOf("\"temp\":") + 7, data.indexOf(",\"feels_like\"")));
