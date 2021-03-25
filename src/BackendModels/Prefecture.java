@@ -19,7 +19,7 @@ public class Prefecture extends Region {
         this.setMajorCityJP(majorCityJP);
         this.setMajorCityEng(majorCityEng);
         this.setCityLat(lat);
-        this.setCitylongi(longi);
+        this.setCityLongi(longi);
         this.weatherForecast = "Updating...";
         this.temperature = "Updating...";
     }

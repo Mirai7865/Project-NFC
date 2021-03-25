@@ -24,14 +24,14 @@ public class BackendModels {
 
     private void initialSetUp() {
         int[] caseNumberAry = CaseNumberApi.getCaseNumber();
-        
+
         this.setPrefectureArray(caseNumberAry);
         this.countDelta(caseNumberAry);
         this.setAverageIncrease(caseNumberAry);
-        
+
 //        locale = new Loc();
         Localization.setLang(System.getProperty("user.language"));
-        
+
         this.map = null;
         this.clock = null;
         this.cThread = null;
@@ -53,7 +53,9 @@ public class BackendModels {
                 int population = prefData.nextInt() * 1000;
                 String majorCityJP = prefData.next();
                 String majorCityEng = prefData.next();
-                japanPrefecture[count] = new Prefecture(prefName, count + 1, caseNumberAry[count], population, majorCityJP, majorCityEng);
+                double lat = prefData.nextDouble();
+                double longi = prefData.nextDouble();
+                japanPrefecture[count] = new Prefecture(prefName, count + 1, caseNumberAry[count], population, majorCityJP, majorCityEng, lat, longi);
                 allJapanCaseNumber += caseNumberAry[count];
                 allJapanPopulation += population;
 //                System.out.println(caseNumberAry[count]);
