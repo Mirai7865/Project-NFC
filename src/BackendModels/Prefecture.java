@@ -11,13 +11,33 @@ public class Prefecture extends Region {
     private String majorCityEng;
     private String weatherForecast;
     private String temperature;
+    private double lat;
+    private double longi;
 
-    public Prefecture(String prefectureName, int regionNumber, int caseNumber, int population, String majorCityJP, String majorCityEng) {
+    public Prefecture(String prefectureName, int regionNumber, int caseNumber, int population, String majorCityJP, String majorCityEng, double lat, double longi) {
         super(prefectureName, regionNumber, caseNumber, population);
         this.setMajorCityJP(majorCityJP);
         this.setMajorCityEng(majorCityEng);
+        this.setCityLat(lat);
+        this.setCitylongi(longi);
         this.weatherForecast = "Updating...";
         this.temperature = "Updating...";
+    }
+
+    private void setCityLat(double lat) {
+        this.lat = lat;
+    }
+
+    private void setCityLongi(double longi) {
+        this.longi = longi;
+    }
+
+    public double getCityLat() {
+        return this.lat;
+    }
+
+    public double getCityLongi() {
+        return this.longi;
     }
 
     private void setMajorCityJP(String city) {
