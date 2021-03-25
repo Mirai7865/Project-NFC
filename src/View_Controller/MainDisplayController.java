@@ -41,6 +41,7 @@ public class MainDisplayController {
         this.mainDisplay.sortByRiskButton.addActionListener(new SortAction());
         this.mainDisplay.langChoiceApply.addActionListener(new ApplyLangSettingAction());
         this.mainDisplay.hyperLink.addMouseListener(new openCaseNumberSourceAction());
+        this.mainDisplay.githubButton.addActionListener(new JumpToGithubAction());
     }
 
     private class ChangeLanguageToJaAction implements ActionListener {
@@ -158,6 +159,20 @@ public class MainDisplayController {
         @Override
         public void mouseEntered(MouseEvent e) {
             mainDisplay.hyperLink.setForeground(new Color(128, 0, 128));
+        }
+    }
+
+    private class JumpToGithubAction implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                Desktop.getDesktop().browse(new URI("https://github.com/Mirai7865/Project-NFC"));
+            } catch (IOException ex) {
+                System.out.println("Possibly no internet connection.");
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(MainDisplayController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }

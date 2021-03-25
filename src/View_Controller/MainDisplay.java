@@ -48,7 +48,8 @@ public class MainDisplay extends JFrame {
     JPanel guidePanel;
     JPanel settingsPanel;
     JTextArea sidePane;
-
+    
+    JButton githubButton;
     JTextArea guidebookText;
     JScrollPane guideSectionPane;
     JPanel guideSectionImagePane1;
@@ -110,7 +111,11 @@ public class MainDisplay extends JFrame {
         this.mapPanel = new JPanel(new GridBagLayout());
         this.mapPanel.setBackground(Color.WHITE);
         this.mapPanel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));
-
+        
+        this.githubButton = new JButton();
+        this.githubButton.setText("Jump to Github");
+        
+        
         this.guidebookText = new JTextArea();
         this.guidebookText.setEditable(false);
 
@@ -311,6 +316,17 @@ public class MainDisplay extends JFrame {
 //        gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.NORTH;
         this.settingsPanel.add(this.langChoiceApply, gbc);
+        
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+//        gbc.fill = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.SOUTH;
+        this.settingsPanel.add(this.githubButton, gbc);
 
         this.mainPane.addTab(Localization.getLangDataAt(65), null, this.settingsPanel, "Per user settings");
 
