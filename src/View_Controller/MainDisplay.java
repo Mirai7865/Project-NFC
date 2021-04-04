@@ -230,7 +230,7 @@ public class MainDisplay extends JFrame {
         gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
 //        gbc.anchor = GridBagConstraints.NORTH;
-        this.mapPanel.add(new JLabel(backendModels.map.initialDraw(this.backendModels.japanPrefecture)));
+        this.mapPanel.add(new JLabel(backendModels.map.initialDraw(this.backendModels.japanPrefecture, "japan_map.png")));
         
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -462,7 +462,7 @@ public class MainDisplay extends JFrame {
         return risk;
     }
     
-    public void updateAll(int index, int sortType) {
+    public void updateAllComponents(int index, int sortType) {
         this.updateCaseNumberTextPane();
         this.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(51)));
         this.sidePane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(70)));

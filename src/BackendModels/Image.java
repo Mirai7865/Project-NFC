@@ -17,6 +17,7 @@ public class Image {
     private BufferedImage img;
 
     public Image(String path) {
+        this.img = null;
         this.loadImage(path);
     }
 

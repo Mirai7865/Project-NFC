@@ -14,7 +14,7 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 public class CaseNumberApi {
 
-    private static String apiURL = "https://opendata.corona.go.jp/api/Covid19JapanAll";
+    private static final String API_URL = "https://opendata.corona.go.jp/api/Covid19JapanAll";
 
     public CaseNumberApi() {
     }
@@ -24,7 +24,7 @@ public class CaseNumberApi {
         StringBuffer strB = new StringBuffer();
 
         try {
-            URL url = new URL(new URI(apiURL).toASCIIString());
+            URL url = new URL(new URI(API_URL).toASCIIString());
             HttpURLConnection con = (HttpURLConnection) (url.openConnection());
             con.connect();
             Scanner scr = new Scanner(url.openStream());
@@ -34,7 +34,7 @@ public class CaseNumberApi {
             scr.close();
             con.disconnect();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Unable to connect to " + apiURL, "Error", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Unable to connect to " + API_URL, "Error", ERROR_MESSAGE);
             System.exit(0);
         }
 
@@ -60,6 +60,6 @@ public class CaseNumberApi {
     }
 
     public static String getAPIURL() {
-        return apiURL;
+        return API_URL;
     }
 }

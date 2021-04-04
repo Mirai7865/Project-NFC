@@ -19,17 +19,12 @@ public class BackendModels {
     public Thread cThread;
 
     public BackendModels() {
-        this.initialSetUp();
-    }
-
-    private void initialSetUp() {
         int[] caseNumberAry = CaseNumberApi.getCaseNumber();
 
         this.setPrefectureArray(caseNumberAry);
         this.countDelta(caseNumberAry);
         this.setAverageIncrease(caseNumberAry);
 
-//        locale = new Loc();
         Localization.setLang(System.getProperty("user.language"));
 
         this.map = null;

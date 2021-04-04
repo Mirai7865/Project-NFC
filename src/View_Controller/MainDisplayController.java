@@ -12,7 +12,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BorderFactory;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -37,10 +36,10 @@ public class MainDisplayController {
     private void initialSetup() {
         this.mainDisplay.langJpButton.addActionListener(new ChangeLanguageToJaAction());
         this.mainDisplay.langEnButton.addActionListener(new ChangeLanguageToEnAction());
-        this.mainDisplay.caseNumberList.addMouseListener(new openSidePanelAction());
+        this.mainDisplay.caseNumberList.addMouseListener(new OpenSidePanelAction());
         this.mainDisplay.sortByRiskButton.addActionListener(new SortAction());
         this.mainDisplay.langChoiceApply.addActionListener(new ApplyLangSettingAction());
-        this.mainDisplay.hyperLink.addMouseListener(new openCaseNumberSourceAction());
+        this.mainDisplay.hyperLink.addMouseListener(new OpenCaseNumberSourceAction());
         this.mainDisplay.githubButton.addActionListener(new JumpToGithubAction());
     }
 
@@ -49,7 +48,7 @@ public class MainDisplayController {
         @Override
         public void actionPerformed(ActionEvent ae) {
             Localization.setLang("ja");
-            mainDisplay.updateAll(selectedIndexCaseNumberField, sort);
+            mainDisplay.updateAllComponents(selectedIndexCaseNumberField, sort);
         }
     }
 
@@ -58,7 +57,7 @@ public class MainDisplayController {
         @Override
         public void actionPerformed(ActionEvent ae) {
             Localization.setLang("en");
-            mainDisplay.updateAll(selectedIndexCaseNumberField, sort);
+            mainDisplay.updateAllComponents(selectedIndexCaseNumberField, sort);
         }
     }
 
@@ -82,7 +81,7 @@ public class MainDisplayController {
         }
     }
 
-    private class openSidePanelAction implements MouseListener {
+    private class OpenSidePanelAction implements MouseListener {
 
         @Override
         public void mouseExited(MouseEvent me) {
@@ -125,12 +124,12 @@ public class MainDisplayController {
             } else if (selectedIndexLanguageField == 1) {
                 Localization.setLang("ja");
             }
-            mainDisplay.updateAll(selectedIndexCaseNumberField, sort);
+            mainDisplay.updateAllComponents(selectedIndexCaseNumberField, sort);
 
         }
     }
 
-    private class openCaseNumberSourceAction implements MouseListener {
+    private class OpenCaseNumberSourceAction implements MouseListener {
 
         @Override
         public void mouseExited(MouseEvent me) {

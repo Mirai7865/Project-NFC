@@ -14,14 +14,14 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 public class WeatherAPI {
 
-    private static String apiKey = "02fd994e9f537d6f68bdccd39f801d57";
+    private static final String API_KEY = "02fd994e9f537d6f68bdccd39f801d57";
 
     public WeatherAPI() {
         //Create http request 
     }
 
     public static void getForecast(Prefecture pref) { //The plan is to get weather data by connecting to yahoo weather(one of the most reliable sources). Will be working on this later.
-        String urlStr = "https://api.openweathermap.org/data/2.5/onecall?lat=" + pref.getCityLat() + "&lon=" + pref.getCityLongi() + "&exclude=" + "&appid=" + apiKey;
+        String urlStr = "https://api.openweathermap.org/data/2.5/onecall?lat=" + pref.getCityLat() + "&lon=" + pref.getCityLongi() + "&exclude=" + "&appid=" + API_KEY;
         StringBuffer strB = new StringBuffer();
         try {
             URL url = new URL(urlStr);

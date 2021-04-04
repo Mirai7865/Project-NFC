@@ -19,39 +19,47 @@ public class DrawMap {
     BufferedImage dotRed;
     BufferedImage dotGreen;
     BufferedImage dotOrange;
-    BufferedImage dotBlue;
+//    BufferedImage dotBlue;
     private int[] xLoc;
     private int[] yLoc;
 
     public DrawMap() {
-        Scanner scr = new Scanner(AccessFile.readFile("data" + File.separator + "images" + File.separator +"dotLocation.txt"));
+        this.map = null;
+        this.dotRed = null;
+        this.dotGreen = null;
+        this.dotOrange = null;
+
+        Scanner scr = new Scanner(AccessFile.readFile("data" + File.separator + "images" + File.separator + "dotLocation.txt"));
         scr.useDelimiter("@");
         int count = 0;
-        xLoc = new int[47];
-        yLoc = new int[47];
+        this.xLoc = new int[47];
+        this.yLoc = new int[47];
+        int indexEqualSign = -1;
+        int indexComma = -1;
+        int indexCommaLast = -1;
 
         while (scr.hasNext()) {
             String str = scr.next();
-            int indexEqualSign = str.indexOf("=");
-            int indexComma = str.indexOf(",");
-            int indexCommaLast = str.lastIndexOf(",");
-            xLoc[count] = Integer.parseInt(str.substring(indexEqualSign + 1, indexComma));
-            yLoc[count] = Integer.parseInt(str.substring(indexComma + 1, indexCommaLast));
+            indexEqualSign = str.indexOf("=");
+            indexComma = str.indexOf(",");
+            indexCommaLast = str.lastIndexOf(",");
+            this.xLoc[count] = Integer.parseInt(str.substring(indexEqualSign + 1, indexComma));
+            this.yLoc[count] = Integer.parseInt(str.substring(indexComma + 1, indexCommaLast));
             count++;
         }
     }
 
-    public ImageIcon initialDraw(Prefecture[] pref) {
-        this.setMap("japan_map.png");
+    public ImageIcon initialDraw(Prefecture[] pref, String fileName) {
+        this.setMap(fileName);
         this.setDots();
         Graphics g = this.map.getGraphics();
-        for (int i = 0; i < xLoc.length; i++) {
+        for (int i = 0; i < this.xLoc.length; i++) {
             if (pref[i].getRisk().equals("High")) {
-                g.drawImage(this.dotRed, xLoc[i], yLoc[i], null);
+                g.drawImage(this.dotRed, this.xLoc[i], this.yLoc[i], null);
             } else if (pref[i].getRisk().equals("Moderate")) {
-                g.drawImage(this.dotOrange, xLoc[i], yLoc[i], null);
+                g.drawImage(this.dotOrange, this.xLoc[i], this.yLoc[i], null);
             } else if (pref[i].getRisk().equals("Low")) {
-                g.drawImage(this.dotGreen, xLoc[i], yLoc[i], null);
+                g.drawImage(this.dotGreen, this.xLoc[i], this.yLoc[i], null);
             }
         }
         g.drawImage(this.dotRed, 10, 10, null);
@@ -79,7 +87,7 @@ public class DrawMap {
         this.dotGreen = (dot.getImage());
         dot = new Image("orange dot.png");
         this.dotOrange = (dot.getImage());
-        dot = new Image("blue dot.png");
-        this.dotBlue = (dot.getImage());
+//        dot = new Image("blue dot.png");
+//        this.dotBlue = (dot.getImage());
     }
 }
