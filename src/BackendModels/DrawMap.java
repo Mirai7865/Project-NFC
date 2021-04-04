@@ -87,7 +87,5 @@ public class DrawMap {
         this.dotGreen = (dot.getImage());
         dot = new Image("orange dot.png");
         this.dotOrange = (dot.getImage());
-//        dot = new Image("blue dot.png");
-//        this.dotBlue = (dot.getImage());
     }
 }
