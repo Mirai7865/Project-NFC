@@ -5,63 +5,62 @@
  */
 package BackendModels;
 
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.jsoup.*;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 public class TranslatorApi {
 
-    private Document doc;
-    private Element link;
-    private String relHref; // == "/"
-    private String absHref;
+    private String url;
 
-    public TranslatorApi() throws InterruptedException {
+    public TranslatorApi() {
         //Request http connection
+        this.url = "http://translate.google.com/translate?js=n&sl=auto&tl=ja&text=";
+        this.url += "Hello";
         this.connect();
     }
 
-    private void connect() throws InterruptedException {
-        try {
-            Connection c = Jsoup.connect("http://translate.google.com/translate?js=n&sl=auto&tl=ja&text=Hello");
-            for (int i = 0; i < 1000000; i++) {
+    private void connect() {
+//        try {
+        //        try {
+//            final WebClient client = new WebClient();
+//            HtmlPage page = client.getPage(this.url);
+////            String xml = page.asXml();
+//            String text = page.asNormalizedText();
+////            System.out.println(xml);
+//            System.out.println(text);
+//
+//        } catch (IOException ex) {
+//            Logger.getLogger(TranslatorApi.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (FailingHttpStatusCodeException ex) {
+//            Logger.getLogger(TranslatorApi.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        try (final WebClient webClient = new WebClient()) {
+//            final HtmlPage page = webClient.getPage(this.url);
+////            Assert.assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
+//
+//            final String pageAsXml = page.asText();
+//            System.out.println(pageAsXml);
+////            Assert.assertTrue(pageAsXml.contains("<body class=\"composite\">"));
+//        } catch (IOException ex) {
+//            Logger.getLogger(TranslatorApi.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (FailingHttpStatusCodeException ex) {
+//            Logger.getLogger(TranslatorApi.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//            Document doc = Jsoup.connect(this.url).get();
+//            Element bodyElm = doc.body();
+//            System.out.println(bodyElm.toString());
+//        } catch (IOException ex) {
+//            Logger.getLogger(TranslatorApi.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
-            }
-            for (int i = 0; i < 1000000; i++) {
-
-            }
-            for (int i = 0; i < 1000000; i++) {
-
-            }
-            this.doc = c.get();
-            this.link = this.doc.body();
-//            Elements span = this.link.getElementsByTag("jsaction");
-
-//            for (int i = 0; i < span.size(); i++) {
-//                Element aSpanElem = span.get(i);
-//                System.out.println(aSpanElem.text());
-//            }
-            String word = this.doc.text();
-            Scanner scr = new Scanner(word);
-            scr.useDelimiter(" ");
-            while (scr.hasNext()) {
-                System.out.println(scr.next());
-            }
-//            System.out.println(this.doc.title());
-//            System.out.println(word);
-//            this.relHref = link.attr("href"); // == "/"
-//            this.absHref = link.attr("abs:href"); // "http://jsoup.org/"
-//            this.doc = Jsoup.connect("http://translate.google.com/translate?js=n&sl=auto&tl=ja&text=Gracias").wait(0).get();
-            word = this.doc.text();
-            System.out.println(word);
-        } catch (IOException ex) {
-            System.exit(0);
-        }
+//        }
     }
 
     public static String getTranslation(String str, String language) {
