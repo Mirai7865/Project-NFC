@@ -59,7 +59,8 @@ public class MainDisplay extends JFrame {
     JLabel mapLabelGBP;
     JPanel mapPanelGBP;
     Guide sensouji;
-    
+    Guide tokyoSkyTree;
+
     JComboBox langChoices;
     JButton langChoiceApply;
 
@@ -121,18 +122,18 @@ public class MainDisplay extends JFrame {
         this.githubButton = new JButton();
         this.githubButton.setText("Jump to Github");
 
-        this.guidebookText = new JTextArea();
-        this.guidebookText.setEditable(false);
-
         this.sidePane = new JTextArea();
-        this.sidePane.setPreferredSize(new Dimension(300, 200));
-//        this.sidePane.setBackground(new Color(0, 0, 0, 0));
+        this.sidePane.setPreferredSize(new Dimension(300, 620));
         this.sidePane.setFont(new Font("MS Gothic", Font.BOLD, 20));
         this.sidePane.setEditable(false);
+        this.sidePane.setWrapStyleWord(true);
         this.sidePane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(70)));
         this.updateSidePanel(0);
 
         this.sensouji = new Guide("Sensoji", null);
+        
+        this.guidebookText = new JTextArea();
+        this.guidebookText.setEditable(false);
         this.guidebookText.setText(this.sensouji.getArticle());
         this.guidebookText.setFont(new Font(Font.SERIF, Font.PLAIN, 18));
         this.guidebookText.setLineWrap(true);
