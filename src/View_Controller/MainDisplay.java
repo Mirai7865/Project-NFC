@@ -50,10 +50,12 @@ public class MainDisplay extends JFrame {
     JTextArea sidePane;
 
     JButton githubButton;
+
     JTextArea guidebookText;
+    JLabel kaminarimonImg1;
+    JLabel kaminarimonImg2;
     JScrollPane guideSectionPane;
-    JPanel guideSectionImagePane1;
-    JPanel guideSectionImagePane2;
+    JPanel guideSectionArticlePane1;
 
     JComboBox langChoices;
     JButton langChoiceApply;
@@ -133,25 +135,28 @@ public class MainDisplay extends JFrame {
         Guide sensouji = new Guide("Sensoji", null);
         this.guidebookText.setText(sensouji.getArticle());
         this.guidebookText.setFont(new Font(Font.SERIF, Font.PLAIN, 18));
-        this.guidebookText.setSize(new Dimension(350, 700));
+//        this.guidebookText.setSize(new Dimension(350, 700));
         this.guidebookText.setLineWrap(true);
         this.guidebookText.setWrapStyleWord(true);
 
         this.mapPanelGBP = new JPanel(new GridBagLayout());
         this.mapPanelGBP.setBackground(Color.WHITE);
         this.mapPanelGBP.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));
-        
-        this.guideSectionImagePane1 = new JPanel();
-        this.guideSectionPane = new JScrollPane(this.guideSectionImagePane1);
-//        this.guideSectionPane.setLayout(new GridBagLayout());
-//        this.guideSectionPane.add(this.guidebookText);
+
+        this.guideSectionArticlePane1 = new JPanel(new GridBagLayout());
+        this.guideSectionArticlePane1.setBackground(Color.WHITE);
+
+        this.kaminarimonImg1 = new JLabel(this.fetchImage("Kaminarimon.jpg"));
+        this.kaminarimonImg1.setBorder(BorderFactory.createTitledBorder("The face of Senso-ji, \"Kaminarimon\""));
+
+        this.kaminarimonImg2 = new JLabel(this.fetchImage("Kaminarimon from distance.jpg"));
+        this.kaminarimonImg2.setBorder(BorderFactory.createTitledBorder("Anothther view of Senso-ji"));
+
+        this.guideSectionPane = new JScrollPane(this.guideSectionArticlePane1);
         this.guideSectionPane.setBorder(BorderFactory.createTitledBorder("Senso-ji"));
         this.guideSectionPane.setPreferredSize(new Dimension(700, 600));
 
-//        this.guideSectionPane.add(new JLabel(this.fetchImage("Kaminarimon.jpg")));
-//        this.guideSectionImagePane1.setBorder(BorderFactory.createTitledBorder("The face of Senso-ji, \"Kaminarimon\""));
-//        this.guideSectionImagePane2 = new JPanel();
-//        this.guideSectionPane.add(new JLabel(this.fetchImage("Kaminarimon from distance.jpg")));
+//        this.guideSectionArticlePane1.setBorder(BorderFactory.createTitledBorder("The face of Senso-ji, \"Kaminarimon\""));
 //        this.guideSectionImagePane2.setBorder(BorderFactory.createTitledBorder("Take another look at Kaminarimon!"));
         this.langChoices = new JComboBox(Localization.getLangFileNames());
         this.langChoices.setEditable(false);
@@ -277,7 +282,7 @@ public class MainDisplay extends JFrame {
 //        gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.NORTH;
         this.guidePanel.add(this.guideSectionPane, gbc);
-        
+
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -285,10 +290,10 @@ public class MainDisplay extends JFrame {
         gbc.gridheight = 1;
         gbc.weightx = 1;
         gbc.weighty = 1;
-//        gbc.fill = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.BOTH;
         gbc.anchor = GridBagConstraints.NORTH;
-        this.guideSectionImagePane1.add(this.guidebookText, gbc);
-        
+        this.guideSectionArticlePane1.add(this.guidebookText, gbc);
+
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -297,40 +302,21 @@ public class MainDisplay extends JFrame {
         gbc.weightx = 1;
         gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
-        gbc.anchor = GridBagConstraints.NORTH;
-        this.guideSectionImagePane1.add(new JLabel(this.fetchImage("Kaminarimon.jpg")), gbc);
-//        this.guideSectionImagePane1.setBorder(BorderFactory.createTitledBorder("The face of Senso-ji, \"Kaminarimon\""));
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        this.guideSectionArticlePane1.add(this.kaminarimonImg1, gbc);
+//        this.guideSectionArticlePane1.setBorder(BorderFactory.createTitledBorder("The face of Senso-ji, \"Kaminarimon\""));
 
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 2;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbc.weightx = 1;
         gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
-        gbc.anchor = GridBagConstraints.NORTH;
-        this.guideSectionImagePane1.add(new JLabel(this.fetchImage("Kaminarimon from distance.jpg")), gbc);
-//        gbc = new GridBagConstraints();
-//        gbc.gridx = 0;
-//        gbc.gridy = 1;
-//        gbc.gridwidth = 1;
-//        gbc.gridheight = 1;
-//        gbc.weightx = 1;
-//        gbc.weighty = 1;
-////        gbc.fill = GridBagConstraints.CENTER;
-//        gbc.anchor = GridBagConstraints.NORTH;
-//        this.guideSectionPane.add(this.guideSectionImagePane1, gbc);
-//        gbc = new GridBagConstraints();
-//        gbc.gridx = 0;
-//        gbc.gridy = 2;
-//        gbc.gridwidth = 1;
-//        gbc.gridheight = 1;
-//        gbc.weightx = 1;
-//        gbc.weighty = 1;
-////        gbc.fill = GridBagConstraints.CENTER;
-//        gbc.anchor = GridBagConstraints.SOUTH;
-//        this.guideSectionPane.add(this.guideSectionImagePane2, gbc);
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        this.guideSectionArticlePane1.add(this.kaminarimonImg2, gbc);
+
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
