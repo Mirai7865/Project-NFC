@@ -35,6 +35,7 @@ public class Guide {
         this.article = AccessFile.readFile("data" + File.separator + "articles" + File.separator + this.path + ".txt");
         this.article = this.article.replaceFirst("@", "");
         this.article = this.article.replaceAll("@", "\n");
+        this.article = this.article + "\n\n";
     }
 
     private void loadArticleFromWiki() {
@@ -63,6 +64,7 @@ public class Guide {
         }
         String parsedArticle = parseJSON(strB.toString());
         this.article = parsedArticle.substring(parsedArticle.toString().indexOf("\"extract\":\"") + "\"extract\":\"".length(), parsedArticle.toString().lastIndexOf("\",\"ns\""));
+        this.article = this.article + "\n\n";
     }
 
     public String getArticle() {
@@ -75,7 +77,6 @@ public class Guide {
 
     private String parseJSON(String jsonStr) {
         JSONObject obj = new JSONObject(jsonStr);
-//        System.out.println(obj);
         return obj.toString();
     }
 }

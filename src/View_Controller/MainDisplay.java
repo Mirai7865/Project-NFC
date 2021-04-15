@@ -58,7 +58,8 @@ public class MainDisplay extends JFrame {
     JPanel guideSectionArticlePane1;
     JLabel mapLabelGBP;
     JPanel mapPanelGBP;
-
+    Guide sensouji;
+    
     JComboBox langChoices;
     JButton langChoiceApply;
 
@@ -131,8 +132,8 @@ public class MainDisplay extends JFrame {
         this.sidePane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(70)));
         this.updateSidePanel(0);
 
-        Guide sensouji = new Guide("Sensoji", null);
-        this.guidebookText.setText(sensouji.getArticle());
+        this.sensouji = new Guide("Sensoji", null);
+        this.guidebookText.setText(this.sensouji.getArticle());
         this.guidebookText.setFont(new Font(Font.SERIF, Font.PLAIN, 18));
         this.guidebookText.setLineWrap(true);
         this.guidebookText.setWrapStyleWord(true);
@@ -153,8 +154,9 @@ public class MainDisplay extends JFrame {
         this.kaminarimonImg2.setBorder(BorderFactory.createTitledBorder("Anothther view of Senso-ji"));
 
         this.guideSectionPane = new JScrollPane(this.guideSectionArticlePane1);
-        this.guideSectionPane.setBorder(BorderFactory.createTitledBorder("Senso-ji"));
+        this.guideSectionPane.setBorder(BorderFactory.createTitledBorder(this.sensouji.getArticleTitle()));
         this.guideSectionPane.setPreferredSize(new Dimension(700, 600));
+        this.guideSectionPane.getVerticalScrollBar().setUnitIncrement(10);
 
         this.langChoices = new JComboBox(Localization.getLangFileNames());
         this.langChoices.setEditable(false);
