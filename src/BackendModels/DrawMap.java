@@ -15,19 +15,21 @@ import javax.swing.ImageIcon;
 
 public class DrawMap {
 
-    BufferedImage map;
-    BufferedImage dotRed;
-    BufferedImage dotGreen;
-    BufferedImage dotOrange;
-//    BufferedImage dotBlue;
+    private BufferedImage map;
+    private BufferedImage dotRed;
+    private BufferedImage dotGreen;
+    private BufferedImage dotOrange;
+    private BufferedImage dotBlue;
     private int[] xLoc;
     private int[] yLoc;
+    private Prefecture[] pref;
+    private String mapName;
 
-    public DrawMap() {
-        this.map = null;
-        this.dotRed = null;
-        this.dotGreen = null;
-        this.dotOrange = null;
+    public DrawMap(Prefecture[] pref, String fileName) {
+
+        this.mapName = fileName;
+        this.setDots();
+        this.pref = pref;
 
         Scanner scr = new Scanner(AccessFile.readFile("data" + File.separator + "images" + File.separator + "dotLocation.txt"));
         scr.useDelimiter("@");
@@ -49,19 +51,19 @@ public class DrawMap {
         }
     }
 
-    public ImageIcon initialDraw(Prefecture[] pref, String fileName) {
-        this.setMap(fileName);
-        this.setDots();
+    public ImageIcon DrawRiskMap() {
+        this.resetMap();
         Graphics g = this.map.getGraphics();
         for (int i = 0; i < this.xLoc.length; i++) {
-            if (pref[i].getRisk().equals("High")) {
+            if (this.pref[i].getRisk().equals("High")) {
                 g.drawImage(this.dotRed, this.xLoc[i], this.yLoc[i], null);
-            } else if (pref[i].getRisk().equals("Moderate")) {
+            } else if (this.pref[i].getRisk().equals("Moderate")) {
                 g.drawImage(this.dotOrange, this.xLoc[i], this.yLoc[i], null);
-            } else if (pref[i].getRisk().equals("Low")) {
+            } else if (this.pref[i].getRisk().equals("Low")) {
                 g.drawImage(this.dotGreen, this.xLoc[i], this.yLoc[i], null);
             }
         }
+
         g.drawImage(this.dotRed, 10, 10, null);
         g.drawImage(this.dotOrange, 10, 50, null);
         g.drawImage(this.dotGreen, 10, 90, null);
@@ -74,8 +76,15 @@ public class DrawMap {
         return new ImageIcon(this.map);
     }
 
-    private void setMap(String mapName) {
-        Image map = new Image(mapName);
+    public ImageIcon DrawLocationMap(int index) {
+        this.resetMap();
+        Graphics g = this.map.getGraphics();
+        g.drawImage(this.dotBlue, this.xLoc[index], this.yLoc[index], null);
+        return new ImageIcon(this.map);
+    }
+
+    private void resetMap() {
+        Image map = new Image(this.mapName);
         this.map = (map.getImage());
     }
 
@@ -87,5 +96,7 @@ public class DrawMap {
         this.dotGreen = (dot.getImage());
         dot = new Image("orange dot.png");
         this.dotOrange = (dot.getImage());
+        dot = new Image("blue dot.png");
+        this.dotBlue = (dot.getImage());
     }
 }

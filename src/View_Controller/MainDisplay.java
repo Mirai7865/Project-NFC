@@ -56,15 +56,14 @@ public class MainDisplay extends JFrame {
     JLabel kaminarimonImg2;
     JScrollPane guideSectionPane;
     JPanel guideSectionArticlePane1;
+    JLabel mapLabelGBP;
+    JPanel mapPanelGBP;
 
     JComboBox langChoices;
     JButton langChoiceApply;
 
     JLabel mapLabelCNP;
     JPanel mapPanelCNP;
-
-    JLabel mapLabelGBP;
-    JPanel mapPanelGBP;
 
     JScrollPane caseNumberPane;
     DefaultListModel<String> listModel;
@@ -135,13 +134,13 @@ public class MainDisplay extends JFrame {
         Guide sensouji = new Guide("Sensoji", null);
         this.guidebookText.setText(sensouji.getArticle());
         this.guidebookText.setFont(new Font(Font.SERIF, Font.PLAIN, 18));
-//        this.guidebookText.setSize(new Dimension(350, 700));
         this.guidebookText.setLineWrap(true);
         this.guidebookText.setWrapStyleWord(true);
 
         this.mapPanelGBP = new JPanel(new GridBagLayout());
         this.mapPanelGBP.setBackground(Color.WHITE);
-        this.mapPanelGBP.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));
+
+        this.mapLabelGBP = new JLabel(backendModels.map.DrawLocationMap(12));
 
         this.guideSectionArticlePane1 = new JPanel(new GridBagLayout());
         this.guideSectionArticlePane1.setBackground(Color.WHITE);
@@ -156,8 +155,6 @@ public class MainDisplay extends JFrame {
         this.guideSectionPane.setBorder(BorderFactory.createTitledBorder("Senso-ji"));
         this.guideSectionPane.setPreferredSize(new Dimension(700, 600));
 
-//        this.guideSectionArticlePane1.setBorder(BorderFactory.createTitledBorder("The face of Senso-ji, \"Kaminarimon\""));
-//        this.guideSectionImagePane2.setBorder(BorderFactory.createTitledBorder("Take another look at Kaminarimon!"));
         this.langChoices = new JComboBox(Localization.getLangFileNames());
         this.langChoices.setEditable(false);
         this.langChoiceApply = new JButton();
@@ -243,7 +240,7 @@ public class MainDisplay extends JFrame {
         gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
 //        gbc.anchor = GridBagConstraints.NORTH;
-        this.mapPanelCNP.add(new JLabel(backendModels.map.initialDraw(this.backendModels.japanPrefecture, "japan_map.png")));
+        this.mapPanelCNP.add(new JLabel(backendModels.map.DrawRiskMap()));
 
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -304,7 +301,6 @@ public class MainDisplay extends JFrame {
 //        gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         this.guideSectionArticlePane1.add(this.kaminarimonImg1, gbc);
-//        this.guideSectionArticlePane1.setBorder(BorderFactory.createTitledBorder("The face of Senso-ji, \"Kaminarimon\""));
 
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -336,18 +332,7 @@ public class MainDisplay extends JFrame {
         gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
 //        gbc.anchor = GridBagConstraints.NORTH;
-        this.mapPanelGBP.add(new JLabel(backendModels.map.initialDraw(this.backendModels.japanPrefecture, "japan_map.png")));
-
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.weightx = 1;
-        gbc.weighty = 1;
-//        gbc.fill = GridBagConstraints.CENTER;
-        gbc.anchor = GridBagConstraints.SOUTHEAST;
-        this.mapPanelGBP.add(this.hyperLink, gbc);
+        this.mapPanelGBP.add(this.mapLabelGBP, gbc);
 
         this.mainPane.addTab(Localization.getLangDataAt(53), null, this.guidePanel, "Guidebook section");
 
@@ -399,7 +384,7 @@ public class MainDisplay extends JFrame {
     public MainDisplay(BackendModels bem) {
         //Create JFrame and locate all the components. Also update caseNumber.
         this.backendModels = bem;
-        this.backendModels.map = new DrawMap();
+        this.backendModels.map = new DrawMap(this.backendModels.japanPrefecture, "japan_map.png");
         this.initialComponents();
         this.updateCaseNumberTextPane();
 
