@@ -139,6 +139,7 @@ public class MainDisplay extends JFrame {
 
         this.mapPanelGBP = new JPanel(new GridBagLayout());
         this.mapPanelGBP.setBackground(Color.WHITE);
+        this.mapPanelGBP.setBorder(BorderFactory.createTitledBorder("The map of Japan"));
 
         this.mapLabelGBP = new JLabel(backendModels.map.DrawLocationMap(12));
 

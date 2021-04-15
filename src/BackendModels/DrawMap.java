@@ -80,6 +80,12 @@ public class DrawMap {
         this.resetMap();
         Graphics g = this.map.getGraphics();
         g.drawImage(this.dotBlue, this.xLoc[index], this.yLoc[index], null);
+        
+        g.drawImage(this.dotBlue, 10, 10, null);
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 13));
+        g.setColor(java.awt.Color.black);
+        g.drawString("= Location of the site", 35, 25);
+        
         return new ImageIcon(this.map);
     }
 
