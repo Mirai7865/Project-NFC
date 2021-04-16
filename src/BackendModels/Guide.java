@@ -64,7 +64,7 @@ public class Guide {
         }
         String parsedArticle = parseJSON(strB.toString());
         this.article = parsedArticle.substring(parsedArticle.toString().indexOf("\"extract\":\"") + "\"extract\":\"".length(), parsedArticle.toString().lastIndexOf("\",\"ns\""));
-        this.article = this.article + "\n\n";
+        this.article = this.article;
     }
 
     public String getArticle() {
@@ -73,6 +73,10 @@ public class Guide {
 
     public String getArticleTitle() {
         return this.articleTitle;
+    }
+
+    public String getPath() {
+        return this.path;
     }
 
     private String parseJSON(String jsonStr) {

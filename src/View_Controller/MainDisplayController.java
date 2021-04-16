@@ -39,7 +39,8 @@ public class MainDisplayController {
         this.mainDisplay.caseNumberList.addMouseListener(new OpenSidePanelAction());
         this.mainDisplay.sortByRiskButton.addActionListener(new SortAction());
         this.mainDisplay.langChoiceApply.addActionListener(new ApplyLangSettingAction());
-        this.mainDisplay.hyperLink.addMouseListener(new OpenCaseNumberSourceAction());
+        this.mainDisplay.sourceHyperLink.addMouseListener(new OpenCaseNumberSourceAction());
+        this.mainDisplay.sensoujiHyperLink.addMouseListener(new OpenSensoujiWikiAction());
         this.mainDisplay.githubButton.addActionListener(new JumpToGithubAction());
     }
 
@@ -133,7 +134,7 @@ public class MainDisplayController {
 
         @Override
         public void mouseExited(MouseEvent me) {
-            mainDisplay.hyperLink.setForeground(Color.BLUE);
+            mainDisplay.sourceHyperLink.setForeground(Color.BLUE);
         }
 
         @Override
@@ -157,7 +158,7 @@ public class MainDisplayController {
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            mainDisplay.hyperLink.setForeground(new Color(128, 0, 128));
+            mainDisplay.sourceHyperLink.setForeground(new Color(128, 0, 128));
         }
     }
 
@@ -172,6 +173,38 @@ public class MainDisplayController {
             } catch (URISyntaxException ex) {
                 Logger.getLogger(MainDisplayController.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+    
+    private class OpenSensoujiWikiAction implements MouseListener {
+
+        @Override
+        public void mouseExited(MouseEvent me) {
+            mainDisplay.sensoujiHyperLink.setForeground(Color.BLUE);
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent me) {
+            try {
+                Desktop.getDesktop().browse(new URI("https://en.wikipedia.org/wiki/Sens%C5%8D-ji"));
+            } catch (IOException ex) {
+                System.out.println("Possibly no internet connection.");
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(MainDisplayController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            mainDisplay.sensoujiHyperLink.setForeground(new Color(128, 0, 128));
         }
     }
 }

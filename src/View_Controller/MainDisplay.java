@@ -39,7 +39,7 @@ public class MainDisplay extends JFrame {
     JButton langJpButton;
     JButton langEnButton;
     JButton sortByRiskButton;
-    JTextArea hyperLink;
+    JTextArea sourceHyperLink;
     JTabbedPane mainPane;
 
     JPanel clockLabel;
@@ -60,6 +60,7 @@ public class MainDisplay extends JFrame {
     JPanel mapPanelGBP;
     Guide sensouji;
     Guide tokyoSkyTree;
+    JTextArea sensoujiHyperLink;
 
     JComboBox langChoices;
     JButton langChoiceApply;
@@ -109,11 +110,11 @@ public class MainDisplay extends JFrame {
         this.sortByRiskButton = new JButton();
         this.sortByRiskButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(67));
 
-        this.hyperLink = new JTextArea();
-        this.hyperLink.setEditable(false);
-        this.hyperLink.setOpaque(false);
-        this.hyperLink.setText(Localization.getLangDataAt(63) + " https://corona.go.jp/dashboard");
-        this.hyperLink.setForeground(Color.BLUE);
+        this.sourceHyperLink = new JTextArea();
+        this.sourceHyperLink.setEditable(false);
+        this.sourceHyperLink.setOpaque(false);
+        this.sourceHyperLink.setText(Localization.getLangDataAt(63) + " https://corona.go.jp/dashboard");
+        this.sourceHyperLink.setForeground(Color.BLUE);
 
         this.mapPanelCNP = new JPanel(new GridBagLayout());
         this.mapPanelCNP.setBackground(Color.WHITE);
@@ -131,7 +132,7 @@ public class MainDisplay extends JFrame {
         this.updateSidePanel(0);
 
         this.sensouji = new Guide("Sensoji", null);
-        
+
         this.guidebookText = new JTextArea();
         this.guidebookText.setEditable(false);
         this.guidebookText.setText(this.sensouji.getArticle());
@@ -157,7 +158,13 @@ public class MainDisplay extends JFrame {
         this.guideSectionPane = new JScrollPane(this.guideSectionArticlePane1);
         this.guideSectionPane.setBorder(BorderFactory.createTitledBorder(this.sensouji.getArticleTitle()));
         this.guideSectionPane.setPreferredSize(new Dimension(700, 600));
-        this.guideSectionPane.getVerticalScrollBar().setUnitIncrement(10);
+        this.guideSectionPane.getVerticalScrollBar().setUnitIncrement(15);
+
+        this.sensoujiHyperLink = new JTextArea();
+        this.sensoujiHyperLink.setEditable(false);
+        this.sensoujiHyperLink.setOpaque(false);
+        this.sensoujiHyperLink.setText("Learn more...\n\n");
+        this.sensoujiHyperLink.setForeground(Color.BLUE);
 
         this.langChoices = new JComboBox(Localization.getLangFileNames());
         this.langChoices.setEditable(false);
@@ -255,7 +262,7 @@ public class MainDisplay extends JFrame {
         gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.SOUTHEAST;
-        this.mapPanelCNP.add(this.hyperLink, gbc);
+        this.mapPanelCNP.add(this.sourceHyperLink, gbc);
 
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
@@ -304,11 +311,22 @@ public class MainDisplay extends JFrame {
         gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.NORTHWEST;
-        this.guideSectionArticlePane1.add(this.kaminarimonImg1, gbc);
+        this.guideSectionArticlePane1.add(this.sensoujiHyperLink, gbc);
 
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 2;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+//        gbc.fill = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        this.guideSectionArticlePane1.add(this.kaminarimonImg1, gbc);
+
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 3;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbc.weightx = 1;
@@ -514,7 +532,7 @@ public class MainDisplay extends JFrame {
         this.sidePane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(70)));
         this.clockLabel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(64)));
         this.mapPanelCNP.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));
-        this.hyperLink.setText(Localization.getLangDataAt(63) + " https://corona.go.jp/dashboard");
+        this.sourceHyperLink.setText(Localization.getLangDataAt(63) + " https://corona.go.jp/dashboard");
         this.mainPane.setTitleAt(0, Localization.getLangDataAt(52));
         this.mainPane.setTitleAt(1, Localization.getLangDataAt(53));
         this.mainPane.setTitleAt(2, Localization.getLangDataAt(65));
