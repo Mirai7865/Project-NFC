@@ -163,6 +163,7 @@ public class MainDisplay extends JFrame {
         this.sensoujiHyperLink = new JTextArea();
         this.sensoujiHyperLink.setEditable(false);
         this.sensoujiHyperLink.setOpaque(false);
+        this.sensoujiHyperLink.setFont(new Font("Times New Roman", Font.PLAIN, 16));
         this.sensoujiHyperLink.setText("Learn more...\n\n");
         this.sensoujiHyperLink.setForeground(Color.BLUE);
 
