@@ -32,10 +32,8 @@ public class Localization {
 
         boolean matched = false;
         for (File langFile : langFiles) {
-//            System.out.println((langFile.getName()).replaceAll(".txt", ""));
             if ((langFile.getName()).replaceAll(".txt", "").equals(lang)) {
                 language = lang;
-//                System.out.println("Found lang file.");
                 matched = true;
                 break;
             }

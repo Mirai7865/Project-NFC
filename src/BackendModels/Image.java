@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
@@ -34,5 +35,9 @@ public class Image {
 
     public BufferedImage getImage() {
         return this.img;
+    }
+
+    public ImageIcon getImageIcon() {
+        return new ImageIcon(this.img);
     }
 }

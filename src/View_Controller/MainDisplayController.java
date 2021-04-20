@@ -40,7 +40,7 @@ public class MainDisplayController {
         this.mainDisplay.sortByRiskButton.addActionListener(new SortAction());
         this.mainDisplay.langChoiceApply.addActionListener(new ApplyLangSettingAction());
         this.mainDisplay.sourceHyperLink.addMouseListener(new OpenCaseNumberSourceAction());
-        this.mainDisplay.sensoujiHyperLink.addMouseListener(new OpenSensoujiWikiAction());
+//        this.mainDisplay.sensoujiHyperLink.addMouseListener(new OpenSensoujiWikiAction());
         this.mainDisplay.githubButton.addActionListener(new JumpToGithubAction());
     }
 
@@ -176,35 +176,35 @@ public class MainDisplayController {
         }
     }
     
-    private class OpenSensoujiWikiAction implements MouseListener {
-
-        @Override
-        public void mouseExited(MouseEvent me) {
-            mainDisplay.sensoujiHyperLink.setForeground(Color.BLUE);
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent me) {
-            try {
-                Desktop.getDesktop().browse(new URI("https://en.wikipedia.org/wiki/Sens%C5%8D-ji"));
-            } catch (IOException ex) {
-                System.out.println("Possibly no internet connection.");
-            } catch (URISyntaxException ex) {
-                Logger.getLogger(MainDisplayController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-            mainDisplay.sensoujiHyperLink.setForeground(new Color(128, 0, 128));
-        }
-    }
+//    private class OpenSensoujiWikiAction implements MouseListener {
+//
+//        @Override
+//        public void mouseExited(MouseEvent me) {
+//            mainDisplay.sensoujiHyperLink.setForeground(Color.BLUE);
+//        }
+//
+//        @Override
+//        public void mouseReleased(MouseEvent me) {
+//            try {
+//                Desktop.getDesktop().browse(new URI("https://en.wikipedia.org/wiki/Sens%C5%8D-ji"));
+//            } catch (IOException ex) {
+//                System.out.println("Possibly no internet connection.");
+//            } catch (URISyntaxException ex) {
+//                Logger.getLogger(MainDisplayController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//
+//        @Override
+//        public void mouseClicked(MouseEvent e) {
+//        }
+//
+//        @Override
+//        public void mousePressed(MouseEvent e) {
+//        }
+//
+//        @Override
+//        public void mouseEntered(MouseEvent e) {
+//            mainDisplay.sensoujiHyperLink.setForeground(new Color(128, 0, 128));
+//        }
+//    }
 }
