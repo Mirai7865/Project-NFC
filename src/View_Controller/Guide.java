@@ -38,7 +38,6 @@ public class Guide {
         this.articlePanel.setBackground(Color.WHITE);
 
         this.articlePane = new JScrollPane(this.articlePanel);
-        this.articlePane.setBorder(BorderFactory.createTitledBorder(this.article.getArticleTitle()));
         this.articlePane.setPreferredSize(new Dimension(700, 600));
         this.articlePane.getVerticalScrollBar().setUnitIncrement(15);
 
@@ -116,5 +115,9 @@ public class Guide {
     public JScrollPane getArticleComponent() {
         this.addComponents();
         return this.articlePane;
+    }
+    
+    public String getArticleTitle () {
+        return this.article.getArticleTitle();
     }
 }

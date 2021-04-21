@@ -46,11 +46,12 @@ public class MainDisplay extends JFrame {
     JTextArea clockTextArea;
     JPanel caseNumberPanel;
     JPanel guidePanel;
+    JTabbedPane guidePane;
     JPanel settingsPanel;
     JTextArea sidePane;
 
     JButton githubButton;
-    
+
     JLabel mapLabelGBP;
     JPanel mapPanelGBP;
     JComboBox langChoices;
@@ -106,6 +107,17 @@ public class MainDisplay extends JFrame {
         this.sourceHyperLink.setOpaque(false);
         this.sourceHyperLink.setText(Localization.getLangDataAt(63) + " https://corona.go.jp/dashboard");
         this.sourceHyperLink.setForeground(Color.BLUE);
+
+        this.guidePane = new JTabbedPane(JTabbedPane.TOP);
+
+        Guide sensoji = new Guide("Sensoji", null, 12);
+        this.guidePane.addTab(sensoji.getArticleTitle(), sensoji.getArticleComponent());
+
+        Guide skyTree = new Guide("Tokyo_Skytree", null, 12);
+        this.guidePane.addTab(skyTree.getArticleTitle(), skyTree.getArticleComponent());
+
+        Guide palace = new Guide("Tokyo_Imperial_Palace", null, 12);
+        this.guidePane.addTab(palace.getArticleTitle(), palace.getArticleComponent());
 
         this.mapPanelCNP = new JPanel(new GridBagLayout());
         this.mapPanelCNP.setBackground(Color.WHITE);
@@ -261,15 +273,17 @@ public class MainDisplay extends JFrame {
 //        gbc.fill = GridBagConstraints.CENTER;
 //        gbc.anchor = GridBagConstraints.NORTH;
         this.mapPanelGBP.add(this.mapLabelGBP, gbc);
-        
-        Guide sensoji = new Guide("Sensoji", null, 13);
-        gbc = new GridBagConstraints();
+
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
 //        gbc.anchor = GridBagConstraints.NORTH;
-        this.guidePanel.add(sensoji.getArticleComponent(), gbc);
-        System.out.println(sensoji.getArticleComponent().getComponentCount());
+        this.guidePanel.add(this.guidePane, gbc);
+
         this.mainPane.addTab(Localization.getLangDataAt(53), null, this.guidePanel, "Guidebook section");
 
         gbc = new GridBagConstraints();
