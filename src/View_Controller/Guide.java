@@ -72,10 +72,10 @@ public class Guide {
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbc.weightx = 1;
-        gbc.weighty = 1;
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.anchor = GridBagConstraints.NORTHWEST;
-        this.articlePanel.add(this.articleTextArea, gbc);
+        gbc.weighty = 0.01;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.SOUTHWEST;
+        this.articlePanel.add(this.articleTextArea,gbc);
 
         if (this.article.getPath().equals("https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=" + this.article.getArticleTitle())) {
             this.hyperLink = new JTextArea();
@@ -87,7 +87,7 @@ public class Guide {
 
             gbc = new GridBagConstraints();
             gbc.gridx = 0;
-            gbc.gridy = 1;
+            gbc.gridy = GridBagConstraints.RELATIVE;
             gbc.gridwidth = 1;
             gbc.gridheight = 1;
             gbc.weightx = 1;
@@ -116,8 +116,8 @@ public class Guide {
         this.addComponents();
         return this.articlePane;
     }
-    
-    public String getArticleTitle () {
+
+    public String getArticleTitle() {
         return this.article.getArticleTitle();
     }
 }
