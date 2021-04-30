@@ -16,7 +16,6 @@ import java.text.NumberFormat;
 import java.util.Arrays;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -78,7 +77,7 @@ public class MainDisplay extends JFrame {
 
         this.listModel = new DefaultListModel<>();
         this.caseNumberList = new JList(this.listModel);
-        this.caseNumberList.setFont(new Font("monospaced", Font.BOLD, 14));
+        this.caseNumberList.setFont(new Font("Arial", Font.BOLD, 14));
 
         this.clockTextArea = new JTextArea();
         this.clockTextArea.setFont(new Font("Times New Roman", Font.BOLD, 42));
