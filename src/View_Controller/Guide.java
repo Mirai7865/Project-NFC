@@ -116,6 +116,7 @@ public class Guide {
                 this.articlePanel.add(this.articleImage[i], gbc);
             }
         }
+        
     }
 
     public JScrollPane getArticleComponent() {
