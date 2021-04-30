@@ -32,7 +32,11 @@ public class Guide {
 
     public Guide(String articleTitle, String path, int regionNum) {
         this.article = new Article(articleTitle, path);
-        this.locationRegionNum = regionNum;
+        if (regionNum <= 47) {
+            this.locationRegionNum = regionNum;
+        } else {
+            return;
+        }
 
         this.articlePanel = new JPanel(new GridBagLayout());
         this.articlePanel.setBackground(Color.WHITE);
@@ -63,6 +67,8 @@ public class Guide {
                 this.articleImage[i].setBorder(BorderFactory.createTitledBorder(this.imageTitle[i]));
             }
         }
+
+        this.addComponents();
     }
 
     private void addComponents() {
@@ -75,14 +81,14 @@ public class Guide {
         gbc.weighty = 0.01;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.SOUTHWEST;
-        this.articlePanel.add(this.articleTextArea,gbc);
+        this.articlePanel.add(this.articleTextArea, gbc);
 
         if (this.article.getPath().equals("https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=" + this.article.getArticleTitle())) {
             this.hyperLink = new JTextArea();
             this.hyperLink.setEditable(false);
             this.hyperLink.setOpaque(false);
             this.hyperLink.setFont(new Font(Font.SERIF, Font.PLAIN, 16));
-            this.hyperLink.setText("Learn more...\n\n");
+            this.hyperLink.setText("(From Wikipedia)\n\n");
             this.hyperLink.setForeground(Color.BLUE);
 
             gbc = new GridBagConstraints();
@@ -113,11 +119,30 @@ public class Guide {
     }
 
     public JScrollPane getArticleComponent() {
-        this.addComponents();
         return this.articlePane;
     }
 
     public String getArticleTitle() {
-        return this.article.getArticleTitle();
+        return this.article.getArticleTitle().replaceAll("_", " ");
+    }
+
+    public String getArticlePath() {
+        if (this.pathIsURL()) {
+            return "https://en.wikipedia.org/wiki/" + this.article.getArticleTitle();
+        } else {
+            return this.article.getPath();
+        }
+    }
+
+    public boolean pathIsURL() {
+        return this.article.getPath().equals("https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=" + this.article.getArticleTitle());
+    }
+
+    public int getRegionNum() {
+        return this.locationRegionNum;
+    }
+
+    public JTextArea getHyperLink() {
+        return this.hyperLink;
     }
 }

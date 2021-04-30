@@ -34,6 +34,7 @@ public class MainDisplay extends JFrame {
 
     BackendModels backendModels;
     DrawMap map;
+    Guide guidebook[] = new Guide[3];
 
     JList caseNumberList;
     JButton langJpButton;
@@ -110,14 +111,14 @@ public class MainDisplay extends JFrame {
 
         this.guidePane = new JTabbedPane(JTabbedPane.TOP);
 
-        Guide sensoji = new Guide("Sensoji", null, 12);
-        this.guidePane.addTab(sensoji.getArticleTitle(), sensoji.getArticleComponent());
+        guidebook[0] = new Guide("Sensoji", null, 12);
+        this.guidePane.addTab(guidebook[0].getArticleTitle(), guidebook[0].getArticleComponent());
 
-        Guide skyTree = new Guide("Tokyo_Skytree", null, 12);
-        this.guidePane.addTab(skyTree.getArticleTitle(), skyTree.getArticleComponent());
+        guidebook[1] = new Guide("Tokyo_Skytree", null, 12);
+        this.guidePane.addTab(guidebook[1].getArticleTitle(), guidebook[1].getArticleComponent());
 
-        Guide palace = new Guide("Tokyo_Imperial_Palace", null, 12);
-        this.guidePane.addTab(palace.getArticleTitle(), palace.getArticleComponent());
+        guidebook[2] = new Guide("Tokyo_Imperial_Palace", null, 12);
+        this.guidePane.addTab(guidebook[2].getArticleTitle(), guidebook[2].getArticleComponent());
 
         this.mapPanelCNP = new JPanel(new GridBagLayout());
         this.mapPanelCNP.setBackground(Color.WHITE);
