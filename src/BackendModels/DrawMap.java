@@ -77,7 +77,7 @@ public class DrawMap {
     }
 
     public ImageIcon DrawLocationMap(int index) {
-        if (index > 46) {
+        if (index > 47) {
             return null;
         }
         this.resetMap();

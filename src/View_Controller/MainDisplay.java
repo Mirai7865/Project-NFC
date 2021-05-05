@@ -33,7 +33,7 @@ public class MainDisplay extends JFrame {
 
     BackendModels backendModels;
     DrawMap map;
-    Guide guidebook[] = new Guide[3];
+    Guide guidebook[] = new Guide[4];
 
     JList caseNumberList;
     JButton langJpButton;
@@ -118,6 +118,9 @@ public class MainDisplay extends JFrame {
 
         guidebook[2] = new Guide("Tokyo_Imperial_Palace", null, 12);
         this.guidePane.addTab(guidebook[2].getArticleTitle(), guidebook[2].getArticleComponent());
+
+        this.guidebook[3] = new Guide("Tokyo_Disneyland", null, 11);
+        this.guidePane.addTab(this.guidebook[3].getArticleTitle(), this.guidebook[3].getArticleComponent());
 
         this.mapPanelCNP = new JPanel(new GridBagLayout());
         this.mapPanelCNP.setBackground(Color.WHITE);
@@ -337,6 +340,7 @@ public class MainDisplay extends JFrame {
         this.backendModels.map = new DrawMap(this.backendModels.japanPrefecture, "japan_map.png");
         this.initialComponents();
         this.updateCaseNumberTextPane();
+        this.map = this.backendModels.map;
 
     }
 
