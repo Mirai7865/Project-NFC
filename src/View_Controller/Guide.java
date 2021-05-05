@@ -62,7 +62,7 @@ public class Guide {
             this.imageTitle = new String[images.length];
             for (int i = 0; i < images.length; i++) {
                 AccessImage img = new AccessImage(this.article.getArticleTitle() + File.separator + images[i].getName());
-                this.articleImage[i] = new JLabel(img.getScaledImage(600, 700));
+                this.articleImage[i] = new JLabel(img.getScaledImage(700, 1000));
                 this.imageTitle[i] = images[i].getName().substring(0, images[i].getName().lastIndexOf("."));
                 this.articleImage[i].setBorder(BorderFactory.createTitledBorder(this.imageTitle[i]));
             }
