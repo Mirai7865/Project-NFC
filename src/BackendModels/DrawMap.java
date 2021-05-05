@@ -93,19 +93,19 @@ public class DrawMap {
     }
 
     private void resetMap() {
-        Image map = new Image(this.mapName);
+        AccessImage map = new AccessImage(this.mapName);
         this.map = (map.getImage());
     }
 
     private void setDots() {
-        Image dot;
-        dot = new Image("red dot.png");
+        AccessImage dot;
+        dot = new AccessImage("red dot.png");
         this.dotRed = (dot.getImage());
-        dot = new Image("green dot.png");
+        dot = new AccessImage("green dot.png");
         this.dotGreen = (dot.getImage());
-        dot = new Image("orange dot.png");
+        dot = new AccessImage("orange dot.png");
         this.dotOrange = (dot.getImage());
-        dot = new Image("blue dot.png");
+        dot = new AccessImage("blue dot.png");
         this.dotBlue = (dot.getImage());
     }
 }

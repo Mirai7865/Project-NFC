@@ -53,17 +53,17 @@ public class Guide {
         this.articleTextArea.setWrapStyleWord(true);
 
         File folder = new File("data" + File.separator + "images" + File.separator + this.article.getArticleTitle());
-        File[] langFiles = folder.listFiles();
+        File[] images = folder.listFiles();
 
-        if (langFiles == null) {
-            articleImage = null;
+        if (images == null) {
+            this.articleImage = null;
         } else {
-            this.articleImage = new JLabel[langFiles.length];
-            this.imageTitle = new String[langFiles.length];
-            for (int i = 0; i < langFiles.length; i++) {
-                Image img = new Image(this.article.getArticleTitle() + File.separator + langFiles[i].getName());
-                this.articleImage[i] = new JLabel(img.getImageIcon());
-                this.imageTitle[i] = langFiles[i].getName().substring(0, langFiles[i].getName().lastIndexOf("."));
+            this.articleImage = new JLabel[images.length];
+            this.imageTitle = new String[images.length];
+            for (int i = 0; i < images.length; i++) {
+                AccessImage img = new AccessImage(this.article.getArticleTitle() + File.separator + images[i].getName());
+                this.articleImage[i] = new JLabel(img.getScaledImage(600, 700));
+                this.imageTitle[i] = images[i].getName().substring(0, images[i].getName().lastIndexOf("."));
                 this.articleImage[i].setBorder(BorderFactory.createTitledBorder(this.imageTitle[i]));
             }
         }

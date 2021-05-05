@@ -5,6 +5,7 @@
  */
 package BackendModels;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -13,11 +14,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
-public class Image {
+public class AccessImage {
 
     private BufferedImage img;
 
-    public Image(String path) {
+    public AccessImage(String path) {
         this.img = null;
         this.loadImage(path);
     }
@@ -39,5 +40,18 @@ public class Image {
 
     public ImageIcon getImageIcon() {
         return new ImageIcon(this.img);
+    }
+
+    public ImageIcon getScaledImage(int maxWidth, int maxHeight) {
+        BufferedImage scaleImage = this.getImage();
+        Image finalImage = scaleImage;
+        int height = scaleImage.getHeight();
+        int width = scaleImage.getWidth();
+        while (height > maxHeight || width > maxWidth) {
+            height *= 0.75;
+            width *= 0.75;
+            finalImage = scaleImage.getScaledInstance(width, height, BufferedImage.SCALE_DEFAULT);
+        }
+        return new ImageIcon(finalImage);
     }
 }
