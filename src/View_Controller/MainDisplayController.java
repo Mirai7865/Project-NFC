@@ -23,20 +23,20 @@ import javax.swing.event.ChangeListener;
  * and open the template in the editor.
  */
 public class MainDisplayController {
-    
+
     BackendModels backendModels;
     MainDisplay mainDisplay;
-    
+
     private int selectedIndexCaseNumberField = 0;
     private int selectedIndexLanguageField = 0;
     private int sort = 0;
-    
+
     public MainDisplayController(BackendModels models, MainDisplay mainDisplay) {
         this.backendModels = models;
         this.mainDisplay = mainDisplay;
         this.initialSetup();
     }
-    
+
     private void initialSetup() {
         this.mainDisplay.langJpButton.addActionListener(new ChangeLanguageToJaAction());
         this.mainDisplay.langEnButton.addActionListener(new ChangeLanguageToEnAction());
@@ -47,7 +47,8 @@ public class MainDisplayController {
         this.mainDisplay.githubButton.addActionListener(new JumpToGithubAction());
         for (Guide article : this.mainDisplay.guidebook) {
             if (article.pathIsURL()) {
-                article.getHyperLink().addMouseListener(new OpenWikiAction());
+                article.getHyperLinkWiki().addMouseListener(new OpenWikiAction());
+                article.getHyperLinkGoogleMap().addMouseListener(new OpenGoogleMapAction());
             }
         }
         this.mainDisplay.guidePane.addChangeListener(new ChangeListener() {
@@ -56,33 +57,33 @@ public class MainDisplayController {
                 if (e.getSource() instanceof JTabbedPane) {
                     JTabbedPane pane = (JTabbedPane) e.getSource();
                     mainDisplay.mapLabelGBP.setIcon(mainDisplay.map.DrawLocationMap(mainDisplay.guidebook[pane.getSelectedIndex()].getRegionNum()));
-                    
+
                 }
             }
         }
         );
     }
-    
+
     private class ChangeLanguageToJaAction implements ActionListener {
-        
+
         @Override
         public void actionPerformed(ActionEvent ae) {
             Localization.setLang("ja");
             mainDisplay.updateAllComponents(selectedIndexCaseNumberField, sort);
         }
     }
-    
+
     private class ChangeLanguageToEnAction implements ActionListener {
-        
+
         @Override
         public void actionPerformed(ActionEvent ae) {
             Localization.setLang("en");
             mainDisplay.updateAllComponents(selectedIndexCaseNumberField, sort);
         }
     }
-    
+
     private class SortAction implements ActionListener {
-        
+
         @Override
         public void actionPerformed(ActionEvent ae) {
             if (sort == 0) {
@@ -100,14 +101,14 @@ public class MainDisplayController {
             }
         }
     }
-    
+
     private class OpenSidePanelAction implements MouseListener {
-        
+
         @Override
         public void mouseExited(MouseEvent me) {
-            
+
         }
-        
+
         @Override
         public void mouseReleased(MouseEvent me) {
             selectedIndexCaseNumberField = mainDisplay.caseNumberList.getSelectedIndex();
@@ -120,22 +121,22 @@ public class MainDisplayController {
                 }
             }
         }
-        
+
         @Override
         public void mouseClicked(MouseEvent e) {
         }
-        
+
         @Override
         public void mousePressed(MouseEvent e) {
         }
-        
+
         @Override
         public void mouseEntered(MouseEvent e) {
         }
     }
-    
+
     private class ApplyLangSettingAction implements ActionListener {
-        
+
         @Override
         public void actionPerformed(ActionEvent ae) {
             selectedIndexLanguageField = mainDisplay.langChoices.getSelectedIndex();
@@ -145,17 +146,17 @@ public class MainDisplayController {
                 Localization.setLang("ja");
             }
             mainDisplay.updateAllComponents(selectedIndexCaseNumberField, sort);
-            
+
         }
     }
-    
+
     private class OpenCaseNumberSourceAction implements MouseListener {
-        
+
         @Override
         public void mouseExited(MouseEvent me) {
             mainDisplay.sourceHyperLink.setForeground(Color.BLUE);
         }
-        
+
         @Override
         public void mouseReleased(MouseEvent me) {
             try {
@@ -166,23 +167,23 @@ public class MainDisplayController {
                 Logger.getLogger(MainDisplayController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         @Override
         public void mouseClicked(MouseEvent e) {
         }
-        
+
         @Override
         public void mousePressed(MouseEvent e) {
         }
-        
+
         @Override
         public void mouseEntered(MouseEvent e) {
             mainDisplay.sourceHyperLink.setForeground(new Color(128, 0, 128));
         }
     }
-    
+
     private class JumpToGithubAction implements ActionListener {
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
@@ -194,14 +195,14 @@ public class MainDisplayController {
             }
         }
     }
-    
+
     private class OpenWikiAction implements MouseListener {
-        
+
         @Override
         public void mouseExited(MouseEvent me) {
-            mainDisplay.guidebook[mainDisplay.guidePane.getSelectedIndex()].getHyperLink().setForeground(Color.BLUE);
+            mainDisplay.guidebook[mainDisplay.guidePane.getSelectedIndex()].getHyperLinkWiki().setForeground(Color.BLUE);
         }
-        
+
         @Override
         public void mouseReleased(MouseEvent me) {
             try {
@@ -212,18 +213,51 @@ public class MainDisplayController {
                 Logger.getLogger(MainDisplayController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         @Override
         public void mouseClicked(MouseEvent e) {
         }
-        
+
         @Override
         public void mousePressed(MouseEvent e) {
         }
-        
+
         @Override
         public void mouseEntered(MouseEvent e) {
-            mainDisplay.guidebook[mainDisplay.guidePane.getSelectedIndex()].getHyperLink().setForeground(new Color(128, 0, 128));
+            mainDisplay.guidebook[mainDisplay.guidePane.getSelectedIndex()].getHyperLinkWiki().setForeground(new Color(128, 0, 128));
+        }
+    }
+
+    private class OpenGoogleMapAction implements MouseListener {
+
+        @Override
+        public void mouseExited(MouseEvent me) {
+            mainDisplay.guidebook[mainDisplay.guidePane.getSelectedIndex()].getHyperLinkGoogleMap().setForeground(Color.BLUE);
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent me) {
+            try {
+                String param = mainDisplay.guidebook[mainDisplay.guidePane.getSelectedIndex()].getArticleTitle().replaceAll(" ", "+");
+                Desktop.getDesktop().browse(new URI("https://www.google.com/maps/search/?api=1&query=" + param));
+            } catch (IOException ex) {
+                System.out.println("Possibly no internet connection.");
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(MainDisplayController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            mainDisplay.guidebook[mainDisplay.guidePane.getSelectedIndex()].getHyperLinkGoogleMap().setForeground(new Color(128, 0, 128));
         }
     }
 }

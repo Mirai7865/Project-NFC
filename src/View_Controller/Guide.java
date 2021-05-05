@@ -26,7 +26,8 @@ public class Guide {
     private JTextArea articleTextArea;
     private JLabel[] articleImage;
     private String[] imageTitle;
-    private JTextArea hyperLink;
+    private JTextArea hyperLinkWiki;
+    private JTextArea hyperLinkGoogleMap;
 
     private int locationRegionNum;
 
@@ -84,30 +85,48 @@ public class Guide {
         this.articlePanel.add(this.articleTextArea, gbc);
 
         if (this.article.getPath().equals("https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=" + this.article.getArticleTitle())) {
-            this.hyperLink = new JTextArea();
-            this.hyperLink.setEditable(false);
-            this.hyperLink.setOpaque(false);
-            this.hyperLink.setFont(new Font(Font.SERIF, Font.PLAIN, 16));
-            this.hyperLink.setText("(From Wikipedia)\n\n");
-            this.hyperLink.setForeground(Color.BLUE);
+            this.hyperLinkWiki = new JTextArea();
+            this.hyperLinkWiki.setEditable(false);
+            this.hyperLinkWiki.setOpaque(false);
+            this.hyperLinkWiki.setFont(new Font(Font.SERIF, Font.PLAIN, 16));
+            this.hyperLinkWiki.setText("(From Wikipedia)");
+            this.hyperLinkWiki.setForeground(Color.BLUE);
 
-            gbc = new GridBagConstraints();
+            this.hyperLinkGoogleMap = new JTextArea();
+            this.hyperLinkGoogleMap.setEditable(false);
+            this.hyperLinkGoogleMap.setOpaque(false);
+            this.hyperLinkGoogleMap.setFont(new Font(Font.SERIF, Font.PLAIN, 16));
+            this.hyperLinkGoogleMap.setText("See in Google Map\n\n");
+            this.hyperLinkGoogleMap.setForeground(Color.BLUE);
+
             gbc.gridx = 0;
-            gbc.gridy = GridBagConstraints.RELATIVE;
+            gbc.gridy = gbc.gridy + 1;
             gbc.gridwidth = 1;
             gbc.gridheight = 1;
             gbc.weightx = 1;
             gbc.weighty = 1;
-//        gbc.fill = GridBagConstraints.CENTER;
+            gbc.fill = 0;
+            gbc.anchor = GridBagConstraints.SOUTHWEST;
+            this.articlePanel.add(this.hyperLinkWiki, gbc);
+
+            gbc.gridx = 0;
+            gbc.gridy = gbc.gridy + 1;
+            gbc.gridwidth = 1;
+            gbc.gridheight = 1;
+            gbc.weightx = 1;
+            gbc.weighty = 1;
+            gbc.fill = 0;
             gbc.anchor = GridBagConstraints.NORTHWEST;
-            this.articlePanel.add(this.hyperLink, gbc);
+            this.articlePanel.add(this.hyperLinkGoogleMap, gbc);
         }
+
+        int relativeY = gbc.gridy;
 
         if (this.articleImage != null) {
             for (int i = 0; i < this.articleImage.length; i++) {
                 gbc = new GridBagConstraints();
                 gbc.gridx = 0;
-                gbc.gridy = i + 2;
+                gbc.gridy = relativeY + 1 + i;
                 gbc.gridwidth = 1;
                 gbc.gridheight = 1;
                 gbc.weightx = 1;
@@ -116,7 +135,7 @@ public class Guide {
                 this.articlePanel.add(this.articleImage[i], gbc);
             }
         }
-        
+
     }
 
     public JScrollPane getArticleComponent() {
@@ -143,7 +162,11 @@ public class Guide {
         return this.locationRegionNum;
     }
 
-    public JTextArea getHyperLink() {
-        return this.hyperLink;
+    public JTextArea getHyperLinkWiki() {
+        return this.hyperLinkWiki;
+    }
+
+    public JTextArea getHyperLinkGoogleMap() {
+        return this.hyperLinkGoogleMap;
     }
 }
