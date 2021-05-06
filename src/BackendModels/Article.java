@@ -61,8 +61,14 @@ public class Article {
         } catch (Exception ex) {
             this.articleContent = "Article not found.";
         }
+//        System.out.println(strB.toString());
         String parsedArticle = parseJSON(strB.toString());
         this.articleContent = parsedArticle.substring(parsedArticle.toString().indexOf("\"extract\":\"") + "\"extract\":\"".length(), parsedArticle.toString().lastIndexOf("\",\"ns\""));
+        this.articleContent = this.articleContent.replaceAll("\\\\n", "\n");
+        this.articleContent = this.articleContent.replaceAll("\\\\\"", "\"");
+        while (this.articleContent.substring(this.articleContent.length() - 1, this.articleContent.length()).equals("\n")) {
+            this.articleContent = this.articleContent.substring(0, this.articleContent.length() -1);
+        }
     }
 
     public String getArticleContent() {
