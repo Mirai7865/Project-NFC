@@ -43,14 +43,23 @@ public class AccessImage {
     }
 
     public ImageIcon getScaledImage(int maxWidth, int maxHeight) {
-        BufferedImage scaleImage = this.getImage();
-        Image finalImage = scaleImage;
-        int height = scaleImage.getHeight();
-        int width = scaleImage.getWidth();
-        while (height > maxHeight || width > maxWidth) {
-            height *= 0.75;
-            width *= 0.75;
-            finalImage = scaleImage.getScaledInstance(width, height, BufferedImage.SCALE_DEFAULT);
+        BufferedImage scalingImage = this.getImage();
+        Image finalImage = scalingImage;
+        if (scalingImage.getHeight() > maxHeight || scalingImage.getWidth() > maxWidth) {
+
+            double heightScaling = (double)maxHeight / scalingImage.getHeight();
+            double widthScaling = (double)maxWidth / scalingImage.getWidth();
+            double scaling = 1.0;
+
+            if (heightScaling < widthScaling) {
+                scaling = heightScaling;
+            } else {
+                scaling = widthScaling;
+            }
+            
+            int width = (int) (scalingImage.getWidth() * scaling);
+            int height = (int) (scalingImage.getHeight() * scaling);
+            finalImage = scalingImage.getScaledInstance(width, height, BufferedImage.SCALE_DEFAULT);
         }
         return new ImageIcon(finalImage);
     }
