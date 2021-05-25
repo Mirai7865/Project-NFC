@@ -13,6 +13,7 @@ public class Prefecture extends Region {
     private String temperature;
     private double lat;
     private double longi;
+    private Weather[] forecast;
 
     public Prefecture(String prefectureName, int regionNumber, int caseNumber, int population, String majorCityJP, String majorCityEng, double lat, double longi) {
         super(prefectureName, regionNumber, caseNumber, population);
@@ -22,6 +23,7 @@ public class Prefecture extends Region {
         this.setCityLongi(longi);
         this.weatherForecast = "Updating...";
         this.temperature = "Updating...";
+        this.forecast = new Weather[3];
     }
 
     private void setCityLat(double lat) {
@@ -56,29 +58,27 @@ public class Prefecture extends Region {
         return this.majorCityEng;
     }
 
-    public void callAPI() {
-        WeatherAPI.getForecast(this);
+//    public void callAPI() {
+//        WeatherAPI.getForecast(this);
+//    }
+    public void setWeather() {
+        this.forecast = WeatherAPI.getForecast(this);
     }
 
-    public void setWeather(String weather) {
-        this.weatherForecast = weather;
+//    public void setTemp(int temp) {
+//        this.temperature = "" + temp;
+//    }
+    public String getTemp(int day) {
+        return "" + this.forecast[day].getTemp();
     }
 
-    public void setTemp(int temp) {
-        this.temperature = "" + temp;
-    }
-
-    public String getTemp() {
-        return this.temperature;
-    }
-
-    public String getWeather() {
-        return this.weatherForecast;
+    public String getWeather(int day) {
+        return this.forecast[day].getWeatherDescription();
     }
 
     @Override
     public String toString() {
-        String string = "Region: " + this.getRegionName() + ", Case Number: " + this.getCaseNumber() + " Major City: " + this.getMajorCityEng() + " Weather: " + this.getWeather();
+        String string = "Region: " + this.getRegionName() + ", Case Number: " + this.getCaseNumber() + " Major City: " + this.getMajorCityEng() + " Weather: " + this.getWeather(0);
         return string;
     }
 }

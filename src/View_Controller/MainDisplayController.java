@@ -94,7 +94,7 @@ public class MainDisplayController {
             selectedIndexCaseNumberField = mainDisplay.caseNumberList.getSelectedIndex();
             mainDisplay.updateSidePanel(selectedIndexCaseNumberField);
             if (selectedIndexCaseNumberField - 1 >= 0) {
-                if (backendModels.japanPrefecture[selectedIndexCaseNumberField - 1].getWeather().equals("Updating...")) {
+                if (backendModels.japanPrefecture[selectedIndexCaseNumberField - 1].getWeather(0).equals("Updating...")) {
                     SidePanelThread updater = new SidePanelThread(backendModels, mainDisplay, mainDisplay.dataPane, selectedIndexCaseNumberField);
                     Thread updaterThread = new Thread(updater);
                     updaterThread.start();

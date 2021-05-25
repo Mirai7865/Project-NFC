@@ -24,7 +24,7 @@ public class SidePanelThread implements Runnable {
 
     @Override
     public void run() {
-        this.backendModels.japanPrefecture[selectedIndex - 1].callAPI();
+        this.backendModels.japanPrefecture[selectedIndex - 1].setWeather();
         mainDisplay.updateSidePanel(selectedIndex);
     }
 }

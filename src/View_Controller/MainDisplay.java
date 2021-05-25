@@ -481,8 +481,8 @@ public class MainDisplay extends JFrame {
             this.dataPane.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getCaseNumber()));
             this.dataPane.append("\n" + Localization.getLangDataAt(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior()
                     + "\n" + Localization.getLangDataAt(49) + risk);
-            this.weatherPane.setText(Localization.getLangDataAt(61) + " " + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather())
-                    + "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp()));
+            this.weatherPane.setText(Localization.getLangDataAt(61) + " " + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather(0))
+                    + "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp(0)));
             this.weatherPane.setVisible(true);
         }
     }

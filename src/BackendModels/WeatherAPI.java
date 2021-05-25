@@ -20,9 +20,10 @@ public class WeatherAPI {
         //Create http request 
     }
 
-    public static void getForecast(Prefecture pref) { //The plan is to get weather data by connecting to yahoo weather(one of the most reliable sources). Will be working on this later.
-        String urlStr = "https://api.openweathermap.org/data/2.5/onecall?lat=" + pref.getCityLat() + "&lon=" + pref.getCityLongi() + "&exclude=" + "&appid=" + API_KEY;
+    public static Weather[] getForecast(Prefecture pref) { //The plan is to get weather data by connecting to yahoo weather(one of the most reliable sources). Will be working on this later.
+        String urlStr = "https://api.openweathermap.org/data/2.5/onecall?lat=" + pref.getCityLat() + "&lon=" + pref.getCityLongi() + "&exclude=minutely,hourly" + "&appid=" + API_KEY;
         StringBuffer strB = new StringBuffer();
+        Weather forecast[] = new Weather[3];
         try {
             URL url = new URL(urlStr);
             HttpURLConnection con = (HttpURLConnection) (url.openConnection());
@@ -39,27 +40,34 @@ public class WeatherAPI {
         }
 
         String data = strB.toString();
-//        System.out.println(data);
-        try {
-            String weather = data.substring(data.indexOf("\"main\":\"") + 8, data.indexOf(",\"description\"") - 1);
+        Scanner sc = new Scanner(data);
+        sc.useDelimiter(",");
+        while (sc.hasNext()) {
+            System.out.println(sc.next());
+        }
+        for (int i = 0; i < forecast.length; i++) {
+            try {
+                String weather = data.substring(data.indexOf("\"main\":\"") + 8, data.indexOf(",\"description\"") - 1);
 //            System.out.println(weather);
 //            String icon = data.substring(data.indexOf("\"icon\":") + 8, data.indexOf("\"}],\"base\"") - 1);
 ////            System.out.println(icon);
-            double tempKelvin = Double.valueOf(data.substring(data.indexOf("\"temp\":") + 7, data.indexOf(",\"feels_like\"")));
+                double tempKelvin = Double.valueOf(data.substring(data.indexOf("\"temp\":") + 7, data.indexOf(",\"feels_like\"")));
 //            double tempMinKelvin = Double.valueOf(data.substring(data.indexOf("\"temp_min\":") + 11, data.indexOf(",\"temp_max") - 1));
 //            double tempMaxKelvin = Double.valueOf(data.substring(data.indexOf("\"temp_max\":") + 11, data.indexOf(",\"pressure\":") - 1));
 //            int minTemp = (int) Math.round(tempMinKelvin - 273.15);
 //            int maxTemp = (int) Math.round(tempMaxKelvin - 273.15);
-            int temp = (int) Math.round(tempKelvin - 273.15);
+                int temp = (int) Math.round(tempKelvin - 273.15);
 //            System.out.println(minTemp);
 //            System.out.println(maxTemp);
 //            System.out.println(tempKelvin);
 //            System.out.println(temp);
-            pref.setTemp(temp);
-            pref.setWeather(weather);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Unable to process weather data.", "Error", ERROR_MESSAGE);
-            System.exit(0);
+                forecast[i].setTemperature(temp);
+                forecast[i].setWeatherDescription(weather);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Unable to process weather data.", "Error", ERROR_MESSAGE);
+                System.exit(0);
+            }
         }
+        return forecast;
     }
 }
