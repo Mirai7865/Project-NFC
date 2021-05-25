@@ -72,3 +72,4 @@
 <データ>=Data
 <適用>=Apply
 <更新中...>=Updating...
+<天気予報>=Weather Forecast

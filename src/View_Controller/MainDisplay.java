@@ -47,7 +47,8 @@ public class MainDisplay extends JFrame {
     JPanel caseNumberPanel;
     JPanel guidePanel;
     JPanel settingsPanel;
-    JTextArea sidePane;
+    JTextArea dataPane;
+    JTextArea weatherPane;
 
     JButton githubButton;
 
@@ -123,12 +124,19 @@ public class MainDisplay extends JFrame {
         this.githubButton = new JButton();
         this.githubButton.setText("Jump to Github");
 
-        this.sidePane = new JTextArea();
-        this.sidePane.setPreferredSize(new Dimension(300, 620));
-        this.sidePane.setFont(new Font("MS Gothic", Font.BOLD, 20));
-        this.sidePane.setEditable(false);
-        this.sidePane.setWrapStyleWord(true);
-        this.sidePane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(70)));
+        this.dataPane = new JTextArea();
+        this.dataPane.setPreferredSize(new Dimension(300, 200));
+        this.dataPane.setFont(new Font("MS Gothic", Font.BOLD, 20));
+        this.dataPane.setEditable(false);
+        this.dataPane.setWrapStyleWord(true);
+        this.dataPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(70)));
+
+        this.weatherPane = new JTextArea();
+        this.weatherPane.setPreferredSize(new Dimension(300, 400));
+        this.weatherPane.setFont(new Font("MS Gothic", Font.BOLD, 20));
+        this.weatherPane.setEditable(false);
+        this.weatherPane.setWrapStyleWord(true);
+        this.weatherPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(73)));
         this.updateSidePanel(0);
 
         this.sensouji = new Guide("Sensoji", null);
@@ -271,9 +279,20 @@ public class MainDisplay extends JFrame {
         gbc.gridheight = 1;
         gbc.weightx = 1;
         gbc.weighty = 1;
-        gbc.fill = GridBagConstraints.CENTER;
+//        gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.NORTH;
-        this.caseNumberPanel.add(this.sidePane, gbc);
+        this.caseNumberPanel.add(this.dataPane, gbc);
+
+        gbc = new GridBagConstraints();
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 0.5;
+        gbc.weighty = 0.5;
+//        gbc.fill = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.SOUTH;
+        this.caseNumberPanel.add(this.weatherPane, gbc);
 
         Container mainDisplayPane = this.getContentPane();
         mainDisplayPane.setLayout(new GridBagLayout());
@@ -445,26 +464,26 @@ public class MainDisplay extends JFrame {
         fmt.setGroupingUsed(true);
 
         if (index == 0) {
-            this.sidePane.setText(Localization.getLangDataAt(58) + Localization.getLangDataAt(57)
+            this.dataPane.setText(Localization.getLangDataAt(58) + Localization.getLangDataAt(57)
                     + "\n" + Localization.getLangDataAt(60));
-            this.sidePane.append(fmt.format(this.backendModels.japan.getPopulation()));
-            this.sidePane.append("\n" + Localization.getLangDataAt(48));
-            this.sidePane.append(fmt.format(this.backendModels.japan.getCaseNumber()));
-            this.sidePane.append("\n" + Localization.getLangDataAt(59));
-            this.sidePane.append(fmt.format(this.backendModels.japan.getCaseNumberDeltaWithDayPrior()));
-            this.sidePane.append("\n" + Localization.getLangDataAt(49) + risk);
+            this.dataPane.append(fmt.format(this.backendModels.japan.getPopulation()));
+            this.dataPane.append("\n" + Localization.getLangDataAt(48));
+            this.dataPane.append(fmt.format(this.backendModels.japan.getCaseNumber()));
+            this.dataPane.append("\n" + Localization.getLangDataAt(59));
+            this.dataPane.append(fmt.format(this.backendModels.japan.getCaseNumberDeltaWithDayPrior()));
+            this.dataPane.append("\n" + Localization.getLangDataAt(49) + risk);
+            this.weatherPane.setVisible(false);
         } else {
-            this.sidePane.setText(Localization.getLangDataAt(47) + "" + Localization.getLangDataAt(Localization.indexOf(this.backendModels.japanPrefecture[index - 1].getRegionName()))
+            this.dataPane.setText(Localization.getLangDataAt(47) + "" + Localization.getLangDataAt(Localization.indexOf(this.backendModels.japanPrefecture[index - 1].getRegionName()))
                     + "\n" + Localization.getLangDataAt(60));
-            this.sidePane.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getPopulation()));
-            this.sidePane.append("\n" + Localization.getLangDataAt(48));
-            this.sidePane.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getCaseNumber()));
-            this.sidePane.append("\n" + Localization.getLangDataAt(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior()
-                    + "\n" + Localization.getLangDataAt(49) + risk
-                    + "\n\n" + Localization.getLangDataAt(61) + " " + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather())
-                    + "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp())
-            );
-
+            this.dataPane.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getPopulation()));
+            this.dataPane.append("\n" + Localization.getLangDataAt(48));
+            this.dataPane.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getCaseNumber()));
+            this.dataPane.append("\n" + Localization.getLangDataAt(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior()
+                    + "\n" + Localization.getLangDataAt(49) + risk);
+            this.weatherPane.setText(Localization.getLangDataAt(61) + " " + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather())
+                    + "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp()));
+            this.weatherPane.setVisible(true);
         }
     }
 
@@ -529,7 +548,8 @@ public class MainDisplay extends JFrame {
     public void updateAllComponents(int index, int sortType) {
         this.updateCaseNumberTextPane();
         this.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(51)));
-        this.sidePane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(70)));
+        this.dataPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(70)));
+        this.weatherPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(73)));
         this.clockLabel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(64)));
         this.mapPanelCNP.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));
         this.sourceHyperLink.setText(Localization.getLangDataAt(63) + " https://corona.go.jp/dashboard");
