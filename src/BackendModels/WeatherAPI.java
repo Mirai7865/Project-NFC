@@ -45,29 +45,48 @@ public class WeatherAPI {
 //        while (sc.hasNext()) {
 //            System.out.println(sc.next());
 //        }
-        for (int i = 0; i < forecast.length; i++) {
-            try {
-                String weather = data.substring(data.indexOf("\"main\":\"") + 8, data.indexOf(",\"description\"") - 1);
+
+//        try {
+        Scanner scn = new Scanner(data);
+        scn.useDelimiter("\"dt\"");
+        String daily[] = new String[4];
+        int dayCount = 0;
+        while (scn.hasNext() && dayCount < 4) {
+            daily[dayCount] = scn.next();
+            dayCount++;
+        }
+        for (int i = 1; i <= forecast.length; i++) {
+            String weather = daily[i].substring(daily[i].indexOf("\"main\":\"") + 8, daily[i].indexOf(",\"description\"") - 1);
 //                System.out.println(weather);
-//            String icon = data.substring(data.indexOf("\"icon\":") + 8, data.indexOf("\"}],\"base\"") - 1);
-////            System.out.println(icon);
-                double tempKelvin = Double.valueOf(data.substring(data.indexOf("\"temp\":") + 7, data.indexOf(",\"feels_like\"")));
-//            double tempMinKelvin = Double.valueOf(data.substring(data.indexOf("\"temp_min\":") + 11, data.indexOf(",\"temp_max") - 1));
-//            double tempMaxKelvin = Double.valueOf(data.substring(data.indexOf("\"temp_max\":") + 11, data.indexOf(",\"pressure\":") - 1));
+            String icon = daily[i].substring(daily[i].indexOf("\"icon\":") + 8, daily[i].indexOf("\"icon\":") + 11);
+//            System.out.println(icon);
+            double tempKelvin = 0.0;
+            double feelsLikeKelvin = 0.0;
+            if (i == 1) {
+                tempKelvin = Double.valueOf(daily[i].substring(daily[i].indexOf("\"temp\":") + 7, daily[i].indexOf(",\"feels_like\"")));
+                feelsLikeKelvin = Double.valueOf(daily[i].substring(daily[i].indexOf("\"feels_like\"") + 13, daily[i].indexOf(",\"pressure\"")));
+            } else {
+                String cache = daily[i].substring(daily[i].indexOf("\"temp\""), daily[i].indexOf("\"feels_like\""));
+                tempKelvin = Double.valueOf(cache.substring(cache.indexOf("\"day\":") + 6, cache.indexOf(",\"min\"")));
+
+                cache = daily[i].substring(daily[i].indexOf("\"feels_like\""), daily[i].indexOf("\"pressure"));
+                feelsLikeKelvin = Double.valueOf(cache.substring(cache.indexOf("\"day\":") + 6, cache.indexOf(",\"night\"")));
+            }
+//            System.out.println(feelsLikeKelvin);
 //            int minTemp = (int) Math.round(tempMinKelvin - 273.15);
 //            int maxTemp = (int) Math.round(tempMaxKelvin - 273.15);
-                int temp = (int) Math.round(tempKelvin - 273.15);
-//            System.out.println(minTemp);
-//            System.out.println(maxTemp);
-//            System.out.println(tempKelvin);
-//                System.out.println(temp);
-                forecast[i] = new Weather();
-                forecast[i].setTemperature(temp);
-                forecast[i].setWeatherDescription(weather);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Unable to process weather data.", "Error", ERROR_MESSAGE);
-            }
+            int temp = (int) Math.round(tempKelvin - 273.15);
+            int feelsLike = (int) Math.round(feelsLikeKelvin - 273.15);
+
+            forecast[i - 1] = new Weather();
+            forecast[i - 1].setTemperature(temp);
+            forecast[i - 1].setWeatherDescription(weather);
+            forecast[i - 1].setWeatherIcon(icon);
+            forecast[i - 1].setFeelsLikeTemperature(feelsLike);
         }
+//        } catch (Exception ex) {
+//            JOptionPane.showMessageDialog(null, "Unable to process weather data.", "Error", ERROR_MESSAGE);
+//        }
         return forecast;
     }
 }

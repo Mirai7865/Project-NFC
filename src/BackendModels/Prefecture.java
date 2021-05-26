@@ -64,7 +64,7 @@ public class Prefecture extends Region {
     public void setWeather() {
         this.forecast = WeatherAPI.getForecast(this);
     }
-    
+
     public String getTemp(int day) throws IllegalArgumentException {
         if (day > 3) {
             throw new IllegalArgumentException("Day cannot be beyond 3.");
@@ -77,6 +77,20 @@ public class Prefecture extends Region {
             throw new IllegalArgumentException("Day cannot be beyond 3.");
         }
         return this.forecast[day].getWeatherDescription();
+    }
+
+    public String getWeatherIcon(int day) throws IllegalArgumentException {
+        if (day > 3) {
+            throw new IllegalArgumentException("Day cannot be beyond 3.");
+        }
+        return this.forecast[day].getWeatherIcon();
+    }
+
+    public String getFeelsLikeTemperature(int day) throws IllegalArgumentException {
+        if (day > 3) {
+            throw new IllegalArgumentException("Day cannot be beyond 3.");
+        }
+        return this.forecast[day].getFeelsLikeTemperature();
     }
 
     @Override

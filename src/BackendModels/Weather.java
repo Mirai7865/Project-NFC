@@ -11,12 +11,16 @@ public class Weather {
 //    private double lati;
     private String weatherDscrptn;
     private String temperature;
+    private String feelsLike;
+    private String icon;
 
     public Weather() {
 //        this.longi = pref.getCityLongi();
 //        this.lati = pref.getCityLat();
         this.weatherDscrptn = "Updating...";
         this.temperature = "Updating...";
+        this.feelsLike = "Updating...";
+        this.icon = "Updating...";
     }
 
     public void setWeatherDescription(String weather) {
@@ -27,6 +31,14 @@ public class Weather {
         this.temperature = "" + temperature;
     }
 
+    public void setFeelsLikeTemperature(int temperature) {
+        this.feelsLike = "" + temperature;
+    }
+
+    public void setWeatherIcon(String icon) {
+        this.icon = icon;
+    }
+
     public String getWeatherDescription() {
         return this.weatherDscrptn;
     }
@@ -35,4 +47,11 @@ public class Weather {
         return this.temperature;
     }
 
+    public String getWeatherIcon() {
+        return this.icon;
+    }
+
+    public String getFeelsLikeTemperature() {
+        return this.feelsLike;
+    }
 }
