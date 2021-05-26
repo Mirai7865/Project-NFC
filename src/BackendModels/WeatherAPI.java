@@ -40,15 +40,15 @@ public class WeatherAPI {
         }
 
         String data = strB.toString();
-        Scanner sc = new Scanner(data);
-        sc.useDelimiter(",");
-        while (sc.hasNext()) {
-            System.out.println(sc.next());
-        }
+//        Scanner sc = new Scanner(data);
+//        sc.useDelimiter(",");
+//        while (sc.hasNext()) {
+//            System.out.println(sc.next());
+//        }
         for (int i = 0; i < forecast.length; i++) {
             try {
                 String weather = data.substring(data.indexOf("\"main\":\"") + 8, data.indexOf(",\"description\"") - 1);
-//            System.out.println(weather);
+//                System.out.println(weather);
 //            String icon = data.substring(data.indexOf("\"icon\":") + 8, data.indexOf("\"}],\"base\"") - 1);
 ////            System.out.println(icon);
                 double tempKelvin = Double.valueOf(data.substring(data.indexOf("\"temp\":") + 7, data.indexOf(",\"feels_like\"")));
@@ -60,12 +60,12 @@ public class WeatherAPI {
 //            System.out.println(minTemp);
 //            System.out.println(maxTemp);
 //            System.out.println(tempKelvin);
-//            System.out.println(temp);
+//                System.out.println(temp);
+                forecast[i] = new Weather();
                 forecast[i].setTemperature(temp);
                 forecast[i].setWeatherDescription(weather);
-            } catch (Exception e) {
+            } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Unable to process weather data.", "Error", ERROR_MESSAGE);
-                System.exit(0);
             }
         }
         return forecast;

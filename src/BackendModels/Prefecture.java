@@ -9,8 +9,8 @@ public class Prefecture extends Region {
 
     private String majorCityJP;
     private String majorCityEng;
-    private String weatherForecast;
-    private String temperature;
+//    private String weatherForecast;
+//    private String temperature;
     private double lat;
     private double longi;
     private Weather[] forecast;
@@ -21,9 +21,12 @@ public class Prefecture extends Region {
         this.setMajorCityEng(majorCityEng);
         this.setCityLat(lat);
         this.setCityLongi(longi);
-        this.weatherForecast = "Updating...";
-        this.temperature = "Updating...";
+//        this.weatherForecast = "Updating...";
+//        this.temperature = "Updating...";
         this.forecast = new Weather[3];
+        this.forecast[0] = new Weather();
+        this.forecast[1] = new Weather();
+        this.forecast[2] = new Weather();
     }
 
     private void setCityLat(double lat) {
@@ -58,21 +61,21 @@ public class Prefecture extends Region {
         return this.majorCityEng;
     }
 
-//    public void callAPI() {
-//        WeatherAPI.getForecast(this);
-//    }
     public void setWeather() {
         this.forecast = WeatherAPI.getForecast(this);
     }
-
-//    public void setTemp(int temp) {
-//        this.temperature = "" + temp;
-//    }
-    public String getTemp(int day) {
+    
+    public String getTemp(int day) throws IllegalArgumentException {
+        if (day > 3) {
+            throw new IllegalArgumentException("Day cannot be beyond 3.");
+        }
         return "" + this.forecast[day].getTemp();
     }
 
-    public String getWeather(int day) {
+    public String getWeather(int day) throws IllegalArgumentException {
+        if (day > 3) {
+            throw new IllegalArgumentException("Day cannot be beyond 3.");
+        }
         return this.forecast[day].getWeatherDescription();
     }
 

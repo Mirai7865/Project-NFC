@@ -10,28 +10,28 @@ public class Weather {
 //    private double longi;
 //    private double lati;
     private String weatherDscrptn;
-    private int temperature;
+    private String temperature;
 
     public Weather() {
 //        this.longi = pref.getCityLongi();
 //        this.lati = pref.getCityLat();
         this.weatherDscrptn = "Updating...";
-        this.temperature = 0;
+        this.temperature = "Updating...";
     }
-    
-    public void setWeatherDescription (String weather){
+
+    public void setWeatherDescription(String weather) {
         this.weatherDscrptn = weather;
     }
-    
-    public void setTemperature (int temperature){
-        this.temperature = temperature;
+
+    public void setTemperature(int temperature) {
+        this.temperature = "" + temperature;
     }
-    
+
     public String getWeatherDescription() {
         return this.weatherDscrptn;
     }
 
-    public int getTemp() {
+    public String getTemp() {
         return this.temperature;
     }
 
