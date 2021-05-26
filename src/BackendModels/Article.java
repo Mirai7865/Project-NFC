@@ -15,13 +15,13 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import org.json.*;
 
-public class Guide {
+public class Article {
 
     private String articleTitle;
-    private String article;
+    private String articleContent;
     private String path;
 
-    public Guide(String articleTitle, String path) {
+    public Article(String articleTitle, String path) {
         this.articleTitle = articleTitle;
         this.path = path;
         if (this.path == null) {
@@ -31,11 +31,11 @@ public class Guide {
         }
     }
 
-    public void loadArticleFromDisk(String path) {
-        this.article = AccessFile.readFile("data" + File.separator + "articles" + File.separator + this.path + ".txt");
-        this.article = this.article.replaceFirst("@", "");
-        this.article = this.article.replaceAll("@", "\n");
-        this.article = this.article + "\n\n";
+    private void loadArticleFromDisk(String path) {
+        this.articleContent = AccessFile.readFile("data" + File.separator + "articles" + File.separator + this.path + ".txt");
+        this.articleContent = this.articleContent.replaceFirst("@", "");
+        this.articleContent = this.articleContent.replaceAll("@", "\n");
+        this.articleContent = this.articleContent + "\n\n";
     }
 
     private void loadArticleFromWiki() {
@@ -59,16 +59,20 @@ public class Guide {
             scr.close();
             con.disconnect();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Unable to find " + this.articleTitle, "Error", ERROR_MESSAGE);
-            System.exit(0);
+            this.articleContent = "Article not found.";
         }
+//        System.out.println(strB.toString());
         String parsedArticle = parseJSON(strB.toString());
-        this.article = parsedArticle.substring(parsedArticle.toString().indexOf("\"extract\":\"") + "\"extract\":\"".length(), parsedArticle.toString().lastIndexOf("\",\"ns\""));
-        this.article = this.article;
+        this.articleContent = parsedArticle.substring(parsedArticle.toString().indexOf("\"extract\":\"") + "\"extract\":\"".length(), parsedArticle.toString().lastIndexOf("\",\"ns\""));
+        this.articleContent = this.articleContent.replaceAll("\\\\n", "\n");
+        this.articleContent = this.articleContent.replaceAll("\\\\\"", "\"");
+        while (this.articleContent.substring(this.articleContent.length() - 1, this.articleContent.length()).equals("\n")) {
+            this.articleContent = this.articleContent.substring(0, this.articleContent.length() -1);
+        }
     }
 
-    public String getArticle() {
-        return this.article;
+    public String getArticleContent() {
+        return this.articleContent;
     }
 
     public String getArticleTitle() {

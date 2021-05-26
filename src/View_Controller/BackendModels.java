@@ -19,7 +19,8 @@ public class BackendModels {
     public Thread cThread;
 
     public BackendModels() {
-        int[] caseNumberAry = CaseNumberApi.getCaseNumber();
+        COVID_API COVIDAPI = new JpnGoverntApi();
+        int[] caseNumberAry = COVIDAPI.getCaseNumber();
 
         this.setPrefectureArray(caseNumberAry);
         this.countDelta(caseNumberAry);

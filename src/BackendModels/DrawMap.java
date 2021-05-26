@@ -77,32 +77,35 @@ public class DrawMap {
     }
 
     public ImageIcon DrawLocationMap(int index) {
+        if (index > 47) {
+            return null;
+        }
         this.resetMap();
         Graphics g = this.map.getGraphics();
         g.drawImage(this.dotBlue, this.xLoc[index], this.yLoc[index], null);
-        
+
         g.drawImage(this.dotBlue, 10, 10, null);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 13));
         g.setColor(java.awt.Color.black);
         g.drawString("= Location of the site", 35, 25);
-        
+
         return new ImageIcon(this.map);
     }
 
     private void resetMap() {
-        Image map = new Image(this.mapName);
+        AccessImage map = new AccessImage(this.mapName);
         this.map = (map.getImage());
     }
 
     private void setDots() {
-        Image dot;
-        dot = new Image("red dot.png");
+        AccessImage dot;
+        dot = new AccessImage("red dot.png");
         this.dotRed = (dot.getImage());
-        dot = new Image("green dot.png");
+        dot = new AccessImage("green dot.png");
         this.dotGreen = (dot.getImage());
-        dot = new Image("orange dot.png");
+        dot = new AccessImage("orange dot.png");
         this.dotOrange = (dot.getImage());
-        dot = new Image("blue dot.png");
+        dot = new AccessImage("blue dot.png");
         this.dotBlue = (dot.getImage());
     }
 }

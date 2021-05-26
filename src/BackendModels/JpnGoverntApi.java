@@ -12,14 +12,16 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
-public class CaseNumberApi {
+public class JpnGoverntApi implements COVID_API {
 
     private static final String API_URL = "https://opendata.corona.go.jp/api/Covid19JapanAll";
+    private int[] caseNumber;
 
-    public CaseNumberApi() {
+    public JpnGoverntApi() {
+        this.caseNumber = new int[47 * 15];
     }
 
-    public static int[] getCaseNumber() {
+    public int[] getCaseNumber() {
         //use switch statement to count the caseNumbers for each prefecture
         StringBuffer strB = new StringBuffer();
 
@@ -43,7 +45,6 @@ public class CaseNumberApi {
         String str = "";
         int startingIndex = 0;
         int endingIndex = 0;
-        int[] caseNumber = new int[47 * 15];
         str = scr.next();
 
         if (str.equalsIgnoreCase("{\"errorInfo\":{\"errorFlag\":\"0\",\"errorCode\":null,\"errorMessage\":null},\"itemList\":[]}")) {
@@ -54,12 +55,12 @@ public class CaseNumberApi {
             str = scr.next();
             startingIndex = str.indexOf("\"npatients\":") + 13;
             endingIndex = str.indexOf("\"},");
-            caseNumber[i] = Integer.parseInt(str.substring(startingIndex, endingIndex));
+            this.caseNumber[i] = Integer.parseInt(str.substring(startingIndex, endingIndex));
         }
-        return caseNumber;
+        return this.caseNumber;
     }
 
-    public static String getAPIURL() {
+    public String getAPIURL() {
         return API_URL;
     }
 }

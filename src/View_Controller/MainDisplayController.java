@@ -12,6 +12,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
+import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -40,8 +44,24 @@ public class MainDisplayController {
         this.mainDisplay.sortByRiskButton.addActionListener(new SortAction());
         this.mainDisplay.langChoiceApply.addActionListener(new ApplyLangSettingAction());
         this.mainDisplay.sourceHyperLink.addMouseListener(new OpenCaseNumberSourceAction());
-        this.mainDisplay.sensoujiHyperLink.addMouseListener(new OpenSensoujiWikiAction());
         this.mainDisplay.githubButton.addActionListener(new JumpToGithubAction());
+        for (Guide article : this.mainDisplay.guidebook) {
+            if (article.pathIsURL()) {
+                article.getHyperLinkWiki().addMouseListener(new OpenWikiAction());
+                article.getHyperLinkGoogleMap().addMouseListener(new OpenGoogleMapAction());
+            }
+        }
+        this.mainDisplay.guidePane.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if (e.getSource() instanceof JTabbedPane) {
+                    JTabbedPane pane = (JTabbedPane) e.getSource();
+                    mainDisplay.mapLabelGBP.setIcon(mainDisplay.map.DrawLocationMap(mainDisplay.guidebook[pane.getSelectedIndex()].getRegionNum()));
+
+                }
+            }
+        }
+        );
     }
 
     private class ChangeLanguageToJaAction implements ActionListener {
@@ -175,18 +195,18 @@ public class MainDisplayController {
             }
         }
     }
-    
-    private class OpenSensoujiWikiAction implements MouseListener {
+
+    private class OpenWikiAction implements MouseListener {
 
         @Override
         public void mouseExited(MouseEvent me) {
-            mainDisplay.sensoujiHyperLink.setForeground(Color.BLUE);
+            mainDisplay.guidebook[mainDisplay.guidePane.getSelectedIndex()].getHyperLinkWiki().setForeground(Color.BLUE);
         }
 
         @Override
         public void mouseReleased(MouseEvent me) {
             try {
-                Desktop.getDesktop().browse(new URI("https://en.wikipedia.org/wiki/Sens%C5%8D-ji"));
+                Desktop.getDesktop().browse(new URI(mainDisplay.guidebook[mainDisplay.guidePane.getSelectedIndex()].getArticlePath()));
             } catch (IOException ex) {
                 System.out.println("Possibly no internet connection.");
             } catch (URISyntaxException ex) {
@@ -204,7 +224,40 @@ public class MainDisplayController {
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            mainDisplay.sensoujiHyperLink.setForeground(new Color(128, 0, 128));
+            mainDisplay.guidebook[mainDisplay.guidePane.getSelectedIndex()].getHyperLinkWiki().setForeground(new Color(128, 0, 128));
+        }
+    }
+
+    private class OpenGoogleMapAction implements MouseListener {
+
+        @Override
+        public void mouseExited(MouseEvent me) {
+            mainDisplay.guidebook[mainDisplay.guidePane.getSelectedIndex()].getHyperLinkGoogleMap().setForeground(Color.BLUE);
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent me) {
+            try {
+                String param = mainDisplay.guidebook[mainDisplay.guidePane.getSelectedIndex()].getArticleTitle().replaceAll(" ", "+");
+                Desktop.getDesktop().browse(new URI("https://www.google.com/maps/search/?api=1&query=" + param));
+            } catch (IOException ex) {
+                System.out.println("Possibly no internet connection.");
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(MainDisplayController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            mainDisplay.guidebook[mainDisplay.guidePane.getSelectedIndex()].getHyperLinkGoogleMap().setForeground(new Color(128, 0, 128));
         }
     }
 }

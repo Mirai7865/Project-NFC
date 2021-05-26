@@ -16,7 +16,6 @@ import java.text.NumberFormat;
 import java.util.Arrays;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -34,6 +33,7 @@ public class MainDisplay extends JFrame {
 
     BackendModels backendModels;
     DrawMap map;
+    Guide guidebook[] = new Guide[4];
 
     JList caseNumberList;
     JButton langJpButton;
@@ -46,23 +46,15 @@ public class MainDisplay extends JFrame {
     JTextArea clockTextArea;
     JPanel caseNumberPanel;
     JPanel guidePanel;
+    JTabbedPane guidePane;
     JPanel settingsPanel;
     JTextArea dataPane;
     JTextArea weatherPane;
 
     JButton githubButton;
 
-    JTextArea guidebookText;
-    JLabel kaminarimonImg1;
-    JLabel kaminarimonImg2;
-    JScrollPane guideSectionPane;
-    JPanel guideSectionArticlePane1;
     JLabel mapLabelGBP;
     JPanel mapPanelGBP;
-    Guide sensouji;
-    Guide tokyoSkyTree;
-    JTextArea sensoujiHyperLink;
-
     JComboBox langChoices;
     JButton langChoiceApply;
 
@@ -86,7 +78,7 @@ public class MainDisplay extends JFrame {
 
         this.listModel = new DefaultListModel<>();
         this.caseNumberList = new JList(this.listModel);
-        this.caseNumberList.setFont(new Font("monospaced", Font.BOLD, 14));
+        this.caseNumberList.setFont(new Font("Arial", Font.BOLD, 14));
 
         this.clockTextArea = new JTextArea();
         this.clockTextArea.setFont(new Font("Times New Roman", Font.BOLD, 42));
@@ -117,6 +109,20 @@ public class MainDisplay extends JFrame {
         this.sourceHyperLink.setText(Localization.getLangDataAt(63) + " https://corona.go.jp/dashboard");
         this.sourceHyperLink.setForeground(Color.BLUE);
 
+        this.guidePane = new JTabbedPane(JTabbedPane.TOP);
+
+        guidebook[0] = new Guide("Sensoji", null, 12);
+        this.guidePane.addTab(guidebook[0].getArticleTitle(), guidebook[0].getArticleComponent());
+
+        guidebook[1] = new Guide("Tokyo_Skytree", null, 12);
+        this.guidePane.addTab(guidebook[1].getArticleTitle(), guidebook[1].getArticleComponent());
+
+        guidebook[2] = new Guide("Tokyo_Imperial_Palace", null, 12);
+        this.guidePane.addTab(guidebook[2].getArticleTitle(), guidebook[2].getArticleComponent());
+
+        this.guidebook[3] = new Guide("Tokyo_Disneyland", null, 11);
+        this.guidePane.addTab(this.guidebook[3].getArticleTitle(), this.guidebook[3].getArticleComponent());
+
         this.mapPanelCNP = new JPanel(new GridBagLayout());
         this.mapPanelCNP.setBackground(Color.WHITE);
         this.mapPanelCNP.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));
@@ -139,40 +145,10 @@ public class MainDisplay extends JFrame {
         this.weatherPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(73)));
         this.updateSidePanel(0);
 
-        this.sensouji = new Guide("Sensoji", null);
-
-        this.guidebookText = new JTextArea();
-        this.guidebookText.setEditable(false);
-        this.guidebookText.setText(this.sensouji.getArticle());
-        this.guidebookText.setFont(new Font(Font.SERIF, Font.PLAIN, 18));
-        this.guidebookText.setLineWrap(true);
-        this.guidebookText.setWrapStyleWord(true);
-
         this.mapPanelGBP = new JPanel(new GridBagLayout());
         this.mapPanelGBP.setBackground(Color.WHITE);
         this.mapPanelGBP.setBorder(BorderFactory.createTitledBorder("The map of Japan"));
-
         this.mapLabelGBP = new JLabel(backendModels.map.DrawLocationMap(12));
-
-        this.guideSectionArticlePane1 = new JPanel(new GridBagLayout());
-        this.guideSectionArticlePane1.setBackground(Color.WHITE);
-
-        this.kaminarimonImg1 = new JLabel(this.fetchImage("Kaminarimon.jpg"));
-        this.kaminarimonImg1.setBorder(BorderFactory.createTitledBorder("The face of Senso-ji, \"Kaminarimon\""));
-
-        this.kaminarimonImg2 = new JLabel(this.fetchImage("Kaminarimon from distance.jpg"));
-        this.kaminarimonImg2.setBorder(BorderFactory.createTitledBorder("Anothther view of Senso-ji"));
-
-        this.guideSectionPane = new JScrollPane(this.guideSectionArticlePane1);
-        this.guideSectionPane.setBorder(BorderFactory.createTitledBorder(this.sensouji.getArticleTitle()));
-        this.guideSectionPane.setPreferredSize(new Dimension(700, 600));
-        this.guideSectionPane.getVerticalScrollBar().setUnitIncrement(15);
-
-        this.sensoujiHyperLink = new JTextArea();
-        this.sensoujiHyperLink.setEditable(false);
-        this.sensoujiHyperLink.setOpaque(false);
-        this.sensoujiHyperLink.setText("Learn more...\n\n");
-        this.sensoujiHyperLink.setForeground(Color.BLUE);
 
         this.langChoices = new JComboBox(Localization.getLangFileNames());
         this.langChoices.setEditable(false);
@@ -299,61 +275,6 @@ public class MainDisplay extends JFrame {
 
         this.mainPane.addTab(Localization.getLangDataAt(52), null, this.caseNumberPanel, "Shows case numbers");
 
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.weightx = 1;
-        gbc.weighty = 1;
-//        gbc.fill = GridBagConstraints.CENTER;
-        gbc.anchor = GridBagConstraints.NORTH;
-        this.guidePanel.add(this.guideSectionPane, gbc);
-
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.weightx = 1;
-        gbc.weighty = 1;
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.anchor = GridBagConstraints.NORTH;
-        this.guideSectionArticlePane1.add(this.guidebookText, gbc);
-
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.weightx = 1;
-        gbc.weighty = 1;
-//        gbc.fill = GridBagConstraints.CENTER;
-        gbc.anchor = GridBagConstraints.NORTHWEST;
-        this.guideSectionArticlePane1.add(this.sensoujiHyperLink, gbc);
-
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.weightx = 1;
-        gbc.weighty = 1;
-//        gbc.fill = GridBagConstraints.CENTER;
-        gbc.anchor = GridBagConstraints.NORTHWEST;
-        this.guideSectionArticlePane1.add(this.kaminarimonImg1, gbc);
-
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.weightx = 1;
-        gbc.weighty = 1;
-//        gbc.fill = GridBagConstraints.CENTER;
-        gbc.anchor = GridBagConstraints.NORTHWEST;
-        this.guideSectionArticlePane1.add(this.kaminarimonImg2, gbc);
-
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
@@ -374,6 +295,16 @@ public class MainDisplay extends JFrame {
 //        gbc.fill = GridBagConstraints.CENTER;
 //        gbc.anchor = GridBagConstraints.NORTH;
         this.mapPanelGBP.add(this.mapLabelGBP, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+//        gbc.fill = GridBagConstraints.CENTER;
+//        gbc.anchor = GridBagConstraints.NORTH;
+        this.guidePanel.add(this.guidePane, gbc);
 
         this.mainPane.addTab(Localization.getLangDataAt(53), null, this.guidePanel, "Guidebook section");
 
@@ -428,6 +359,7 @@ public class MainDisplay extends JFrame {
         this.backendModels.map = new DrawMap(this.backendModels.japanPrefecture, "japan_map.png");
         this.initialComponents();
         this.updateCaseNumberTextPane();
+        this.map = this.backendModels.map;
 
     }
 
@@ -450,12 +382,6 @@ public class MainDisplay extends JFrame {
                 this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAt(47) + " " + "%-10.10s" + Localization.getLangDataAt(48) + "%7s" + "\n" + Localization.getLangDataAt(49) + " " + risk, Localization.getLangDataAt(Localization.indexOf(this.backendModels.japanPrefecture[i].getRegionName())), backendModels.japanPrefecture[i].getCaseNumber())) + "</pre></html>");
             }
         }
-    }
-
-    private ImageIcon fetchImage(String name) {
-        Image image = new Image(name);
-        ImageIcon imageIcon = new ImageIcon(image.getImage());
-        return imageIcon;
     }
 
     public void updateSidePanel(int index) {
