@@ -407,8 +407,18 @@ public class MainDisplay extends JFrame {
             this.dataPane.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getCaseNumber()));
             this.dataPane.append("\n" + Localization.getLangDataAt(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior()
                     + "\n" + Localization.getLangDataAt(49) + risk);
-            this.weatherPane.setText(Localization.getLangDataAt(61) + " " + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather(0))
-                    + "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp(0)));
+            this.weatherPane.setText("Current\n" + Localization.getLangDataAt(61) + " " + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather(0))
+                    + "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp(0))
+                    + "\n" + "Feels Like:" + this.backendModels.japanPrefecture[index - 1].getFeelsLikeTemperature(0)
+                    + "\n\n" + "Tomorrow\n"
+                    + Localization.getLangDataAt(61) + " " + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather(1))
+                    + "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp(1))
+                    + "\n" + "Feels Like:" + this.backendModels.japanPrefecture[index - 1].getFeelsLikeTemperature(1)
+                    + "\n\n" + "Day after tomorrow\n"
+                    + Localization.getLangDataAt(61) + " " + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather(2))
+                    + "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp(2))
+                    + "\n" + "Feels Like:" + this.backendModels.japanPrefecture[index - 1].getFeelsLikeTemperature(2)
+            );
             this.weatherPane.setVisible(true);
         }
     }

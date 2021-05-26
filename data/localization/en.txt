@@ -61,7 +61,7 @@
 <新規感染者数:>=New Patients:
 <人口:>=Population:
 <天気:>=Weather:
-<気温:>=Current Temperature:
+<気温:>=Temperature:
 <提供:>=Source:
 <日本時間>=Current Time in JST
 <設定>=User Settings
