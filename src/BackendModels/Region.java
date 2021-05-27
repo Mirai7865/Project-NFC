@@ -73,9 +73,9 @@ public class Region {
 
     public void setRisk() {
         this.riskValue = (double)this.getCaseNumberAverage() / this.getPopulation();
-        if (this.riskValue > 0.000015) {
+        if (this.riskValue > 0.00003) {
             this.risk = "High";
-        } else if (this.riskValue > 0.0000075) {
+        } else if (this.riskValue > 0.000015) {
             this.risk = "Moderate";
         } else {
             this.risk = "Low";
