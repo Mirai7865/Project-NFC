@@ -49,7 +49,8 @@ public class MainDisplay extends JFrame {
     JTabbedPane guidePane;
     JPanel settingsPanel;
     JTextArea dataPane;
-    JTextArea weatherPane;
+    JTextArea weatherText;
+    JScrollPane weatherPane;
 
     JButton githubButton;
 
@@ -137,12 +138,16 @@ public class MainDisplay extends JFrame {
         this.dataPane.setWrapStyleWord(true);
         this.dataPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(70)));
 
-        this.weatherPane = new JTextArea();
+        this.weatherText = new JTextArea();
+//        this.weatherText.setPreferredSize(new Dimension(300, 400));
+        this.weatherText.setFont(new Font("MS Gothic", Font.BOLD, 20));
+        this.weatherText.setEditable(false);
+        this.weatherText.setWrapStyleWord(true);
+        this.weatherText.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(73)));
+        
+        this.weatherPane = new JScrollPane(this.weatherText);
         this.weatherPane.setPreferredSize(new Dimension(300, 400));
-        this.weatherPane.setFont(new Font("MS Gothic", Font.BOLD, 20));
-        this.weatherPane.setEditable(false);
-        this.weatherPane.setWrapStyleWord(true);
-        this.weatherPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(73)));
+
         this.updateSidePanel(0);
 
         this.mapPanelGBP = new JPanel(new GridBagLayout());
@@ -413,7 +418,7 @@ public class MainDisplay extends JFrame {
             } else {
                 cityName = Localization.getLangDataAt(74).replaceFirst("__", this.backendModels.japanPrefecture[index - 1].getMajorCityEng());
             }
-            this.weatherPane.setText(cityName + "\n\n" + Localization.getLangDataAt(76)
+            this.weatherText.setText(cityName + "\n\n" + Localization.getLangDataAt(76)
                     + "\n" + Localization.getLangDataAt(61) + " " + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather(0))
                     + "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp(0))
                     + "\n" + Localization.getLangDataAt(75) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getFeelsLikeTemperature(0))
@@ -421,10 +426,15 @@ public class MainDisplay extends JFrame {
                     + "\n" + Localization.getLangDataAt(61) + " " + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather(1))
                     + "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp(1))
                     + "\n" + Localization.getLangDataAt(75) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getFeelsLikeTemperature(1))
+                    + "\n" + Localization.getLangDataAt(79) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getMaxTemperature(1))
+                    + "\n" + Localization.getLangDataAt(80) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getMinTemperature(1))
                     + "\n\n" + Localization.getLangDataAt(78)
                     + "\n" + Localization.getLangDataAt(61) + " " + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather(2))
                     + "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp(2))
                     + "\n" + Localization.getLangDataAt(75) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getFeelsLikeTemperature(2))
+                    + "\n" + Localization.getLangDataAt(75) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getFeelsLikeTemperature(2))
+                    + "\n" + Localization.getLangDataAt(79) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getMaxTemperature(1))
+                    + "\n" + Localization.getLangDataAt(80) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getMinTemperature(1))
             );
             this.weatherPane.setVisible(true);
         }
@@ -498,7 +508,7 @@ public class MainDisplay extends JFrame {
         this.updateCaseNumberTextPane();
         this.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(51)));
         this.dataPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(70)));
-        this.weatherPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(73)));
+        this.weatherText.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(73)));
         this.clockLabel.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(64)));
         this.mapPanelCNP.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));
         this.sourceHyperLink.setText(Localization.getLangDataAt(63) + " https://corona.go.jp/dashboard");
@@ -511,7 +521,7 @@ public class MainDisplay extends JFrame {
             this.sortButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(69));
         } else if (sortType == 1) {
             this.sortButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(67));
-        }  else if (sortType == 2) {
+        } else if (sortType == 2) {
             this.sortButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(59));
         } else {
             this.sortButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(68));
