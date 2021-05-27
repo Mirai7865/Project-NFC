@@ -426,16 +426,16 @@ public class MainDisplay extends JFrame {
                     + "\n" + Localization.getLangDataAt(61) + " " + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather(1))
                     + "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp(1))
                     + "\n" + Localization.getLangDataAt(75) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getFeelsLikeTemperature(1))
-                    + "\n" + Localization.getLangDataAt(79) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getMaxTemperature(1))
-                    + "\n" + Localization.getLangDataAt(80) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getMinTemperature(1))
+                    + "\n" + Localization.getLangDataAt(79) + ": " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getMaxTemperature(1))
+                    + "\n" + Localization.getLangDataAt(80) + ": " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getMinTemperature(1))
                     + "\n\n" + Localization.getLangDataAt(78)
                     + "\n" + Localization.getLangDataAt(61) + " " + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather(2))
                     + "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp(2))
                     + "\n" + Localization.getLangDataAt(75) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getFeelsLikeTemperature(2))
-                    + "\n" + Localization.getLangDataAt(75) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getFeelsLikeTemperature(2))
-                    + "\n" + Localization.getLangDataAt(79) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getMaxTemperature(1))
-                    + "\n" + Localization.getLangDataAt(80) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getMinTemperature(1))
+                    + "\n" + Localization.getLangDataAt(79) + ": " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getMaxTemperature(1))
+                    + "\n" + Localization.getLangDataAt(80) + ": " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getMinTemperature(1))
             );
+            this.weatherText.setCaretPosition(0);
             this.weatherPane.setVisible(true);
         }
     }
