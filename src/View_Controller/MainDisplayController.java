@@ -41,7 +41,7 @@ public class MainDisplayController {
         this.mainDisplay.langJpButton.addActionListener(new ChangeLanguageToJaAction());
         this.mainDisplay.langEnButton.addActionListener(new ChangeLanguageToEnAction());
         this.mainDisplay.caseNumberList.addMouseListener(new OpenSidePanelAction());
-        this.mainDisplay.sortByRiskButton.addActionListener(new SortAction());
+        this.mainDisplay.sortButton.addActionListener(new SortAction());
         this.mainDisplay.langChoiceApply.addActionListener(new ApplyLangSettingAction());
         this.mainDisplay.sourceHyperLink.addMouseListener(new OpenCaseNumberSourceAction());
         this.mainDisplay.githubButton.addActionListener(new JumpToGithubAction());
@@ -88,15 +88,19 @@ public class MainDisplayController {
         public void actionPerformed(ActionEvent ae) {
             if (sort == 0) {
                 mainDisplay.sortByRisk();
-                mainDisplay.sortByRiskButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(68));
+                mainDisplay.sortButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(67));
                 sort = 1;
             } else if (sort == 1) {
-                mainDisplay.sortByCaseNumber();
-                mainDisplay.sortByRiskButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(69));
+                mainDisplay.sortByTotalCaseNumber();
+                mainDisplay.sortButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(68));
                 sort = 2;
+            } else if (sort == 2) {
+                mainDisplay.sortByNewCaseNumber();
+                mainDisplay.sortButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(59));
+                sort = 3;
             } else {
                 mainDisplay.sortByRegionNumber();
-                mainDisplay.sortByRiskButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(67));
+                mainDisplay.sortButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(69));
                 sort = 0;
             }
         }

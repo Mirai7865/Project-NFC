@@ -38,7 +38,7 @@ public class MainDisplay extends JFrame {
     JList caseNumberList;
     JButton langJpButton;
     JButton langEnButton;
-    JButton sortByRiskButton;
+    JButton sortButton;
     JTextArea sourceHyperLink;
     JTabbedPane mainPane;
 
@@ -100,8 +100,8 @@ public class MainDisplay extends JFrame {
         this.langEnButton = new JButton();
         this.langEnButton.setText("English");
 
-        this.sortByRiskButton = new JButton();
-        this.sortByRiskButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(67));
+        this.sortButton = new JButton();
+        this.sortButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(69));
 
         this.sourceHyperLink = new JTextArea();
         this.sourceHyperLink.setEditable(false);
@@ -190,7 +190,7 @@ public class MainDisplay extends JFrame {
         gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.NORTHWEST;
-        this.caseNumberPanel.add(this.sortByRiskButton, gbc);
+        this.caseNumberPanel.add(this.sortButton, gbc);
 
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -369,9 +369,9 @@ public class MainDisplay extends JFrame {
         String risk = this.convertRisk(0);
 
         if (Localization.getLang().equals("ja")) {
-            this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAt(58) + "   " + Localization.getLangDataAt(57) + "\t" + Localization.getLangDataAt(48) + "%7s" + " " + Localization.getLangDataAt(49) + " " + risk, backendModels.japan.getCaseNumber())) + "</pre></html>");
+            this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAt(58) + ":   " + Localization.getLangDataAt(57) + "\t" + Localization.getLangDataAt(48) + "%7s" + " " + Localization.getLangDataAt(49) + " " + risk, backendModels.japan.getCaseNumber())) + "</pre></html>");
         } else if (Localization.getLang().equals("en")) {
-            this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAt(58) + " " + "%-13.13s" + Localization.getLangDataAt(48) + "%7s" + "\n" + Localization.getLangDataAt(49) + " " + risk, Localization.getLangDataAt(57), backendModels.japan.getCaseNumber())) + "</pre></html>");
+            this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAt(58) + ": " + "%-13.13s" + Localization.getLangDataAt(48) + "%7s" + "\n" + Localization.getLangDataAt(49) + " " + risk, Localization.getLangDataAt(57), backendModels.japan.getCaseNumber())) + "</pre></html>");
         }
 
         for (int i = 0; i < this.backendModels.japanPrefecture.length; i++) {
@@ -390,22 +390,22 @@ public class MainDisplay extends JFrame {
         fmt.setGroupingUsed(true);
 
         if (index == 0) {
-            this.dataPane.setText(Localization.getLangDataAt(58) + Localization.getLangDataAt(57)
-                    + "\n" + Localization.getLangDataAt(60));
+            this.dataPane.setText(Localization.getLangDataAt(58) + ":" + Localization.getLangDataAt(57)
+                    + "\n" + Localization.getLangDataAt(60) + ":");
             this.dataPane.append(fmt.format(this.backendModels.japan.getPopulation()));
             this.dataPane.append("\n" + Localization.getLangDataAt(48));
             this.dataPane.append(fmt.format(this.backendModels.japan.getCaseNumber()));
-            this.dataPane.append("\n" + Localization.getLangDataAt(59));
-            this.dataPane.append(fmt.format(this.backendModels.japan.getCaseNumberDeltaWithDayPrior()));
+            this.dataPane.append("\n" + Localization.getLangDataAt(59) + ":");
+            this.dataPane.append(fmt.format(this.backendModels.japan.getNewCaseNumber()));
             this.dataPane.append("\n" + Localization.getLangDataAt(49) + risk);
             this.weatherPane.setVisible(false);
         } else {
             this.dataPane.setText(Localization.getLangDataAt(47) + "" + Localization.getLangDataAt(Localization.indexOf(this.backendModels.japanPrefecture[index - 1].getRegionName()))
-                    + "\n" + Localization.getLangDataAt(60));
+                    + "\n" + Localization.getLangDataAt(60) + ":");
             this.dataPane.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getPopulation()));
             this.dataPane.append("\n" + Localization.getLangDataAt(48));
             this.dataPane.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getCaseNumber()));
-            this.dataPane.append("\n" + Localization.getLangDataAt(59) + this.backendModels.japanPrefecture[index - 1].getCaseNumberDeltaWithDayPrior()
+            this.dataPane.append("\n" + Localization.getLangDataAt(59) + ":" + this.backendModels.japanPrefecture[index - 1].getNewCaseNumber()
                     + "\n" + Localization.getLangDataAt(49) + risk);
             String cityName = "";
             if (Localization.getLang().equals("ja")) {
@@ -418,12 +418,10 @@ public class MainDisplay extends JFrame {
                     + "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp(0))
                     + "\n" + Localization.getLangDataAt(75) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getFeelsLikeTemperature(0))
                     + "\n\n" + Localization.getLangDataAt(77)
-                    
                     + "\n" + Localization.getLangDataAt(61) + " " + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather(1))
                     + "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp(1))
                     + "\n" + Localization.getLangDataAt(75) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getFeelsLikeTemperature(1))
                     + "\n\n" + Localization.getLangDataAt(78)
-                    
                     + "\n" + Localization.getLangDataAt(61) + " " + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather(2))
                     + "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp(2))
                     + "\n" + Localization.getLangDataAt(75) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getFeelsLikeTemperature(2))
@@ -458,8 +456,14 @@ public class MainDisplay extends JFrame {
         this.updateCaseNumberTextPane();
     }
 
-    public void sortByCaseNumber() {
-        CompareByCase compare = new CompareByCase();
+    public void sortByTotalCaseNumber() {
+        CompareByTotalCase compare = new CompareByTotalCase();
+        Arrays.sort(this.backendModels.japanPrefecture, compare);
+        this.updateCaseNumberTextPane();
+    }
+
+    public void sortByNewCaseNumber() {
+        CompareByNewCase compare = new CompareByNewCase();
         Arrays.sort(this.backendModels.japanPrefecture, compare);
         this.updateCaseNumberTextPane();
     }
@@ -504,11 +508,13 @@ public class MainDisplay extends JFrame {
         this.langChoiceApply.setText(Localization.getLangDataAt(71));
         this.updateSidePanel(index);
         if (sortType == 0) {
-            this.sortByRiskButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(67));
+            this.sortButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(69));
         } else if (sortType == 1) {
-            this.sortByRiskButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(68));
+            this.sortButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(67));
+        }  else if (sortType == 2) {
+            this.sortButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(59));
         } else {
-            this.sortByRiskButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(69));
+            this.sortButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(68));
         }
     }
 }

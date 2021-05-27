@@ -11,7 +11,7 @@ public class Region {
     private int caseNumber;
     private int population;
     private String risk;
-    private int caseNumberDelta;
+    private int newCaseNumber;
     private double caseNumberAverage;
     private double riskValue;
     private int regionNumber;
@@ -48,11 +48,11 @@ public class Region {
     }
 
     public void setCaseNumberDeltaWithDayPrior(int caseNumberYesterday) {
-        this.caseNumberDelta = this.getCaseNumber() - caseNumberYesterday;
+        this.newCaseNumber = this.getCaseNumber() - caseNumberYesterday;
     }
 
-    public int getCaseNumberDeltaWithDayPrior() {
-        return this.caseNumberDelta;
+    public int getNewCaseNumber() {
+        return this.newCaseNumber;
     }
 
     public void setCaseNumberAverage(int caseNumber14daysAgo) {
