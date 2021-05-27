@@ -73,3 +73,8 @@
 <適用>=Apply
 <更新中...>=Updating...
 <天気予報>=Weather Forecast
+<__市の天気予報>=__'s Weather Forecast
+<体感気温:>=Feels Like:
+<現在>=Current
+<明日>=Tomorrow
+<明後日>=Day After Tomorrow

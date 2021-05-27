@@ -1,4 +1,4 @@
-﻿"Prefecture Name", "Population, but divided by a thousand.", "Major City Name"
+﻿"Prefecture Name", "Population, but divided by a thousand.", "Major City Name", "latitude and longitude"
 北海道 5250 札幌市 Sapporo 43.062096 141.354370
 青森県 1246 青森市 Aomori 40.824306 140.740005
 岩手県 1227 盛岡市 Morioka 39.697922 141.155991
