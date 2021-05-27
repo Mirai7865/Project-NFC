@@ -40,11 +40,11 @@ public class WeatherAPI {
         }
 
         String data = strB.toString();
-        Scanner sc = new Scanner(data);
-        sc.useDelimiter(",");
-        while (sc.hasNext()) {
-            System.out.println(sc.next());
-        }
+//        Scanner sc = new Scanner(data);
+//        sc.useDelimiter(",");
+//        while (sc.hasNext()) {
+//            System.out.println(sc.next());
+//        }
 
 //        try {
         Scanner scn = new Scanner(data);

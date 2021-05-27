@@ -5,6 +5,11 @@
  */
 package BackendModels;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Prefecture extends Region {
 
     private String majorCityJP;
@@ -80,14 +85,15 @@ public class Prefecture extends Region {
         return this.forecast[day].getWeatherDescription();
     }
 
-    public String getWeatherIcon(int day) throws IllegalArgumentException {
+    public String getWeatherIconURL(int day) throws IllegalArgumentException {
         if (day > 2) {
             throw new IllegalArgumentException("Day cannot be beyond 3.");
         }
         if (this.forecast[day] == null) {
-            return "Updating...";
+            return "";
         }
-        return this.forecast[day].getWeatherIcon();
+        String urlStr = "http://openweathermap.org/img/wn/" + this.forecast[day].getWeatherIcon() + "@2x.png";
+        return urlStr;
     }
 
     public String getFeelsLikeTemperature(int day) throws IllegalArgumentException {

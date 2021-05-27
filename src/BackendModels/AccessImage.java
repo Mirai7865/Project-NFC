@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -22,6 +23,11 @@ public class AccessImage {
         this.img = null;
         this.loadImage(path);
     }
+    
+    public AccessImage(URL path) {
+        this.img = null;
+        this.loadImage(path);
+    }
 
     private void loadImage(String name) {
         File imgPath;
@@ -31,9 +37,17 @@ public class AccessImage {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "No such file found: " + name, "Error", ERROR_MESSAGE);
             System.exit(0);
+        } 
+    }
+    
+    private void loadImage(URL path) {
+        try {
+            this.img = ImageIO.read(path);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Unable to fetch weather icon.", "Error", ERROR_MESSAGE);
         }
     }
-
+    
     public BufferedImage getImage() {
         return this.img;
     }

@@ -5,6 +5,16 @@
  */
 package BackendModels;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+
 public class Weather {
 
 //    private double longi;
@@ -47,6 +57,14 @@ public class Weather {
 
     public void setWeatherIcon(String icon) {
         this.icon = icon;
+
+//        String urlStr = "http://openweathermap.org/img/wn/" + icon + "png";
+//        try {
+//            AccessImage img = new AccessImage(new URL(urlStr));
+//        } catch (MalformedURLException ex) {
+//            JOptionPane.showMessageDialog(null, "Something went wrong with getting the weather icon...", "Error", ERROR_MESSAGE);
+//        }
+//    }
     }
 
     public String getWeatherDescription() {

@@ -116,7 +116,9 @@ public class MainDisplayController {
         @Override
         public void mouseReleased(MouseEvent me) {
             selectedIndexCaseNumberField = mainDisplay.caseNumberList.getSelectedIndex();
+//            System.out.println("a");
             mainDisplay.updateSidePanel(selectedIndexCaseNumberField);
+//            System.out.println("b");
             if (selectedIndexCaseNumberField - 1 >= 0) {
                 if (backendModels.japanPrefecture[selectedIndexCaseNumberField - 1].getWeather(0).equals("Updating...")) {
                     SidePanelThread updater = new SidePanelThread(backendModels, mainDisplay, mainDisplay.dataPane, selectedIndexCaseNumberField);

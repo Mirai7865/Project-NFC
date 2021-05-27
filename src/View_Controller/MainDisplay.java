@@ -12,10 +12,15 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.NumberFormat;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -49,7 +54,10 @@ public class MainDisplay extends JFrame {
     JTabbedPane guidePane;
     JPanel settingsPanel;
     JTextArea dataPane;
+
     JTextArea weatherText;
+    JPanel weatherPanel;
+    JLabel weatherIcons[];
     JScrollPane weatherPane;
 
     JButton githubButton;
@@ -139,13 +147,15 @@ public class MainDisplay extends JFrame {
         this.dataPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(70)));
 
         this.weatherText = new JTextArea();
-//        this.weatherText.setPreferredSize(new Dimension(300, 400));
         this.weatherText.setFont(new Font("MS Gothic", Font.BOLD, 20));
         this.weatherText.setEditable(false);
         this.weatherText.setWrapStyleWord(true);
         this.weatherText.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(73)));
-        
-        this.weatherPane = new JScrollPane(this.weatherText);
+
+        this.weatherPanel = new JPanel(new GridBagLayout());
+        this.weatherIcons = new JLabel[3];
+
+        this.weatherPane = new JScrollPane(this.weatherPanel);
         this.weatherPane.setPreferredSize(new Dimension(300, 400));
 
         this.updateSidePanel(0);
@@ -263,6 +273,17 @@ public class MainDisplay extends JFrame {
 //        gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.NORTH;
         this.caseNumberPanel.add(this.dataPane, gbc);
+
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 0.5;
+        gbc.weighty = 0.5;
+//        gbc.fill = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.NORTH;
+        this.weatherPanel.add(this.weatherText, gbc);
 
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
@@ -435,8 +456,34 @@ public class MainDisplay extends JFrame {
                     + "\n" + Localization.getLangDataAt(79) + ": " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getMaxTemperature(1))
                     + "\n" + Localization.getLangDataAt(80) + ": " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getMinTemperature(1))
             );
+            this.addWeatherIconImage(index - 1, 0);
+//            this.addWeatherIconImage(index - 1, 1);
+//            this.addWeatherIconImage(index - 1, 2);
             this.weatherText.setCaretPosition(0);
             this.weatherPane.setVisible(true);
+        }
+    }
+
+    private void addWeatherIconImage(int index, int day) {
+        try {
+            if (!this.backendModels.japanPrefecture[index - 1].getWeatherIconURL(day).equals("")) {
+                URL url = new URL(this.backendModels.japanPrefecture[index - 1].getWeatherIconURL(day));
+                AccessImage image = new AccessImage(url);
+                this.weatherIcons[day] = new JLabel(image.getImageIcon());
+                System.out.println(this.weatherIcons[day]);
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.gridx = 0;
+                gbc.gridy = 2;
+                gbc.gridwidth = 1;
+                gbc.gridheight = 1;
+                gbc.weightx = 0.5;
+                gbc.weighty = 0.5;
+//              gbc.fill = GridBagConstraints.CENTER;
+                gbc.anchor = GridBagConstraints.SOUTH;
+                this.weatherPanel.add(this.weatherIcons[day], gbc);
+            }
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(MainDisplay.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
