@@ -21,12 +21,7 @@ public class Prefecture extends Region {
         this.setMajorCityEng(majorCityEng);
         this.setCityLat(lat);
         this.setCityLongi(longi);
-//        this.weatherForecast = "Updating...";
-//        this.temperature = "Updating...";
         this.forecast = new Weather[3];
-        this.forecast[0] = new Weather();
-        this.forecast[1] = new Weather();
-        this.forecast[2] = new Weather();
     }
 
     private void setCityLat(double lat) {
@@ -66,29 +61,41 @@ public class Prefecture extends Region {
     }
 
     public String getTemp(int day) throws IllegalArgumentException {
-        if (day > 3) {
+        if (day > 2) {
             throw new IllegalArgumentException("Day cannot be beyond 3.");
+        }
+        if (this.forecast[day] == null) {
+            return "Updating...";
         }
         return "" + this.forecast[day].getTemp();
     }
 
     public String getWeather(int day) throws IllegalArgumentException {
-        if (day > 3) {
+        if (day > 2) {
             throw new IllegalArgumentException("Day cannot be beyond 3.");
+        }
+        if (this.forecast[day] == null) {
+            return "Updating...";
         }
         return this.forecast[day].getWeatherDescription();
     }
 
     public String getWeatherIcon(int day) throws IllegalArgumentException {
-        if (day > 3) {
+        if (day > 2) {
             throw new IllegalArgumentException("Day cannot be beyond 3.");
+        }
+        if (this.forecast[day] == null) {
+            return "Updating...";
         }
         return this.forecast[day].getWeatherIcon();
     }
 
     public String getFeelsLikeTemperature(int day) throws IllegalArgumentException {
-        if (day > 3) {
+        if (day > 2) {
             throw new IllegalArgumentException("Day cannot be beyond 3.");
+        }
+        if (this.forecast[day] == null) {
+            return "Updating...";
         }
         return this.forecast[day].getFeelsLikeTemperature();
     }
