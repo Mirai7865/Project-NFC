@@ -100,6 +100,26 @@ public class Prefecture extends Region {
         return this.forecast[day].getFeelsLikeTemperature();
     }
 
+    public String getMaxTemperature(int day) throws IllegalArgumentException {
+        if (day > 2) {
+            throw new IllegalArgumentException("Day cannot be beyond 3.");
+        }
+        if (this.forecast[day] == null) {
+            return "Updating...";
+        }
+        return this.forecast[day].getMaxTemp();
+    }
+
+    public String getMinTemperature(int day) throws IllegalArgumentException {
+        if (day > 2) {
+            throw new IllegalArgumentException("Day cannot be beyond 3.");
+        }
+        if (this.forecast[day] == null) {
+            return "Updating...";
+        }
+        return this.forecast[day].getMinTemp();
+    }
+
     @Override
     public String toString() {
         String string = "Region: " + this.getRegionName() + ", Case Number: " + this.getCaseNumber() + " Major City: " + this.getMajorCityEng() + " Weather: " + this.getWeather(0);

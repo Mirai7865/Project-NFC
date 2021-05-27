@@ -40,11 +40,11 @@ public class WeatherAPI {
         }
 
         String data = strB.toString();
-//        Scanner sc = new Scanner(data);
-//        sc.useDelimiter(",");
-//        while (sc.hasNext()) {
-//            System.out.println(sc.next());
-//        }
+        Scanner sc = new Scanner(data);
+        sc.useDelimiter(",");
+        while (sc.hasNext()) {
+            System.out.println(sc.next());
+        }
 
 //        try {
         Scanner scn = new Scanner(data);
@@ -60,14 +60,25 @@ public class WeatherAPI {
 //                System.out.println(weather);
             String icon = daily[i].substring(daily[i].indexOf("\"icon\":") + 8, daily[i].indexOf("\"icon\":") + 11);
 //            System.out.println(icon);
+            forecast[i - 1] = new Weather();
+
             double tempKelvin = 0.0;
             double feelsLikeKelvin = 0.0;
+            double maxKelvin = 0.0;
+            double minKelvin = 0.0;
+
             if (i == 1) {
                 tempKelvin = Double.valueOf(daily[i].substring(daily[i].indexOf("\"temp\":") + 7, daily[i].indexOf(",\"feels_like\"")));
                 feelsLikeKelvin = Double.valueOf(daily[i].substring(daily[i].indexOf("\"feels_like\"") + 13, daily[i].indexOf(",\"pressure\"")));
             } else {
                 String cache = daily[i].substring(daily[i].indexOf("\"temp\""), daily[i].indexOf("\"feels_like\""));
                 tempKelvin = Double.valueOf(cache.substring(cache.indexOf("\"day\":") + 6, cache.indexOf(",\"min\"")));
+                minKelvin = Double.valueOf(cache.substring(cache.indexOf("\"min\":") + 6, cache.indexOf(",\"max\"")));
+                maxKelvin = Double.valueOf(cache.substring(cache.indexOf("\"max\":") + 6, cache.indexOf(",\"night\"")));
+//                System.out.println(minKelvin + "  " + maxKelvin);
+
+                forecast[i - 1].setMaxTemperature((int) (maxKelvin - 273.15));
+                forecast[i - 1].setMinTemperature((int) (minKelvin - 273.15));
 
                 cache = daily[i].substring(daily[i].indexOf("\"feels_like\""), daily[i].indexOf("\"pressure"));
                 feelsLikeKelvin = Double.valueOf(cache.substring(cache.indexOf("\"day\":") + 6, cache.indexOf(",\"night\"")));
@@ -78,7 +89,6 @@ public class WeatherAPI {
             int temp = (int) Math.round(tempKelvin - 273.15);
             int feelsLike = (int) Math.round(feelsLikeKelvin - 273.15);
 
-            forecast[i - 1] = new Weather();
             forecast[i - 1].setTemperature(temp);
             forecast[i - 1].setWeatherDescription(weather);
             forecast[i - 1].setWeatherIcon(icon);

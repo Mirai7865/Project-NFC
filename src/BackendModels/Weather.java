@@ -21,6 +21,8 @@ public class Weather {
         this.temperature = "";
         this.feelsLike = "";
         this.icon = "";
+        this.minTemp = "";
+        this.maxTemp = "";
     }
 
     public void setWeatherDescription(String weather) {
