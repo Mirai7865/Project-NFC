@@ -456,9 +456,9 @@ public class MainDisplay extends JFrame {
                     + "\n" + Localization.getLangDataAt(79) + ": " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getMaxTemperature(1))
                     + "\n" + Localization.getLangDataAt(80) + ": " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getMinTemperature(1))
             );
-            this.addWeatherIconImage(index - 1, 0);
-//            this.addWeatherIconImage(index - 1, 1);
-//            this.addWeatherIconImage(index - 1, 2);
+            this.addWeatherIconImage(index, 0);
+            this.addWeatherIconImage(index, 1);
+            this.addWeatherIconImage(index, 2);
             this.weatherText.setCaretPosition(0);
             this.weatherPane.setVisible(true);
         }
@@ -466,14 +466,14 @@ public class MainDisplay extends JFrame {
 
     private void addWeatherIconImage(int index, int day) {
         try {
-            if (!this.backendModels.japanPrefecture[index - 1].getWeatherIconURL(day).equals("")) {
+            if (!(this.backendModels.japanPrefecture[index - 1].getWeatherIconURL(day).equals(""))) {
                 URL url = new URL(this.backendModels.japanPrefecture[index - 1].getWeatherIconURL(day));
                 AccessImage image = new AccessImage(url);
                 this.weatherIcons[day] = new JLabel(image.getImageIcon());
                 System.out.println(this.weatherIcons[day]);
                 GridBagConstraints gbc = new GridBagConstraints();
                 gbc.gridx = 0;
-                gbc.gridy = 2;
+                gbc.gridy = day + 2;
                 gbc.gridwidth = 1;
                 gbc.gridheight = 1;
                 gbc.weightx = 0.5;
