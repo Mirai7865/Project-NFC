@@ -435,8 +435,10 @@ public class MainDisplay extends JFrame {
             } else {
                 cityName = Localization.getLangDataAt(74).replaceFirst("__", this.backendModels.japanPrefecture[index - 1].getMajorCityEng());
             }
-            this.weatherText[0].setText(cityName + "\n\n" + Localization.getLangDataAt(76) + "\n" + Localization.getLangDataAt(77));
+            this.weatherText[0].setText(cityName + "\n\n" + Localization.getLangDataAt(76) + "\n");
             GridBagConstraints gbc = new GridBagConstraints();
+
+            this.weatherPanel.removeAll();
 
             gbc.gridx = 0;
             gbc.gridy = 0;
@@ -445,8 +447,33 @@ public class MainDisplay extends JFrame {
             gbc.weightx = 1;
             gbc.weighty = 1;
             gbc.fill = GridBagConstraints.HORIZONTAL;
-            gbc.anchor = GridBagConstraints.SOUTH;
+            gbc.anchor = GridBagConstraints.NORTH;
             this.weatherPanel.add(this.weatherText[0], gbc);
+            
+            for (int i = 0; i <= 2; i++) {
+                String date = Localization.getLangDataAt(77 + i);
+                if (i >= 2) {
+                    date = "";
+                }
+
+                this.weatherText[i + 1].setText(/*Localization.getLangDataAt(77 + day)+ */"\n" + Localization.getLangDataAt(61) + " "
+                        + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather(i))
+                        + "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp(i))
+                        + "\n" + Localization.getLangDataAt(75) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getFeelsLikeTemperature(i))
+                        + "\n\n" + date
+                );
+
+                gbc = new GridBagConstraints();
+                gbc.gridx = 0;
+                gbc.gridy = 2 + 3 * (i + 1);
+                gbc.gridwidth = 1;
+                gbc.gridheight = 1;
+                gbc.weightx = 1;
+                gbc.weighty = 1;
+                gbc.fill = GridBagConstraints.HORIZONTAL;
+                gbc.anchor = GridBagConstraints.SOUTH;
+                this.weatherPanel.add(this.weatherText[i + 1], gbc);
+            }
 
             this.addWeatherIconImage(index, 0);
             this.addWeatherIconImage(index, 1);
@@ -458,6 +485,16 @@ public class MainDisplay extends JFrame {
     }
 
     private void addWeatherIconImage(int index, int day) {
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.NORTH;
+        this.weatherPanel.add(this.weatherText[0], gbc);
         try {
             if (!(this.backendModels.japanPrefecture[index - 1].getWeatherIconURL(day).equals(""))) {
                 String cityName = "";
@@ -466,16 +503,12 @@ public class MainDisplay extends JFrame {
                 } else {
                     cityName = Localization.getLangDataAt(74).replaceFirst("__", this.backendModels.japanPrefecture[index - 1].getMajorCityEng());
                 }
-//                String date = "";
-//                if (day < 2) {
-//                    date = Localization.getLangDataAt(day + 77);
-//                }
 
                 URL url = new URL(this.backendModels.japanPrefecture[index - 1].getWeatherIconURL(day));
                 AccessImage image = new AccessImage(url);
                 this.weatherIcons[day] = new JLabel(image.getImageIcon());
 
-                GridBagConstraints gbc = new GridBagConstraints();
+//                GridBagConstraints gbc = new GridBagConstraints();
                 gbc.gridx = 0;
                 gbc.gridy = 1 + 3 * (day + 1);
                 gbc.gridwidth = 1;
@@ -486,21 +519,6 @@ public class MainDisplay extends JFrame {
                 gbc.anchor = GridBagConstraints.SOUTH;
                 this.weatherPanel.add(this.weatherIcons[day], gbc);
 
-                this.weatherText[day + 1].setText(/*Localization.getLangDataAt(77 + day)+ */"\n" + Localization.getLangDataAt(61) + " " + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather(0))
-                        + "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp(0))
-                        + "\n" + Localization.getLangDataAt(75) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getFeelsLikeTemperature(0))
-                );
-
-                gbc = new GridBagConstraints();
-                gbc.gridx = 0;
-                gbc.gridy = 2 + 3 * (day + 1);
-                gbc.gridwidth = 1;
-                gbc.gridheight = 1;
-                gbc.weightx = 1;
-                gbc.weighty = 1;
-                gbc.fill = GridBagConstraints.HORIZONTAL;
-                gbc.anchor = GridBagConstraints.SOUTH;
-                this.weatherPanel.add(this.weatherText[day], gbc);
             }
         } catch (MalformedURLException ex) {
             Logger.getLogger(MainDisplay.class.getName()).log(Level.SEVERE, null, ex);
