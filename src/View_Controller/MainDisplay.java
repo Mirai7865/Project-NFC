@@ -38,7 +38,7 @@ public class MainDisplay extends JFrame {
 
     BackendModels backendModels;
     DrawMap map;
-    Guide guidebook[] = new Guide[4];
+    Guide guidebook[] = new Guide[10];
 
     JList caseNumberList;
     JButton langJpButton;
@@ -120,7 +120,7 @@ public class MainDisplay extends JFrame {
 
         this.guidePane = new JTabbedPane(JTabbedPane.TOP);
 
-        guidebook[0] = new Guide("Sensoji", null, 12);
+        this.guidebook[0] = new Guide("Sensoji", null, 12);
         this.guidePane.addTab(guidebook[0].getArticleTitle(), guidebook[0].getArticleComponent());
 
         guidebook[1] = new Guide("Tokyo_Skytree", null, 12);
@@ -131,6 +131,15 @@ public class MainDisplay extends JFrame {
 
         this.guidebook[3] = new Guide("Tokyo_Disneyland", null, 11);
         this.guidePane.addTab(this.guidebook[3].getArticleTitle(), this.guidebook[3].getArticleComponent());
+
+        this.guidebook[4] = new Guide("Mount_Fuji", null, 21);
+        this.guidePane.addTab(this.guidebook[4].getArticleTitle(), this.guidebook[4].getArticleComponent());
+
+        this.guidebook[5] = new Guide("Hiroshima_Peace_Memorial_Park", null, 33);
+        this.guidePane.addTab(this.guidebook[5].getArticleTitle(), this.guidebook[5].getArticleComponent());
+
+        this.guidebook[6] = new Guide("Itsukushima_Shrine", null, 33);
+        this.guidePane.addTab(this.guidebook[6].getArticleTitle(), this.guidebook[6].getArticleComponent());
 
         this.mapPanelCNP = new JPanel(new GridBagLayout());
         this.mapPanelCNP.setBackground(Color.WHITE);
@@ -466,7 +475,7 @@ public class MainDisplay extends JFrame {
                     this.weatherText[i + 1].append("\n" + Localization.getLangDataAt(79) + ": " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getMaxTemperature(i)));
                     this.weatherText[i + 1].append("\n" + Localization.getLangDataAt(80) + ": " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getMinTemperature(i)));
                 }
-                
+
                 this.weatherText[i + 1].append("\n\n" + date);
 
                 gbc = new GridBagConstraints();
