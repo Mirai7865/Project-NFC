@@ -72,7 +72,7 @@ public class Prefecture extends Region {
         if (this.forecast[day] == null) {
             return "Updating...";
         }
-        return "" + this.forecast[day].getTemp();
+        return "" + this.forecast[day].getTemp() + "\u2103";
     }
 
     public String getWeather(int day) throws IllegalArgumentException {
@@ -103,7 +103,7 @@ public class Prefecture extends Region {
         if (this.forecast[day] == null) {
             return "Updating...";
         }
-        return this.forecast[day].getFeelsLikeTemperature();
+        return this.forecast[day].getFeelsLikeTemperature() + "\u2103";
     }
 
     public String getMaxTemperature(int day) throws IllegalArgumentException {
@@ -113,7 +113,7 @@ public class Prefecture extends Region {
         if (this.forecast[day] == null) {
             return "Updating...";
         }
-        return this.forecast[day].getMaxTemp();
+        return this.forecast[day].getMaxTemp() + "\u2103";
     }
 
     public String getMinTemperature(int day) throws IllegalArgumentException {
@@ -123,7 +123,7 @@ public class Prefecture extends Region {
         if (this.forecast[day] == null) {
             return "Updating...";
         }
-        return this.forecast[day].getMinTemp();
+        return this.forecast[day].getMinTemp()+ "\u2103";
     }
 
     @Override

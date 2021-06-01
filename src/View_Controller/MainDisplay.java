@@ -160,7 +160,7 @@ public class MainDisplay extends JFrame {
         this.weatherIcons = new JLabel[3];
 
         this.weatherPane = new JScrollPane(this.weatherPanel);
-//        this.weatherPane.setBackground(Color.white);
+        this.weatherPane.getVerticalScrollBar().setUnitIncrement(15);
         this.weatherPane.setPreferredSize(new Dimension(300, 400));
         this.weatherPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(73)));
 
@@ -449,7 +449,7 @@ public class MainDisplay extends JFrame {
             gbc.fill = GridBagConstraints.HORIZONTAL;
             gbc.anchor = GridBagConstraints.NORTH;
             this.weatherPanel.add(this.weatherText[0], gbc);
-            
+
             for (int i = 0; i <= 2; i++) {
                 String date = Localization.getLangDataAt(77 + i);
                 if (i >= 2) {
@@ -460,8 +460,14 @@ public class MainDisplay extends JFrame {
                         + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather(i))
                         + "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp(i))
                         + "\n" + Localization.getLangDataAt(75) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getFeelsLikeTemperature(i))
-                        + "\n\n" + date
                 );
+
+                if (i > 0) {
+                    this.weatherText[i + 1].append("\n" + Localization.getLangDataAt(79) + ": " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getMaxTemperature(i)));
+                    this.weatherText[i + 1].append("\n" + Localization.getLangDataAt(80) + ": " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getMinTemperature(i)));
+                }
+                
+                this.weatherText[i + 1].append("\n\n" + date);
 
                 gbc = new GridBagConstraints();
                 gbc.gridx = 0;
