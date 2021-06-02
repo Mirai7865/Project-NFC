@@ -57,11 +57,11 @@ public class MainDisplayController {
                 if (e.getSource() instanceof JTabbedPane) {
                     JTabbedPane pane = (JTabbedPane) e.getSource();
                     mainDisplay.mapLabelGBP.setIcon(mainDisplay.map.DrawLocationMap(mainDisplay.guidebook[pane.getSelectedIndex()].getRegionNum()));
-
                 }
             }
         }
         );
+        this.mainDisplay.translateButton.addActionListener(new TranslateAction());
     }
 
     private class ChangeLanguageToJaAction implements ActionListener {
@@ -264,4 +264,17 @@ public class MainDisplayController {
             mainDisplay.guidebook[mainDisplay.guidePane.getSelectedIndex()].getHyperLinkGoogleMap().setForeground(new Color(128, 0, 128));
         }
     }
+
+    private class TranslateAction implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            try {
+                //try communicating with the API.
+            } catch (Exception ex) {
+                System.out.println("Possibly no internet connection.");
+            }
+        }
+    }
+
 }
