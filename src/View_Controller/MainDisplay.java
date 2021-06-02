@@ -67,6 +67,11 @@ public class MainDisplay extends JFrame {
     JComboBox langChoices;
     JButton langChoiceApply;
 
+    JPanel translatePanel;
+    JTextArea translatingText;
+    JTextArea translatedText;
+    JButton translateButton;
+
     JLabel mapLabelCNP;
     JPanel mapPanelCNP;
 
@@ -84,6 +89,7 @@ public class MainDisplay extends JFrame {
         this.caseNumberPanel = new JPanel(new GridBagLayout());
         this.guidePanel = new JPanel(new GridBagLayout());
         this.settingsPanel = new JPanel(new GridBagLayout());
+        this.translatePanel = new JPanel(new GridBagLayout());
 
         this.listModel = new DefaultListModel<>();
         this.caseNumberList = new JList(this.listModel);
@@ -193,6 +199,19 @@ public class MainDisplay extends JFrame {
         this.langChoices.setEditable(false);
         this.langChoiceApply = new JButton();
         this.langChoiceApply.setText(Localization.getLangDataAt(71));
+
+        this.translatingText = new JTextArea();
+        this.translatingText.setFont(new Font("MS Gothic", Font.BOLD, 20));
+        this.translatingText.setEditable(false);
+        this.translatingText.setWrapStyleWord(true);
+
+        this.translatedText = new JTextArea();
+        this.translatedText.setFont(new Font("MS Gothic", Font.BOLD, 20));
+        this.translatedText.setEditable(false);
+        this.translatedText.setWrapStyleWord(true);
+
+        this.translateButton = new JButton();
+        this.translateButton.setText(Localization.getLangDataAt(81));
 
         GridBagConstraints gbc;
 
@@ -346,6 +365,41 @@ public class MainDisplay extends JFrame {
         this.guidePanel.add(this.guidePane, gbc);
 
         this.mainPane.addTab(Localization.getLangDataAt(53), null, this.guidePanel, "Guidebook section");
+
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+//        gbc.fill = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.SOUTH;
+        this.translatePanel.add(this.translatingText, gbc);
+
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+//        gbc.fill = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.SOUTH;
+        this.translatePanel.add(this.translateButton, gbc);
+
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+//        gbc.fill = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.NORTH;
+        this.translatePanel.add(this.translatedText, gbc);
+
+        this.mainPane.addTab(Localization.getLangDataAt(81), null, this.translatePanel, "Translator section");
 
         gbc = new GridBagConstraints();
         gbc.gridx = 0;

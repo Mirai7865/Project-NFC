@@ -80,3 +80,4 @@
 <明後日>=Day After Tomorrow
 <最高気温>=High
 <最低気温>=Low
+<>=Translate
