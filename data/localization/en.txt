@@ -78,5 +78,5 @@
 <現在>=Current
 <明日>=Tomorrow
 <明後日>=Day After Tomorrow
-<>=High
-<>=Low
+<最高気温>=High
+<最低気温>=Low
