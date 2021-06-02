@@ -141,6 +141,15 @@ public class MainDisplay extends JFrame {
         this.guidebook[6] = new Guide("Itsukushima_Shrine", null, 33);
         this.guidePane.addTab(this.guidebook[6].getArticleTitle(), this.guidebook[6].getArticleComponent());
 
+        this.guidebook[7] = new Guide("Tōdai-ji", null, 25);
+        this.guidePane.addTab(this.guidebook[7].getArticleTitle(), this.guidebook[7].getArticleComponent());
+
+        this.guidebook[8] = new Guide("Historic_Villages_of_Shirakawa-gō_and_Gokayama", null, 20);
+        this.guidePane.addTab(this.guidebook[8].getArticleTitle(), this.guidebook[8].getArticleComponent());
+
+        this.guidebook[9] = new Guide("Okinawa_Prefecture", null, 46);
+        this.guidePane.addTab(this.guidebook[9].getArticleTitle(), this.guidebook[9].getArticleComponent());
+
         this.mapPanelCNP = new JPanel(new GridBagLayout());
         this.mapPanelCNP.setBackground(Color.WHITE);
         this.mapPanelCNP.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));

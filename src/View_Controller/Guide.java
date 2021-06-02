@@ -43,7 +43,7 @@ public class Guide {
         this.articlePanel.setBackground(Color.WHITE);
 
         this.articlePane = new JScrollPane(this.articlePanel);
-        this.articlePane.setPreferredSize(new Dimension(700, 600));
+        this.articlePane.setPreferredSize(new Dimension(700, 550));
         this.articlePane.getVerticalScrollBar().setUnitIncrement(15);
 
         this.articleTextArea = new JTextArea();
