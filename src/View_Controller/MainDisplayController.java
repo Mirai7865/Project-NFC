@@ -271,6 +271,7 @@ public class MainDisplayController {
         public void actionPerformed(ActionEvent ae) {
             try {
                 //try communicating with the API.
+                mainDisplay.translatedText.setText("Translating......");
             } catch (Exception ex) {
                 System.out.println("Possibly no internet connection.");
             }

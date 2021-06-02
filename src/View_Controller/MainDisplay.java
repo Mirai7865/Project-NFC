@@ -202,14 +202,16 @@ public class MainDisplay extends JFrame {
 
         this.translatingText = new JTextArea();
         this.translatingText.setFont(new Font("MS Gothic", Font.BOLD, 20));
-        this.translatingText.setEditable(false);
+//        this.translatingText.setEditable(false);
         this.translatingText.setWrapStyleWord(true);
+        this.translatingText.setText("Type the tranalating text here....");
 
         this.translatedText = new JTextArea();
         this.translatedText.setFont(new Font("MS Gothic", Font.BOLD, 20));
         this.translatedText.setEditable(false);
         this.translatedText.setWrapStyleWord(true);
-
+        this.translatedText.setText("The translated text will appear here...");
+        
         this.translateButton = new JButton();
         this.translateButton.setText(Localization.getLangDataAt(81));
 
