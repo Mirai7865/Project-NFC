@@ -69,7 +69,7 @@ public class MainDisplay extends JFrame {
 
     JPanel translatePanel;
     JTextArea translatingText;
-    JTextArea translatedText;
+    JTextArea translateInstrct;
     JButton translateButton;
 
     JLabel mapLabelCNP;
@@ -204,14 +204,17 @@ public class MainDisplay extends JFrame {
         this.translatingText.setFont(new Font("MS Gothic", Font.BOLD, 20));
 //        this.translatingText.setEditable(false);
         this.translatingText.setWrapStyleWord(true);
-        this.translatingText.setText("Type the tranalating text here....");
+        this.translatingText.setText("Type the translating text here....");
+        this.translatingText.setPreferredSize(new Dimension(1100, 600));
 
-        this.translatedText = new JTextArea();
-        this.translatedText.setFont(new Font("MS Gothic", Font.BOLD, 20));
-        this.translatedText.setEditable(false);
-        this.translatedText.setWrapStyleWord(true);
-        this.translatedText.setText("The translated text will appear here...");
-        
+        this.translateInstrct = new JTextArea();
+        this.translateInstrct.setFont(new Font("MS Gothic", Font.BOLD, 20));
+        this.translateInstrct.setOpaque(false);
+        this.translateInstrct.setEditable(false);
+        this.translateInstrct.setWrapStyleWord(true);
+        this.translateInstrct.setText("Type in the text into the text box, and then hit the button."
+                + "\nThen, the program will open Google translate in your default web browser.");
+
         this.translateButton = new JButton();
         this.translateButton.setText(Localization.getLangDataAt(81));
 
@@ -377,7 +380,7 @@ public class MainDisplay extends JFrame {
         gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.SOUTH;
-        this.translatePanel.add(this.translatingText, gbc);
+        this.translatePanel.add(this.translateInstrct, gbc);
 
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -386,20 +389,20 @@ public class MainDisplay extends JFrame {
         gbc.gridheight = 1;
         gbc.weightx = 1;
         gbc.weighty = 1;
-//        gbc.fill = GridBagConstraints.CENTER;
-        gbc.anchor = GridBagConstraints.SOUTH;
-        this.translatePanel.add(this.translateButton, gbc);
+        gbc.fill = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.NORTH;
+        this.translatePanel.add(this.translatingText, gbc);
 
         gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbc.weightx = 1;
         gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
-        gbc.anchor = GridBagConstraints.NORTH;
-        this.translatePanel.add(this.translatedText, gbc);
+        gbc.anchor = GridBagConstraints.WEST;
+        this.translatePanel.add(this.translateButton, gbc);
 
         this.mainPane.addTab(Localization.getLangDataAt(81), null, this.translatePanel, "Translator section");
 
@@ -679,7 +682,8 @@ public class MainDisplay extends JFrame {
         this.sourceHyperLink.setText(Localization.getLangDataAt(63) + " https://corona.go.jp/dashboard");
         this.mainPane.setTitleAt(0, Localization.getLangDataAt(52));
         this.mainPane.setTitleAt(1, Localization.getLangDataAt(53));
-        this.mainPane.setTitleAt(2, Localization.getLangDataAt(65));
+        this.mainPane.setTitleAt(2, Localization.getLangDataAt(81));
+        this.mainPane.setTitleAt(3, Localization.getLangDataAt(65));
         this.langChoiceApply.setText(Localization.getLangDataAt(71));
         this.updateSidePanel(index);
         if (sortType == 0) {

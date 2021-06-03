@@ -13,6 +13,8 @@ import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -270,10 +272,17 @@ public class MainDisplayController {
         @Override
         public void actionPerformed(ActionEvent ae) {
             try {
-                //try communicating with the API.
-                mainDisplay.translatedText.setText("Translating......");
-            } catch (Exception ex) {
-                System.out.println("Possibly no internet connection.");
+                //try communicating with the API
+//                mainDisplay.translatedText.setText("Translating......");
+                if (mainDisplay.translatingText.getText().toLowerCase().contains("the translating text here")){
+                    mainDisplay.translatingText.setText("Please \"type\" the translating text here....");
+                    return;
+                }
+                Desktop.getDesktop().browse(new URI("https://translate.google.com/?sl=auto&tl=ja&text=" + mainDisplay.translatingText.getText().replaceAll(" ", "%20")));
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Unable to access the browser.", "Error", ERROR_MESSAGE);
+            } catch (URISyntaxException ex) {
+                JOptionPane.showMessageDialog(null, "Unsupported characters had been used.", "Error", ERROR_MESSAGE);
             }
         }
     }
