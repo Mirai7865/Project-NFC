@@ -206,6 +206,7 @@ public class MainDisplay extends JFrame {
         this.translatingText.setWrapStyleWord(true);
         this.translatingText.setText("Type the translating text here....");
         this.translatingText.setPreferredSize(new Dimension(1100, 600));
+        this.translatingText.setBorder(BorderFactory.createTitledBorder("Translator Textbox"));
 
         this.translateInstrct = new JTextArea();
         this.translateInstrct.setFont(new Font("MS Gothic", Font.BOLD, 20));
@@ -214,6 +215,7 @@ public class MainDisplay extends JFrame {
         this.translateInstrct.setWrapStyleWord(true);
         this.translateInstrct.setText("Type in the text into the text box, and then hit the button."
                 + "\nThen, the program will open Google translate in your default web browser.");
+        this.translateInstrct.setBorder(BorderFactory.createTitledBorder("Instructions"));
 
         this.translateButton = new JButton();
         this.translateButton.setText(Localization.getLangDataAt(81));
@@ -389,7 +391,7 @@ public class MainDisplay extends JFrame {
         gbc.gridheight = 1;
         gbc.weightx = 1;
         gbc.weighty = 1;
-        gbc.fill = GridBagConstraints.CENTER;
+//        gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.NORTH;
         this.translatePanel.add(this.translatingText, gbc);
 
@@ -401,7 +403,7 @@ public class MainDisplay extends JFrame {
         gbc.weightx = 1;
         gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.anchor = GridBagConstraints.SOUTHWEST;
         this.translatePanel.add(this.translateButton, gbc);
 
         this.mainPane.addTab(Localization.getLangDataAt(81), null, this.translatePanel, "Translator section");
