@@ -5,17 +5,11 @@
  */
 package BackendModels;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Prefecture extends Region {
 
     private String majorCityJP;
     private String majorCityEng;
-//    private String weatherForecast;
-//    private String temperature;
     private double lat;
     private double longi;
     private Weather[] forecast;

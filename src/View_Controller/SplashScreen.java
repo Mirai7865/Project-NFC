@@ -9,14 +9,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Rectangle;
 import java.awt.Toolkit;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JWindow;
-import javax.swing.WindowConstants;
 
 public class SplashScreen extends JWindow {
 
