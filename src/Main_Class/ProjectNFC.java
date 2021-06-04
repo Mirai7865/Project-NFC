@@ -5,23 +5,23 @@
  */
 package Main_Class;
 
-import View_Controller.BackendModels;
-import View_Controller.MainDisplayController;
-import View_Controller.MainDisplay;
-import BackendModels.*;
+import View_Controller.*;
 
 public class ProjectNFC {
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         // TODO code application logic here
 //        TranslatorApi trs = new TranslatorApi();
+        SplashScreen splscrn = new SplashScreen();
 
         BackendModels backendModels = new BackendModels();
+        splscrn.setCurrentWork("Getting the GUI ready...");
         MainDisplay mainDisplay = new MainDisplay(backendModels);
         MainDisplayController mdc = new MainDisplayController(backendModels, mainDisplay);
+        splscrn.hide();
     }
 
 }
