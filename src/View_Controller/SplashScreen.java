@@ -34,10 +34,12 @@ public class SplashScreen extends JWindow {
         this.window = new JWindow();
         this.window.setLayout(new GridBagLayout());
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-        this.window.setBounds(((int) d.getWidth() - 722) / 2, ((int) d.getHeight() - 401) / 2, 400, 300);
+        this.window.setBounds(((int) d.getWidth() - 300) / 2, ((int) d.getHeight() - 200) / 2, 300, 200);
         this.appName = new JTextArea();
         this.appName.setText("Welcome to Project-NFC");
         this.appName.setFont(new Font("Arial", Font.BOLD, 22));
+        this.appName.setOpaque(false);
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -52,7 +54,8 @@ public class SplashScreen extends JWindow {
         this.backgroundWork = new JTextArea();
         this.backgroundWork.setFont(new Font("Arial", Font.PLAIN, 16));
         this.backgroundWork.setText("Fetching data from the web...");
-
+        this.backgroundWork.setOpaque(false);
+        
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
