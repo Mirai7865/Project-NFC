@@ -5,6 +5,7 @@
  */
 package View_Controller;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -27,6 +28,7 @@ public class SplashScreen extends JWindow {
 
     private void components() {
         this.window = new JWindow();
+        this.window.getContentPane().setBackground(new Color(53, 137, 235));
         this.window.setLayout(new GridBagLayout());
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
         this.window.setBounds(((int) d.getWidth() - 300) / 2, ((int) d.getHeight() - 200) / 2, 300, 200);
@@ -50,7 +52,7 @@ public class SplashScreen extends JWindow {
         this.backgroundWork.setFont(new Font("Arial", Font.PLAIN, 16));
         this.backgroundWork.setText("Fetching data from the web...");
         this.backgroundWork.setOpaque(false);
-        
+
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
