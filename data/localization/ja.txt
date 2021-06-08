@@ -81,3 +81,4 @@
 <最高気温>=最高気温
 <最低気温>=最低気温
 <>=Translate
+<>=The risk was calculated by taking a value of the 14 day average divided by population. The calculated "risk" is only an estimate and a suggestion, since there are no academic evidence supporting it. However, I consider it to be worth enough to be a factor of consideration.

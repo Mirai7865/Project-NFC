@@ -20,7 +20,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -61,6 +60,7 @@ public class MainDisplay extends JFrame {
     JScrollPane weatherPane;
 
     JButton githubButton;
+    JTextArea disclaimerText;
 
     JLabel mapLabelGBP;
     JPanel mapPanelGBP;
@@ -162,6 +162,15 @@ public class MainDisplay extends JFrame {
 
         this.githubButton = new JButton();
         this.githubButton.setText("Jump to Github");
+
+        this.disclaimerText = new JTextArea();
+        this.disclaimerText.setPreferredSize(new Dimension(700, 550));
+        this.disclaimerText.setLineWrap(true);
+        this.disclaimerText.setWrapStyleWord(true);
+        this.disclaimerText.setEditable(false);
+        this.disclaimerText.setFont(new Font("Arial", Font.PLAIN, 20));
+        this.disclaimerText.setText(Localization.getLangDataAt(82) + "\n\n" + Localization.getLangDataAt(83));
+        this.disclaimerText.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(84)));
 
         this.dataPane = new JTextArea();
         this.dataPane.setPreferredSize(new Dimension(300, 200));
@@ -414,7 +423,7 @@ public class MainDisplay extends JFrame {
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbc.weightx = 1;
-        gbc.weighty = 1;
+        gbc.weighty = 3;
 //        gbc.fill = GridBagConstraints.CENTER;
 //        gbc.anchor = GridBagConstraints.SOUTHEAST;
         this.settingsPanel.add(this.langChoices, gbc);
@@ -425,10 +434,21 @@ public class MainDisplay extends JFrame {
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbc.weightx = 1;
-        gbc.weighty = 1;
+        gbc.weighty = 3;
 //        gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.NORTH;
         this.settingsPanel.add(this.langChoiceApply, gbc);
+
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 3;
+//        gbc.fill = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.SOUTH;
+        this.settingsPanel.add(this.githubButton, gbc);
 
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
@@ -438,8 +458,8 @@ public class MainDisplay extends JFrame {
         gbc.weightx = 1;
         gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
-        gbc.anchor = GridBagConstraints.SOUTH;
-        this.settingsPanel.add(this.githubButton, gbc);
+        gbc.anchor = GridBagConstraints.NORTH;
+        this.settingsPanel.add(this.disclaimerText, gbc);
 
         this.mainPane.addTab(Localization.getLangDataAt(65), null, this.settingsPanel, "Per user settings");
 
