@@ -425,7 +425,7 @@ public class MainDisplay extends JFrame {
         gbc.weightx = 1;
         gbc.weighty = 3;
 //        gbc.fill = GridBagConstraints.CENTER;
-//        gbc.anchor = GridBagConstraints.SOUTHEAST;
+        gbc.anchor = GridBagConstraints.SOUTH;
         this.settingsPanel.add(this.langChoices, gbc);
 
         gbc = new GridBagConstraints();
@@ -434,7 +434,7 @@ public class MainDisplay extends JFrame {
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbc.weightx = 1;
-        gbc.weighty = 3;
+        gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.NORTH;
         this.settingsPanel.add(this.langChoiceApply, gbc);
@@ -445,20 +445,20 @@ public class MainDisplay extends JFrame {
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbc.weightx = 1;
-        gbc.weighty = 3;
+        gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
-        gbc.anchor = GridBagConstraints.SOUTH;
+        gbc.anchor = GridBagConstraints.NORTH;
         this.settingsPanel.add(this.githubButton, gbc);
 
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
-        gbc.gridheight = 1;
+        gbc.gridheight = 3;
         gbc.weightx = 1;
         gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
-        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.anchor = GridBagConstraints.CENTER;
         this.settingsPanel.add(this.disclaimerText, gbc);
 
         this.mainPane.addTab(Localization.getLangDataAt(65), null, this.settingsPanel, "Per user settings");
