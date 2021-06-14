@@ -169,8 +169,8 @@ public class MainDisplay extends JFrame {
         this.disclaimerText.setWrapStyleWord(true);
         this.disclaimerText.setEditable(false);
         this.disclaimerText.setFont(new Font("MS Gothic", Font.BOLD, 20));
-        this.disclaimerText.setText(Localization.getLangDataAt(82) + "\n\n" + Localization.getLangDataAt(83));
-        this.disclaimerText.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(84)));
+        this.disclaimerText.setText(Localization.getLangDataAt(82) + "\n\n" + Localization.getLangDataAt(83) + "\n\n" + Localization.getLangDataAt(84));
+        this.disclaimerText.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(85)));
 
         this.dataPane = new JTextArea();
         this.dataPane.setPreferredSize(new Dimension(300, 200));
@@ -695,9 +695,11 @@ public class MainDisplay extends JFrame {
     }
 
     public void updateAllComponents(int index, int sortType) {
-        SidePanelThread updater = new SidePanelThread(backendModels, this, this.dataPane, index);
-        Thread updaterThread = new Thread(updater);
-        updaterThread.start();
+        if (index - 1 >= 0) {
+            SidePanelThread updater = new SidePanelThread(backendModels, this, this.dataPane, index);
+            Thread updaterThread = new Thread(updater);
+            updaterThread.start();
+        }
         this.updateCaseNumberTextPane();
         this.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(51)));
         this.dataPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(70)));
@@ -713,7 +715,7 @@ public class MainDisplay extends JFrame {
         this.disclaimerText.setText(Localization.getLangDataAt(82) + "\n\n" + Localization.getLangDataAt(83) + "\n\n" + Localization.getLangDataAt(84));
         this.disclaimerText.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(85)));
         this.githubButton.setText(Localization.getLangDataAt(86));
-        
+
         if (sortType == 0) {
             this.sortButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(69));
         } else if (sortType == 1) {
