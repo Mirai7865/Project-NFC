@@ -161,14 +161,14 @@ public class MainDisplay extends JFrame {
         this.mapPanelCNP.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(50)));
 
         this.githubButton = new JButton();
-        this.githubButton.setText("Jump to Github");
+        this.githubButton.setText(Localization.getLangDataAt(86));
 
         this.disclaimerText = new JTextArea();
         this.disclaimerText.setPreferredSize(new Dimension(700, 550));
         this.disclaimerText.setLineWrap(true);
         this.disclaimerText.setWrapStyleWord(true);
         this.disclaimerText.setEditable(false);
-        this.disclaimerText.setFont(new Font("Arial", Font.PLAIN, 20));
+        this.disclaimerText.setFont(new Font("MS Gothic", Font.BOLD, 20));
         this.disclaimerText.setText(Localization.getLangDataAt(82) + "\n\n" + Localization.getLangDataAt(83));
         this.disclaimerText.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(84)));
 
@@ -520,7 +520,7 @@ public class MainDisplay extends JFrame {
             this.dataPane.append("\n" + Localization.getLangDataAt(49) + risk);
             this.weatherPane.setVisible(false);
         } else {
-            this.dataPane.setText(Localization.getLangDataAt(47) + "" + Localization.getLangDataAt(Localization.indexOf(this.backendModels.japanPrefecture[index - 1].getRegionName()))
+            this.dataPane.setText(Localization.getLangDataAt(47) + "" + Localization.getLangDataAt(this.backendModels.japanPrefecture[index - 1].getRegionNumber() - 1)
                     + "\n" + Localization.getLangDataAt(60) + ":");
             this.dataPane.append(fmt.format(this.backendModels.japanPrefecture[index - 1].getPopulation()));
             this.dataPane.append("\n" + Localization.getLangDataAt(48));
@@ -695,6 +695,9 @@ public class MainDisplay extends JFrame {
     }
 
     public void updateAllComponents(int index, int sortType) {
+        SidePanelThread updater = new SidePanelThread(backendModels, this, this.dataPane, index);
+        Thread updaterThread = new Thread(updater);
+        updaterThread.start();
         this.updateCaseNumberTextPane();
         this.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(51)));
         this.dataPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(70)));
@@ -707,7 +710,10 @@ public class MainDisplay extends JFrame {
         this.mainPane.setTitleAt(2, Localization.getLangDataAt(81));
         this.mainPane.setTitleAt(3, Localization.getLangDataAt(65));
         this.langChoiceApply.setText(Localization.getLangDataAt(71));
-        this.updateSidePanel(index);
+        this.disclaimerText.setText(Localization.getLangDataAt(82) + "\n\n" + Localization.getLangDataAt(83) + "\n\n" + Localization.getLangDataAt(84));
+        this.disclaimerText.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(85)));
+        this.githubButton.setText(Localization.getLangDataAt(86));
+        
         if (sortType == 0) {
             this.sortButton.setText(Localization.getLangDataAt(66) + " " + Localization.getLangDataAt(69));
         } else if (sortType == 1) {

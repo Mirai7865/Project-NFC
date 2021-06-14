@@ -89,7 +89,7 @@ public class Guide {
             this.hyperLinkWiki.setEditable(false);
             this.hyperLinkWiki.setOpaque(false);
             this.hyperLinkWiki.setFont(new Font(Font.SERIF, Font.PLAIN, 16));
-            this.hyperLinkWiki.setText("(From Wikipedia)");
+            this.hyperLinkWiki.setText("(From Wikipedia.org)");
             this.hyperLinkWiki.setForeground(Color.BLUE);
 
             this.hyperLinkGoogleMap = new JTextArea();
