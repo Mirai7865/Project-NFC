@@ -6,8 +6,6 @@
 package BackendModels;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -16,7 +14,7 @@ public class Localization {
 
     private static String language;
     private static File[] langFiles;
-    private static List<String> langData = new ArrayList<String>();
+    private static String[] langData = new String[87];
 
     public Localization() {
     }
@@ -50,16 +48,15 @@ public class Localization {
 
     private static void loadLang() {
         //load language files
-        langData.clear();
         String str = AccessFile.readFile("data" + File.separator + "localization" + File.separator + getLang() + ".txt");
         Scanner scr = new Scanner(str);
         scr.useDelimiter("@");
-        while (scr.hasNext()) {
-            langData.add(scr.next());
+        for (int i = 0; i < langData.length; i++) {
+            langData[i] = scr.next();
         }
     }
 
-    public static List<String> getLangData() { //return langData
+    public static String[] getLangData() { //return langData
         return langData;
     }
 
@@ -67,13 +64,13 @@ public class Localization {
         if (index <= -1) {
             return null;
         }
-        String str = langData.get(index);
+        String str = langData[index];
         return str.substring(str.indexOf("=") + 1, str.length());
     }
 
     public static int indexOf(String word) {
-        for (int i = 0; i < langData.size(); i++) {
-            if (langData.get(i).contains(word)) {
+        for (int i = 0; i < langData.length; i++) {
+            if (langData[i].contains(word)) {
                 return i;
             }
         }
