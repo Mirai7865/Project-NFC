@@ -696,7 +696,7 @@ public class MainDisplay extends JFrame {
 
     public void updateAllComponents(int index, int sortType) {
 
-        SidePanelThread updater = new SidePanelThread(backendModels, this, this.dataPane, index);
+        SidePanelThread updater = new SidePanelThread(backendModels, this, this.dataPane, index + 1);
         Thread updaterThread = new Thread(updater);
         updaterThread.start();
         
