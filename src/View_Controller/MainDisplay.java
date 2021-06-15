@@ -497,9 +497,20 @@ public class MainDisplay extends JFrame {
         for (int i = 0; i < this.backendModels.japanPrefecture.length; i++) {
             risk = this.convertRisk(i + 1);
             if (Localization.getLang().equals("ja")) {
-                this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAt(47) + " " + Localization.getLangDataAt(Localization.indexOf(this.backendModels.japanPrefecture[i].getRegionName())) + "\t" + Localization.getLangDataAt(48) + "%7s" + " " + Localization.getLangDataAt(49) + " " + risk, backendModels.japanPrefecture[i].getCaseNumber())) + "</pre></html>");
+//                this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAt(47) + " " + Localization.getLangDataAt(Localization.indexOf(this.backendModels.japanPrefecture[i].getRegionName())) + "\t" + Localization.getLangDataAt(48) + "%7s" + " " + Localization.getLangDataAt(49) + " " + risk, backendModels.japanPrefecture[i].getCaseNumber())) + "</pre></html>");
+                String text = String.format(Localization.getLangDataAt(47) + " " + Localization.getLangDataAt(Localization.indexOf(this.backendModels.japanPrefecture[i].getRegionName())) + "\t" + Localization.getLangDataAt(48) + "%7s" + " " + Localization.getLangDataAt(49) + " " + risk, backendModels.japanPrefecture[i].getCaseNumber());
+                javax.swing.SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        listModel.addElement("<html><pre>" + text + "</pre></html>");
+                    }
+                });
             } else if (Localization.getLang().equals("en")) {
-                this.listModel.addElement("<html><pre>" + (String.format(Localization.getLangDataAt(47) + " " + "%-10.10s" + "\n" + Localization.getLangDataAt(48) + "%7s" + " " + Localization.getLangDataAt(49) + " " + risk, Localization.getLangDataAt(Localization.indexOf(this.backendModels.japanPrefecture[i].getRegionName())), backendModels.japanPrefecture[i].getCaseNumber())) + "</pre></html>");
+                String text = String.format(Localization.getLangDataAt(47) + " " + "%-10.10s" + "\n" + Localization.getLangDataAt(48) + "%7s" + " " + Localization.getLangDataAt(49) + " " + risk, Localization.getLangDataAt(Localization.indexOf(this.backendModels.japanPrefecture[i].getRegionName())), backendModels.japanPrefecture[i].getCaseNumber());
+                javax.swing.SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        listModel.addElement("<html><pre>" + text + "</pre></html>");
+                    }
+                });
             }
         }
     }
@@ -701,7 +712,7 @@ public class MainDisplay extends JFrame {
             Thread updaterThread = new Thread(updater);
             updaterThread.start();
         }
-        
+
         this.updateCaseNumberTextPane();
         this.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(51)));
         this.dataPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(70)));
