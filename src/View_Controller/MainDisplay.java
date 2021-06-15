@@ -695,10 +695,12 @@ public class MainDisplay extends JFrame {
     }
 
     public void updateAllComponents(int index, int sortType) {
-
-        SidePanelThread updater = new SidePanelThread(backendModels, this, this.dataPane, index + 1);
-        Thread updaterThread = new Thread(updater);
-        updaterThread.start();
+        this.updateSidePanel(index);
+        if (index > 0) {
+            SidePanelThread updater = new SidePanelThread(backendModels, this, this.dataPane, index + 1);
+            Thread updaterThread = new Thread(updater);
+            updaterThread.start();
+        }
         
         this.updateCaseNumberTextPane();
         this.caseNumberPane.setBorder(BorderFactory.createTitledBorder(Localization.getLangDataAt(51)));
