@@ -80,9 +80,9 @@
 <明後日>=明後日
 <最高気温>=最高気温
 <最低気温>=最低気温
-<>=Translate
-<>=The risk was calculated by taking a value of the 14 day average divided by population. The calculated "risk" is only an estimate and a suggestion, since there are no academic evidence supporting it. However, I consider it to be worth enough to be a factor of consideration.
-<>=This program was developed as a high school in-class project and still contains many errors. Any bug reports made on GitHub will be appreciated.
-<>=Software developed by Atsuya Osaki (GitHub Username: Mirai7865)
-<>=Disclaimer
-<>=Jump to GitHub
+<翻訳>=通訳
+<>=各都道府県のリスクにつきましては、過去2週間の新規感染者の数の平均から算出されております。この「リスク」はあくまで参考値であり、学術的根拠があるわけではありません。しかし、ユーザーの皆さんが旅先を決めるにあたり、参考になれば幸いです。
+<>=このソフトウェアの開発は高校の卒業プロジェクトの一環として行われました。もしエラーやバグに遭遇した場合は、GitHubにて報告していただけると幸いです。
+<>=このソフトウェアは大崎敦也によって開発されました　(GitHub Username: Mirai7865)
+<>=注意事項
+<>=GitHubへ
