@@ -566,9 +566,9 @@ public class MainDisplay extends JFrame {
                     date = "";
                 }
 
-                this.weatherText[i + 1].setText(/*Localization.getLangDataAt(77 + day)+ */"\n" + Localization.getLangDataAt(61) + " "
+                this.weatherText[i + 1].setText(/*Localization.getLangDataAt(77 + day)+ "\n" + Localization.getLangDataAt(61) + " "
                         + this.localizeWeather(this.backendModels.japanPrefecture[index - 1].getWeather(i))
-                        + "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp(i))
+                        +*/ "\n" + Localization.getLangDataAt(62) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getTemp(i))
                         + "\n" + Localization.getLangDataAt(75) + " " + this.localizeTemp(this.backendModels.japanPrefecture[index - 1].getFeelsLikeTemperature(i))
                 );
 
@@ -641,12 +641,12 @@ public class MainDisplay extends JFrame {
         }
     }
 
-    private String localizeWeather(String weather) {
-        if (weather.equals("Updating...")) {
-            return Localization.getLangDataAt(72);
-        }
-        return weather;
-    }
+//    private String localizeWeather(String weather) {
+//        if (weather.equals("Updating...")) {
+//            return Localization.getLangDataAt(72);
+//        }
+//        return weather;
+//    }
 
     private String localizeTemp(String temp) {
         if (temp.equals("Updating...")) {
