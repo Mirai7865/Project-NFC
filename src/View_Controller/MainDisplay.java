@@ -423,20 +423,20 @@ public class MainDisplay extends JFrame {
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbc.weightx = 1;
-        gbc.weighty = 3;
+        gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
-        gbc.anchor = GridBagConstraints.SOUTH;
+//        gbc.anchor = GridBagConstraints.SOUTH;
         this.settingsPanel.add(this.langChoices, gbc);
 
         gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbc.weightx = 1;
         gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
-        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.anchor = GridBagConstraints.WEST;
         this.settingsPanel.add(this.langChoiceApply, gbc);
 
         gbc = new GridBagConstraints();
@@ -447,13 +447,13 @@ public class MainDisplay extends JFrame {
         gbc.weightx = 1;
         gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.CENTER;
-        gbc.anchor = GridBagConstraints.NORTH;
+//        gbc.anchor = GridBagConstraints.NORTH;
         this.settingsPanel.add(this.githubButton, gbc);
 
         gbc = new GridBagConstraints();
-        gbc.gridx = 1;
+        gbc.gridx = 2;
         gbc.gridy = 0;
-        gbc.gridwidth = 1;
+        gbc.gridwidth = 3;
         gbc.gridheight = 3;
         gbc.weightx = 1;
         gbc.weighty = 1;
