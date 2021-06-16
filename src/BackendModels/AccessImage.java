@@ -23,7 +23,7 @@ public class AccessImage {
         this.img = null;
         this.loadImage(path);
     }
-    
+
     public AccessImage(URL path) {
         this.img = null;
         this.loadImage(path);
@@ -37,9 +37,9 @@ public class AccessImage {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "No such file found: " + name, "Error", ERROR_MESSAGE);
             System.exit(0);
-        } 
+        }
     }
-    
+
     private void loadImage(URL path) {
         try {
             this.img = ImageIO.read(path);
@@ -47,7 +47,7 @@ public class AccessImage {
             JOptionPane.showMessageDialog(null, "Unable to fetch weather icon.", "Error", ERROR_MESSAGE);
         }
     }
-    
+
     public BufferedImage getImage() {
         return this.img;
     }
@@ -59,22 +59,22 @@ public class AccessImage {
     public ImageIcon getScaledImage(int maxWidth, int maxHeight) {
         BufferedImage scalingImage = this.getImage();
         Image finalImage = scalingImage;
-        if (scalingImage.getHeight() > maxHeight || scalingImage.getWidth() > maxWidth) {
+//        if (scalingImage.getHeight() > maxHeight || scalingImage.getWidth() > maxWidth) {
 
-            double heightScaling = (double)maxHeight / scalingImage.getHeight();
-            double widthScaling = (double)maxWidth / scalingImage.getWidth();
-            double scaling = 1.0;
+        double heightScaling = (double) maxHeight / scalingImage.getHeight();
+        double widthScaling = (double) maxWidth / scalingImage.getWidth();
+        double scaling = 1.0;
 
-            if (heightScaling < widthScaling) {
-                scaling = heightScaling;
-            } else {
-                scaling = widthScaling;
-            }
-            
-            int width = (int) (scalingImage.getWidth() * scaling);
-            int height = (int) (scalingImage.getHeight() * scaling);
-            finalImage = scalingImage.getScaledInstance(width, height, BufferedImage.SCALE_DEFAULT);
+        if (heightScaling < widthScaling) {
+            scaling = heightScaling;
+        } else {
+            scaling = widthScaling;
         }
+
+        int width = (int) (scalingImage.getWidth() * scaling);
+        int height = (int) (scalingImage.getHeight() * scaling);
+        finalImage = scalingImage.getScaledInstance(width, height, BufferedImage.SCALE_DEFAULT);
+//        }
         return new ImageIcon(finalImage);
     }
 }

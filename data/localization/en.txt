@@ -64,7 +64,7 @@
 <気温:>=Temperature:
 <提供:>=Source:
 <日本時間>=Current Time in JST
-<設定>=User Settings
+<その他>=Other
 <昇順:>=Sorting:
 <危険度>= Risk
 <総感染者数>=Total Case Numbers
@@ -84,5 +84,5 @@
 <>=The risk was calculated by taking a value of the 14 day average divided by population. The calculated "risk" is only an estimate and a suggestion, since there are no academic evidence supporting it. However, I consider it to be worth enough to be a factor of consideration.
 <>=This program was developed as a high school in-class project and still contains many errors. Any bug reports made on GitHub will be appreciated.
 <>=Software developed by Atsuya Osaki (GitHub Username: Mirai7865)
-<>=Disclaimer
-<>=Jump to GitHub
+<注意事項>=Disclaimer
+<GitHubへ>=Jump to GitHub
