@@ -2,11 +2,12 @@
 # Project-NFC Development Report
 
 Computer Science AP
-*THIS SOFTWARE WAS PART OF A HIGH SCHOOL IN-CLASS ASSIGNMENT*
+
+**THIS SOFTWARE WAS PART OF A HIGH SCHOOL IN-CLASS ASSIGNMENT
 
 ![Image 1](Aspose.Words.a08724df-0b08-4f63-856a-3c9155230d12.001.png)COVID-19 had a significant impact on our lives, which we still continue to suffer from. Tourism has been one of the most impacted industries around the world, and the tourism industry in Japan is no exception. However in 2021, many businesses have started to reopen and many other restrictions are expected to follow suit, thanks to the hard work of the front-line workers and the vaccines manufactures. With our lives returning to the normal, it has become the perfect time for people to start their planning for their next vacation. My software, Project NFC, encourages people around the world to visit Japan, by showcasing the beauties of Japan and its culture, while also delivering COVID related facts for a safer trip. 
 
-Underlying Software Design
+##Underlying Software Design
 
 The 2 factors, interests toward Japan and safeties of traveling, had to be accounted for in my software. Does are what the visitors are most concerned about. Therefore, my decision was to use simple maps and short articles derived from Wikipedia.org as the main features. 
 
@@ -22,11 +23,11 @@ The decision of deriving articles from Wikipedia.org has been made considering t
 
 In behind the GUIs, I had been working hard on making the software as generic as possible. Since I plan on expanding on this software for not only Japan but also other countries, I used Java features such as inheritance and abstract classes so that I can reuse most of the classes from this program. I have also implemented an easy-injection feature for the language files, avoiding the hard-coding of texts for each language option. Currently, the program supports English and partially, Japanese. 
 
-Conclusion
+##Conclusion
 
 As for the conclusion, I consider that my program and its main two features have been successful in addressing the proposed issue. By combining the ideas of case number dash board and a guidebook, it acts as a tool for the people around the world to know more about Japan, and to also consider about their next trip. Unfortunately, it is only a *suggesting* tool, and is *only* combining the features found online, so it has very limited amounts of originality. In future programs, I should combine other studies, such as business, in order to address the issue around the idea of market-in, and not product-in. Also, this program has its major problem in gaining more users, so cooperating with actual businesses and listening to the consumers will be my next goal. Nonetheless, I strongly wish that people who are planning their next vacation to stop by and take a peek at my software; and potentially, have a safe and exciting trip in Japan.
 
-Future Development
+##Future Development
 
 - Improving the accuracy in risk prediction.
   - May be addressed by using machine learning and using a data model to give a prediction. 
@@ -36,6 +37,6 @@ Future Development
   - Shifting development towards web-base and smartphone users can be a step forward. 
 
 Huge thanks to our Computer Science teacher Mr. Cheng for his support, and also to my classmates.
-Special thanks to my parents, my sister, and my best friend, Nic. J
+Special thanks to my parents, my sister, and my best friend, Nic. :)
 
 
