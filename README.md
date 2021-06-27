@@ -3,7 +3,7 @@
 
 ***!!THIS SOFTWARE WAS PART OF A HIGH SCHOOL IN-CLASS ASSIGNMENT!!***
 
-![Image 1](data/image/README/Image1.png)
+![Image 1](data/README/Image1.png)
 
 COVID-19 had a significant impact on our lives, which we still continue to suffer from. Tourism has been one of the most impacted industries around the world, and the tourism industry in Japan is no exception. However in 2021, many businesses have started to reopen and many other restrictions are expected to follow suit, thanks to the hard work of the front-line workers and the vaccines manufactures. With our lives returning to the normal, it has become the perfect time for people to start their planning for their next vacation. My software, Project NFC, encourages people around the world to visit Japan, by showcasing the beauties of Japan and its culture, while also delivering COVID related facts for a safer trip. 
 
@@ -19,7 +19,7 @@ The decision of deriving articles from Wikipedia.org has been made considering t
 
 
 
-![Image 2](data/image/README/Image2.png)
+![Image 2](data/README/Image2.png)
 
 This is another screenshot from the final product. On the left side, there are short articles that describe the place, along with a couple images to gain a better understanding. As I have said, the articles are derived from wikipedia.org, and the user can read more about the place by clicking on “(From Wikipedia)”. The other hyperlink, “See in Google map”, opens Google map in the browser. The map on the right side gives the user a brief understanding of where the place is located. The images are chosen by me, and were downloaded from [HERE](https://www.photo-ac.com/). The images were all free to use. I had to downsize or upscale some of the images to make them fit into the GUI.
 
